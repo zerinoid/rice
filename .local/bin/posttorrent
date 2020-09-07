@@ -1,0 +1,77 @@
+#!/bin/bash
+
+LOG="$HOME/dls/torrents/auto_move.log"
+data=$(date '+%Y-%m-%d %H:%M:%S')
+
+if [[ $(transmission-remote -t "$TR_TORRENT_ID" -f | egrep "264|265" | egrep -v "jpg|jpeg") ]]; then
+
+	echo "$data: Removendo chaves nos filenames" >> "$LOG"
+	find "$TR_TORRENT_DIR/$TR_TORRENT_NAME" -type f -iname "*[*" | \
+		while IFS= read -r line; \
+		do mv "$line" "$(printf %s "$line" | sed -re 's/(\[|\])//g')" 2>&1 >> "$LOG"; done;
+
+	echo "$data: Baixando legenda para $TR_TORRENT_NAME" >> "$LOG"
+	# echo "$TR_TORRENT_DIR/$TR_TORRENT_NAME" >> "$LOG"
+	subliminal --legendastv leoszt 167824324 download -l pt-BR -p legendastv -p opensubtitles -vs "$TR_TORRENT_DIR/$TR_TORRENT_NAME"/* 2>&1 >> "$LOG"
+
+	echo "$data: Removendo formatação nas legendas" >> "$LOG"
+	sed -ei 's/<[^>]*>//g' "$TR_TORRENT_DIR"/"$TR_TORRENT_NAME"/*.srt
+	sed -ei 's/{[^}]*}//g' "$TR_TORRENT_DIR"/"$TR_TORRENT_NAME"/*.srt
+
+	sleep 15
+	echo "$data: Movendo ${TR_TORRENT_NAME} para filmes" >> "$LOG"
+	transmission-remote --torrent "$TR_TORRENT_ID" --move "$HOME/videos/filmes" >> "$LOG"
+
+	sleep 10
+	echo "$data: Movendo legendas baixadas" >> "$LOG"
+	mv "$TR_TORRENT_DIR/$TR_TORRENT_NAME"/*.srt "$HOME/videos/filmes/$TR_TORRENT_NAME" >> "$LOG"
+
+fi
+
+case $(transmission-remote --torrent "$TR_TORRENT_ID" -i | awk -F "%2F" '/magnet/ {print $3}') in
+  flacsfor.me)
+    echo "============================================" >> "$LOG"
+    echo "$data: $TR_TORRENT_NAME baixado" >> "$LOG"
+
+    echo "${data}: Movendo ${TR_TORRENT_NAME} para redacted" >> "$LOG"
+    transmission-remote --torrent "$TR_TORRENT_ID" --move "$HOME/music/redacted/" >> "$LOG"
+    ;;
+  home.opsfet.ch)
+    echo "============================================" >> "$LOG"
+    echo "$data: $TR_TORRENT_NAME baixado" >> "$LOG"
+
+    echo "${data}: Movendo ${TR_TORRENT_NAME} para apollo" >> "$LOG"
+    transmission-remote --torrent "$TR_TORRENT_ID" --move "$HOME/music/apollo/" >> "$LOG"
+    ;;
+  tracker.brokenstones*)
+    echo "============================================" >> "$LOG"
+    echo "$data: $TR_TORRENT_NAME baixado" >> "$LOG"
+
+    echo "${data}: Movendo ${TR_TORRENT_NAME} para app/mac" >> "$LOG"
+    transmission-remote --torrent "$TR_TORRENT_ID" --move "$HOME/fixo/app/mac" >> "$LOG"
+    ;;
+  bt.audionews.org)
+    echo "============================================" >> "$LOG"
+    echo "$data: $TR_TORRENT_NAME baixado" >> "$LOG"
+
+    echo "${data}: Movendo ${TR_TORRENT_NAME} para app" >> "$LOG"
+    transmission-remote --torrent "$TR_TORRENT_ID" --move "$HOME/fixo/app/" >> "$LOG"
+    ;;
+  uhdbits.org%3A34000)
+    echo "============================================" >> "$LOG"
+    echo "$data: $TR_TORRENT_NAME baixado" >> "$LOG"
+
+    echo "${data}: Movendo ${TR_TORRENT_NAME} para filmes" >> "$LOG"
+    transmission-remote --torrent "$TR_TORRENT_ID" --move "$HOME/videos/filmes" >> "$LOG"
+    ;;
+  tracker.gazellegames.net)
+    echo "============================================" >> "$LOG"
+    echo "$data: $TR_TORRENT_NAME baixado" >> "$LOG"
+
+    echo "${data}: Movendo ${TR_TORRENT_NAME} para games" >> "$LOG"
+    transmission-remote --torrent "$TR_TORRENT_ID" --move "$HOME/games" >> "$LOG"
+    ;;
+  tracker.empornium*)
+    transmission-remote --torrent "$TR_TORRENT_ID" --move "$HOME/.ban"
+    ;;
+esac

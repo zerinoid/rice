@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# If emacs is running, will ask to kill, else will ask to start.
+if pgrep -x emacs >/dev/null ;
+then
+  [ "$(printf "No\\nYes" | dmenu -i -p "Kill emacs daemon?")" = "Yes" ] && kill $(pgrep -x emacs) && notify-send "emacs daemon killed."
+else
+	ifinstalled emacs || exit
+	[ "$(printf "No\\nYes" | dmenu -i -p "Start emacs daemon?")" = "Yes" ] && emacs --daemon && notify-send "emacs in daemon mode started."
+fi
+#sleep 3 && pkill -RTMIN+7 "${STATUSBAR:?}"

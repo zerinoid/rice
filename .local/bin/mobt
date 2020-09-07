@@ -1,0 +1,78 @@
+#!/bin/bash
+
+[ ! -d ~/mobile/TRIANGULO ] && echo "celular nao montado" && exit 1
+
+MOBROOT=~/mobile/TRIANGULO/music
+
+if [[ ! -d $MOBROOT ]]; then
+  mkdir -p "$MOBROOT"
+fi
+
+[[ $(fd . ~/docs/tmp/music -d 1) ]] && rm -r ~/docs/tmp/music/*
+
+for folder in "$@"; do
+  echo $folder
+
+
+  if [[ -d $folder ]]; then
+    IFS=$'\n'
+    content=( $(fd "mp3|flac" "$folder") )
+
+    album=$(ffprobe "${content[0]}" 2>&1 | egrep -vi "artist" | awk 'toupper($1) == "ALBUM" { print }' | awk -F": " '{print $2}')
+    artist=$(ffprobe "${content[0]}" 2>&1 | egrep -vi "album" | awk 'toupper($1) == "ARTIST" { print }'| awk -F": " '{print $2}')
+    albumartist=$(ffprobe "${content[0]}" 2>&1 | awk 'toupper($1) == "ALBUM_ARTIST" { print }'| awk -F": " '{print $2}')
+
+    [ ! $(beet ls -a "$album") ] && beet import -w ~/music/*/*"$album"* && beet embedart -y "$album"
+
+    if [ ! $albumartist ]; then 
+      DESTFLAC=~/docs/tmp/music/"$artist"/"$album"
+      DESTMOB="$MOBROOT"/"$artist"/"$album"
+    else
+      DESTFLAC=~/docs/tmp/music/"$albumartist"/"$album"
+      DESTMOB="$MOBROOT"/"$albumartist"/"$album"
+    fi
+
+    [ ! -d "$DESTMOB" ] && mkdir -p "$DESTMOB" && echo criada "$DESTMOB"
+        
+    case ${content[*]} in
+    
+      *.mp3)
+        echo "$albumartist" - "$album"
+        # transfmp3 "${content[@]}" ;;
+
+        for x in "${content[@]}"; do
+          title=$(ffprobe "$x" 2>&1 | awk 'toupper($1) == "TITLE" { print }' | awk -F": " '{print $2}')
+          track=$(ffprobe "$x" 2>&1 | awk '$1 == "track" {print $3}' | cut -d '/' -f1 | xargs printf '%02d\n')
+          COVER=$(mediainfo "$x" | egrep -iv "type|MIME" | awk '$1 == "Cover" { print $3 }')
+
+          if [[ $COVER == Yes ]]; then
+            echo passando "$track" "$title"
+            cp -rvn "$x" "$DESTMOB"/"$track $title".mp3
+          else
+            echo "$track" "$title" "esta sem artwork :("
+          fi
+        done
+      ;;
+      *.flac)
+        [ ! -d $DESTFLAC ] && mkdir -p "$DESTFLAC"
+
+        echo "$albumartist" - "$album"
+        flac2mp3 --preset=V0 --processes=$(nproc) "$folder" "$DESTFLAC"
+
+        # transfmp3 "$DESTFLAC"/*
+        for x in "$DESTFLAC"/*; do
+          title=$(ffprobe "$x" 2>&1 | awk 'toupper($1) == "TITLE" { print }' | awk -F": " '{print $2}')
+          track=$(ffprobe "$x" 2>&1 | awk '$1 == "track" {print $3}' | cut -d '/' -f1)
+          COVER=$(mediainfo "$x" | egrep -iv "type|MIME" | awk '$1 == "Cover" { print $3 }')
+
+          if [[ $COVER == Yes ]]; then
+            echo passando "$track" "$title"
+            cp -rvn "$x" "$DESTMOB"/"$track $title".mp3
+          else
+            echo "$track" "$title" "esta sem artwork :("
+          fi
+        done
+      ;;
+    esac
+  fi
+done

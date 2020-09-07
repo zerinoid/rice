@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [[ -n $(setxkbmap -query | grep nodeadkeys) ]]; then
+  setxkbmap -model abnt2 -layout br -option caps:escape
+else
+  setxkbmap -model abnt2 -layout br -option caps:escape -variant nodeadkeys
+fi

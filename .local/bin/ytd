@@ -1,0 +1,5 @@
+#!/bin/bash
+
+VIDEO=$(xclip -selection clipboard -o)
+
+$TERMA -c pad -g 120x20 -e bash -c "youtube-dl -c --add-metadata -i -o '~/dls/%(title)s.%(ext)s' --no-mtime $VIDEO;read -p 'da enter papai'"

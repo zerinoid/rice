@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+
+data=$(date '+%Y-%m-%d %H:%M:%S')
+
+echo "= .xprofile ========================= $data" >> "$LOGINLOG"
+
+xplugd >> "$LOGINLOG" 2>&1 &
+~/.fehbg >> "$LOGINLOG" 2>&1 &
+syncthing -no-browser &
+dunst >> "$LOGINLOG" 2>&1 &
+picom >> "$LOGINLOG" 2>&1 &
+overgrive >> "$LOGINLOG" 2>&1 &
+transmission-daemon >> "$LOGINLOG" 2>&1 &
+xscreensaver -nosplash &
+mpdas -c ~/.config/mpdasrc >> "$LOGINLOG" 2>&1 &
+unclutter &
+emacs --daemon &
+kunst &
+
+## wal colors
+#wal -R 2>&1 >> "$LOGINLOG" &
+#. "$HOME/.cache/wal/colors.sh"
+#$HOME/.local/bin/randomwal & 2>&1 >> "$LOGINLOG"

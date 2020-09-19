@@ -1,0 +1,20 @@
+directory: ~/music
+library: ~/.config/beets/musiclibrary.db
+import:
+  copy: no
+sort_item: albumartist+ album+ disc+ track+
+plugins: discogs web fetchart embedart convert lastgenre 
+threaded: yes
+embedart:
+  maxwidth: 300
+  ifempty: yes
+convert:
+  format: mp3
+  formats:
+    mp3:
+      command: ffmpeg -i $source -codec:a libmp3lame -q:a 0 $dest
+      extension: mp3
+lastgenre:
+  prefer_specific: yes
+  canonical: yes
+  whitelist: ~/.config/beets/whitelist

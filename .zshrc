@@ -234,6 +234,9 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 zinit ice pick"sqlite-history.zsh"
 zinit load larkery/zsh-histdb
 
+zinit ice pick"async.zsh" src"pure.zsh"
+zinit light sindresorhus/pure
+
 # Usar histdb para sugestões do autosuggest
 _zsh_autosuggest_strategy_histdb_top_here() {
     local query="select commands.argv from

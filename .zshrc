@@ -2,14 +2,14 @@
 
 # Enable colors and change prompt:
 autoload -U colors && colors
-PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
+# PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
 
-RPROMPT="%{$fg[red]%}[%*]%{$reset_color%} "
+# RPROMPT="%{$fg[red]%}[%*]%{$reset_color%} "
 
-# History in cache directory:
-#HISTSIZE=10000
-#SAVEHIST=10000
-#HISTFILE=~/.cache/zsh/history
+# History
+export HISTFILE="$HOME/.cache/zsh/history"
+export HISTSIZE=1000000
+export SAVEHIST=$HISTSIZE
 
 # Basic auto/tab complete:
 autoload -U compinit
@@ -120,12 +120,6 @@ export ZSH_COLORIZE_STYLE="paraiso-dark"
 export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
 # export LESSOPEN='|~/.lessfilter %s'
-
-
-# History
-export HISTFILE="$HOME/.zsh_history"
-export HISTSIZE=1000000
-export SAVEHIST=$HISTSIZE
 
 # =================================
 # OPTIONS

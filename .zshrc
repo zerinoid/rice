@@ -194,77 +194,29 @@ zle -N forward-word-dir
 bindkey "^f" forward-word-dir
 
 
-### Added by Zplugin's installer
-source "$HOME/.zplugin/bin/zplugin.zsh"
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
-### End of Zplugin installer's chunk
-
-# ===========================
-# zplugin
-# ===========================
-
-# Load OMZ Git library
-zplugin snippet OMZ::lib/git.zsh
-
-# Load Git plugin from OMZ
-# zplugin snippet OMZ::plugins/git/git.plugin.zsh
-zplugin cdclear -q # <- forget completions provided up to this moment
-
-setopt promptsubst
-
-# Load theme from OMZ
-#zplugin snippet OMZ::themes/dstufft.zsh-theme
-
-# Load syntax and autosuggestions
-zplugin light zsh-users/zsh-autosuggestions
-zplugin light zdharma/fast-syntax-highlighting
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=244,bold"
-
-# Load fzf and options
-zplugin ice from"gh-r" as"program"
-zplugin load junegunn/fzf-bin
-
-  export FZF_DEFAULT_OPTS="--height 40% --reverse --border --inline-info --color=dark,bg+:235,hl+:10,pointer:5"
-  export FZF_DEFAULT_COMMAND='fd'
-  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
-# Load diff-so-fancy
-# zplugin ice as"program" pick"bin/git-dsf"
-# zplugin light zdharma/zsh-diff-so-fancy
-
-# Load oh-my-zsh plugins
-zplugin snippet OMZ::plugins/command-not-found/command-not-found.plugin.zsh
-zplugin snippet OMZ::plugins/colorize/colorize.plugin.zsh
-zplugin snippet OMZ::plugins/nvm/nvm.plugin.zsh
-zplugin snippet OMZ::plugins/cp/cp.plugin.zsh
-zplugin snippet OMZ::plugins/docker/_docker
-zplugin snippet OMZ::plugins/docker-compose/_docker-compose
-
-# Load larkery/zsh-histdb
-zplugin load larkery/zsh-histdb
-
-source $HOME/.zplugin/plugins/larkery---zsh-histdb/sqlite-history.zsh
-autoload -Uz add-zsh-hook
-add-zsh-hook precmd histdb-update-outcome
-
-# Usar histdb para sugestões do autosuggest
-_zsh_autosuggest_strategy_histdb_top_here() {
-    local query="select commands.argv from
-history left join commands on history.command_id = commands.rowid
-left join places on history.place_id = places.rowid
-where places.dir LIKE '$(sql_escape $PWD)%'
-and commands.argv LIKE '$(sql_escape $1)%'
-group by commands.argv order by count(*) desc limit 1"
-    suggestion=$(_histdb_query "$query")
-}
-
-ZSH_AUTOSUGGEST_STRATEGY=histdb_top_here
-
-# Load enhancd
-zplugin ice pick"init.sh"
-zplugin light b4b4r07/enhancd
-ENHANCD_FILTER="fzf"
-ENHANCD_COMMAND="c"
 
 fpath+=${ZDOTDIR:-~}/.zsh_functions
+
+
+### Added by Zinit's installer
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+fi
+
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zinit-zsh/z-a-rust \
+    zinit-zsh/z-a-as-monitor \
+    zinit-zsh/z-a-patch-dl \
+    zinit-zsh/z-a-bin-gem-node
+
+### End of Zinit's installer chunk

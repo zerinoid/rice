@@ -68,7 +68,7 @@ bindkey -s '^o' 'lfcd\n'
 
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
-#bindkey '^e' edit-command-line
+bindkey '^e' edit-command-line
 
 # Load aliases and shortcuts if existent.
 [ -f "$HOME/.config/shortcutrc" ] && source "$HOME/.config/shortcutrc"
@@ -145,8 +145,6 @@ setopt hist_ignore_space
 
 # Common aliases
 alias ls="ls $LS_OPTIONS"
-#alias ll="ls $LS_OPTIONS -lAhFtr"
-#alias ccat="pygmentize -O style=monokai -f 256 -g"
 alias dig="dig +nocmd any +multiline +noall +answer"
 
 # Common CTRL bindings.
@@ -217,6 +215,40 @@ zinit light-mode for \
     zinit-zsh/z-a-rust \
     zinit-zsh/z-a-as-monitor \
     zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-bin-gem-node
+    zinit-zsh/z-a-bin-gem-node \
+    zsh-users/zsh-autosuggestions \
+    zdharma/fast-syntax-highlighting
 
 ### End of Zinit's installer chunk
+
+zinit snippet OMZP::command-not-found
+zinit snippet OMZP::colorize
+# zinit snippet OMZP::nvm
+
+#vars
+export FZF_DEFAULT_OPTS="--height 40% --reverse --border --inline-info --color=dark,bg+:235,hl+:10,pointer:5"
+export FZF_DEFAULT_COMMAND='fd'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# Load larkery/zsh-histdb
+zinit ice pick"sqlite-history.zsh"
+zinit load larkery/zsh-histdb
+
+# Usar histdb para sugestões do autosuggest
+_zsh_autosuggest_strategy_histdb_top_here() {
+    local query="select commands.argv from
+history left join commands on history.command_id = commands.rowid
+left join places on history.place_id = places.rowid
+where places.dir LIKE '$(sql_escape $PWD)%'
+and commands.argv LIKE '$(sql_escape $1)%'
+group by commands.argv order by count(*) desc limit 1"
+    suggestion=$(_histdb_query "$query")
+}
+
+ZSH_AUTOSUGGEST_STRATEGY=histdb_top_here
+
+# Load enhancd
+zinit ice pick"init.sh"
+zinit light b4b4r07/enhancd
+ENHANCD_FILTER="fzf"
+ENHANCD_COMMAND="c"

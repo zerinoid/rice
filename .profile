@@ -26,11 +26,6 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-# salvar variavel DBUS_SESSION_BUS_ADDRESS para cron exectuar notify-send
-# if [ -x "$HOME/.local/bin/xdbusenv" ] ; then
-#     "$HOME/.local/bin/xdbusenv"
-# fi
-
 # xdg-base-dirs
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"

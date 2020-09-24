@@ -185,10 +185,7 @@ forward-word-dir () {
 zle -N forward-word-dir
 bindkey "^f" forward-word-dir
 
-
-
 fpath+=${ZDOTDIR:-~}/.zsh_functions
-
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then

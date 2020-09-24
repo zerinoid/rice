@@ -1,0 +1,3 @@
+regexSearch: bad_expression: Incomplete escape sequence found.  The error occurred while parsing the regular expression: '\>>>HERE>>>'.
+regexSearch: bad_expression: Incomplete escape sequence found.  The error occurred while parsing the regular expression: '\>>>HERE>>>'.
+regexSearch: bad_expression: Character set declaration starting with [ terminated prematurely - either no ] was found or the set had no content.  The error occurred while parsing the regular expression: '[>>>HERE>>>'.

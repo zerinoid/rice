@@ -143,7 +143,7 @@ alias dig="dig +nocmd any +multiline +noall +answer"
 
 # Common CTRL bindings.
 bindkey "^a" beginning-of-line
-bindkey "^e" end-of-line
+# bindkey "^e" end-of-line
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
 bindkey "^k" kill-line
@@ -215,21 +215,25 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
+##
+# Tema
+##
+zinit ice pick"async.zsh" src"pure.zsh"
+zinit light sindresorhus/pure
+
+# Oh-my-zsh plugins
+
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::colorize
 # zinit snippet OMZP::nvm
 
-#vars
-export FZF_DEFAULT_OPTS="--height 40% --reverse --border --inline-info --color=dark,bg+:235,hl+:10,pointer:5"
-export FZF_DEFAULT_COMMAND='fd'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
-# Load larkery/zsh-histdb
-zinit ice pick"sqlite-history.zsh"
+##
+# Histdb
+##
+zinit ice pick"sqlite-history.zsh" src"histdb-interactive.zsh"
 zinit load larkery/zsh-histdb
 
-zinit ice pick"async.zsh" src"pure.zsh"
-zinit light sindresorhus/pure
+bindkey '^h' _histdb-isearch
 
 # Usar histdb para sugestões do autosuggest
 _zsh_autosuggest_strategy_histdb_top_here() {
@@ -244,8 +248,16 @@ group by commands.argv order by count(*) desc limit 1"
 
 ZSH_AUTOSUGGEST_STRATEGY=histdb_top_here
 
-# Load enhancd
+##
+# enhancd
+##
 zinit ice pick"init.sh"
 zinit light b4b4r07/enhancd
+
+# vars
+
+export FZF_DEFAULT_OPTS="--height 40% --reverse --border --inline-info --color=dark,bg+:235,hl+:10,pointer:5"
+export FZF_DEFAULT_COMMAND='fd'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 ENHANCD_FILTER="fzf"
 ENHANCD_COMMAND="c"

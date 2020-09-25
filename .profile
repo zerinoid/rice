@@ -42,6 +42,7 @@ export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"
 export KUNST_MUSIC_DIR="/home/zerinol/music/"
 export KUNST_POSITION="-260-20"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export ZSHZ_DATA="$ZDOTDIR/.z"
 
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"

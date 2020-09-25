@@ -43,7 +43,7 @@ for folder in "$@"; do
         for x in "${content[@]}"; do
           title=$(ffprobe "$x" 2>&1 | awk 'toupper($1) == "TITLE" { print }' | awk -F": " '{print $2}')
           track=$(ffprobe "$x" 2>&1 | awk '$1 == "track" {print $3}' | cut -d '/' -f1 | xargs printf '%02d\n')
-          COVER=$(mediainfo "$x" | egrep -iv "type|MIME" | awk '$1 == "Cover" { print $3 }')
+          COVER=$(mediainfo "$x" | egrep -iv "type|MIME|description" | awk '$1 == "Cover" { print $3 }')
 
           if [[ $COVER == Yes ]]; then
             echo passando "$track" "$title"

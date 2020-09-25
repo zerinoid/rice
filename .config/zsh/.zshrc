@@ -87,6 +87,8 @@ bindkey '^e' edit-command-line
 # arquivo de funções
 [ -f ~/.funcrc ] && . ~/.funcrc
 
+fpath+=${ZDOTDIR:-~}/.zsh_functions
+
 # =================================
 # CORES BONITAS
 # =================================
@@ -185,8 +187,6 @@ forward-word-dir () {
 zle -N forward-word-dir
 bindkey "^f" forward-word-dir
 
-fpath+=${ZDOTDIR:-~}/.zsh_functions
-
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
@@ -213,22 +213,36 @@ zinit light-mode for \
 ### End of Zinit's installer chunk
 
 ##
-# Tema
+# Plugins
 ##
-zinit ice pick"async.zsh" src"pure.zsh"
-zinit light sindresorhus/pure
 
-# Oh-my-zsh plugins
+zinit ice pick"sqlite-history.zsh" src"histdb-interactive.zsh"
+zinit load larkery/zsh-histdb
+
+zinit ice pick"init.sh"
+zinit light b4b4r07/enhancd
+
+zinit load agkozak/zsh-z
+
+# zinit ice as"program" make"DEST=$ZPFX" pick"kunst"
+# zinit light sdushantha/kunst
 
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::colorize
-# zinit snippet OMZP::nvm
+
+zinit ice load'[[ $PWD == *webdev* ]]' lucid
+zinit snippet OMZP::nvm
 
 ##
-# Histdb
+# Tema
 ##
-zinit ice pick"sqlite-history.zsh" src"histdb-interactive.zsh"
-zinit load larkery/zsh-histdb
+
+zinit ice pick"async.zsh" src"pure.zsh"
+zinit light sindresorhus/pure
+
+##
+# VARS
+##
 
 bindkey '^h' _histdb-isearch
 
@@ -245,16 +259,11 @@ group by commands.argv order by count(*) desc limit 1"
 
 ZSH_AUTOSUGGEST_STRATEGY=histdb_top_here
 
-##
-# enhancd
-##
-zinit ice pick"init.sh"
-zinit light b4b4r07/enhancd
-
-# vars
-
 export FZF_DEFAULT_OPTS="--height 40% --reverse --border --inline-info --color=dark,bg+:235,hl+:10,pointer:5"
 export FZF_DEFAULT_COMMAND='fd'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 ENHANCD_FILTER="fzf"
 ENHANCD_COMMAND="c"
+
+# temp
+export ZSHZ_DATA="$ZDOTDIR/.z"

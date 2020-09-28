@@ -19,7 +19,7 @@ Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'jreybert/vimagit'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
-" Plug 'dylanaraps/wal.vim'
+Plug 'dylanaraps/wal.vim'
 " Plug 'jceb/vim-orgmode'
 
 call plug#end()
@@ -119,7 +119,7 @@ python3 del powerline_setup
 packloadall
 silent! helptags ALL
 
-" colorscheme wal
+colorscheme wal
 
 " Run xrdb whenever Xdefaults or Xresources are updated.
 	autocmd BufWritePost *Xresources,*Xdefaults !xrdb %

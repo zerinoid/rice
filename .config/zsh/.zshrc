@@ -89,6 +89,9 @@ bindkey '^e' edit-command-line
 
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
+__git_files () { 
+    _wanted files expl 'local files' _files  }
+
 # =================================
 # CORES BONITAS
 # =================================

@@ -8,4 +8,3 @@ else
 	ifinstalled emacs || exit
 	[ "$(printf "No\\nYes" | dmenu -i -p "Start emacs daemon?")" = "Yes" ] && emacs --daemon && notify-send "emacs in daemon mode started."
 fi
-#sleep 3 && pkill -RTMIN+7 "${STATUSBAR:?}"

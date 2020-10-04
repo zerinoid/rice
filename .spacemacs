@@ -60,7 +60,7 @@ This function should only modify configuration layer settings."
           org-todo-keywords '((sequence "TODO(t!)" "NEXT(n!)" "|" "CANC(c!)" "DONE(d!)"))
           org-todo-keyword-faces '(("TODO" . org-warning)
                                    ("CANC" . (:foreground "white" :background "#4d4d4d" :weight bold))
-                                   ("NEXT" . "#ff4500"))
+                                   ("NEXT" .  "#4f97d7"))
           )
      journal
      (shell :variables

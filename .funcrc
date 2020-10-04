@@ -1,0 +1,54 @@
+#!/bin/bash
+
+e() {
+	if [ -f $1 ] ; then
+		case $1 in
+			*.tar.bz2)   tar xjvf $1 ;;
+			*.tar.gz)    tar xzvf $1 ;;
+			*.tar.xz)    tar xJvf $1 ;;
+			*.bz2)       bunzip2 $1 ;;
+			*.rar)       unrar xv $1 ;;
+			*.gz)        gunzip $1 ;;
+			*.tar)       tar xvf $1 ;;
+			*.tbz2)      tar xjvf $1 ;;
+			*.tgz)       tar xzvf $1 ;;
+			*.zip)       unzip $1 ;;
+			*.7z)        7z x $1 ;;
+			*.xz)        xz -vd $1 ;;
+			*)           echo "'$1' cannot be extracted via extract()" ;;
+		esac
+	else
+		echo "'$1' is not a valid file"
+	fi
+}
+
+bspunhid(){
+  windows=($(bspc query -N -n .window.hidden))
+
+  index="$(for i in "${!windows[@]}"; do printf "%s %s\n" $i "$(xtitle ${windows[i]})"; done | dmenu)" &&
+      bspc node "${windows[${index%% *}]}" -g hidden=off
+}
+
+superls() { printf "\n" && colorls "$@" -a --sd && printf "\n"; }
+
+bim() { 
+  for album in "$@" 
+  do 
+    beet import ~/music/*/*"$album"*;
+    beet embedart -y "$album"
+  done
+}
+
+pwlog() { git log "$@" --graph --oneline --decorate --color | less -SEXIER }
+
+mkill() { for pid in $(ps -ef | awk '/'"$@"'/ {print $2}'); do kill -9 $pid; done }
+
+# lfcd () {
+#     tmp="$(mktemp)"
+#     lf -last-dir-path="$tmp" "$@"
+#     if [ -f "$tmp" ]; then
+#         dir="$(cat "$tmp")"
+#         rm -f "$tmp"
+#         [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+#     fi
+# }

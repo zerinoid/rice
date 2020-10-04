@@ -15,7 +15,7 @@ xscreensaver -nosplash &
 mpdas -c ~/.config/mpdasrc >> "$LOGINLOG" 2>&1 &
 unclutter &
 emacs --daemon &
-kunst &
+# kunst &
 
 ## wal colors
 #wal -R 2>&1 >> "$LOGINLOG" &

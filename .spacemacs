@@ -542,6 +542,7 @@ before packages are loaded."
   (spacemacs/declare-prefix "o" "own-menu")
   (spacemacs/set-leader-keys "os" 'org-save-all-org-buffers)
   (spacemacs/set-leader-keys "oi" 'helm-org-agenda-files-headings)
+  (spacemacs/set-leader-keys "oc" 'org-columns)
   (spacemacs/set-leader-keys "skp" 'helm-projectile-ack)
 
   (setq default-directory "~/docs/")

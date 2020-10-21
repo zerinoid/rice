@@ -35,13 +35,13 @@ alias aph="apt search"\
 	ngso="ng s --open"\
 	pas="php artisan serve"\
 	nrw="npm run watch"\
-	gam="git commit -am"\
-    ga="git add" \
-    gc="git commit -m"\
-    gs="git status"\
-    gp="git push"\
-    gf="git pull"\
-    gd="git difftool"\
+	gam="dit commit -am"\
+    ga="dit add" \
+    gc="dit commit -m"\
+    gs="dit status"\
+    gp="dit push"\
+    gf="dit pull"\
+    gd="dit difftool"\
     ytv="straw-viewer --player=mpv"\
     ffmpeg="ffmpeg -hide_banner"\
 	kbd="setxkbmap -model abnt2 -layout br\
@@ -58,7 +58,7 @@ alias aph="apt search"\
     w3m="w3m -config ~/.config/w3m/config"\
     mpdas="mpdas -c ~/.config/mpdasrc"\
     nmset="rfkill block wlan; sleep 3; rfkill unblock wlan"\
-    config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+    dit='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 alias l="ls -lFh"\
     la="ls -lAFh"\

@@ -34,14 +34,29 @@ alias aph="apt search"\
 	doc="docker-compose exec workspace"\
 	ngso="ng s --open"\
 	pas="php artisan serve"\
-	nrw="npm run watch"\
-	gam="dit commit -am"\
-    ga="dit add" \
-    gc="dit commit -m"\
-    gs="dit status"\
-    gp="dit push"\
-    gf="dit pull"\
-    gd="dit difftool"\
+	nrw="npm run watch"
+
+# git
+alias \
+    gam="git commit -am"\
+    ga="git add" \
+    gc="git commit -m"\
+    gs="git status"\
+    gp="git push"\
+    gf="git pull"\
+    gd="git difftool"\
+	dam="dit commit -am"
+
+# dotfiles git
+alias \
+    da="dit add" \
+    dc="dit commit -m"\
+    ds="dit status"\
+    dp="dit push"\
+    df="dit pull"\
+    dd="dit difftool"\
+
+alias \
     ytv="straw-viewer --player=mpv"\
     ffmpeg="ffmpeg -hide_banner"\
 	kbd="setxkbmap -model abnt2 -layout br\

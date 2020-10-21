@@ -75,11 +75,11 @@ alias \
 alias \
     dit='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'\
     da="dit add" \
-    dc="dit commit -m"\
+    gdc="dit commit -m"\
     ds="dit status"\
     dp="dit push"\
-    df="dit pull"\
-    dd="dit difftool"
+    gdf="dit pull"\
+    gdd="dit difftool"
 
 # beets
 alias \

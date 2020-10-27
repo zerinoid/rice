@@ -16,7 +16,7 @@ xset +fp /home/zerinol/.fonts
 xset fp rehash
 xset -b &
 
-(ps x | grep bspswallow | grep -v grep) || bspswallow &
+# (ps x | grep bspswallow | grep -v grep) || bspswallow &
 
 [ -x $HOME/.local/bin/dual_monitor ] && dual_monitor  2>&1 >> "$LOGINLOG"
 

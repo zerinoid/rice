@@ -69,7 +69,6 @@ alias \
     gp="git push"\
     gf="git pull"\
     gd="git difftool"\
-	dam="dit commit -am"
 
 # dotfiles git
 alias \
@@ -80,6 +79,7 @@ alias \
     dp="dit push"\
     gdf="dit pull"\
     gdd="dit difftool"
+	dam="dit commit -am"
 
 # beets
 alias \

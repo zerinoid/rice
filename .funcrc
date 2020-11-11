@@ -43,6 +43,11 @@ pwlog() { git log "$@" --graph --oneline --decorate --color | less -SEXIER }
 
 mkill() { for pid in $(ps -ef | awk '/'"$@"'/ {print $2}'); do kill -9 $pid; done }
 
+unhistory () {
+   LC_ALL=C sed -i '/'$1'/d' $HISTFILE
+   histdb --forget "$1"
+}
+
 # lfcd () {
 #     tmp="$(mktemp)"
 #     lf -last-dir-path="$tmp" "$@"

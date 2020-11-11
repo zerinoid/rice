@@ -239,7 +239,7 @@ zinit light sindresorhus/pure
 # VARS
 ##
 
-bindkey '^h' _histdb-isearch
+# bindkey '^h' _histdb-isearch
 
 # Usar histdb para sugestões do autosuggest
 _zsh_autosuggest_strategy_histdb_top_here() {

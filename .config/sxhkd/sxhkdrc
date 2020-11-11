@@ -11,7 +11,7 @@ super + Return
   "$TERMB"
 
 super + alt + Return
-  "$TERMA" -c pad
+  "$TERMB" --class pad
 
 super + shift + Return
 	"$TERMA"
@@ -60,8 +60,8 @@ super + e
 super + shift + e
 	emacsclient -s $EMACS_SERVER_SOCKET -c ~/docs/org/misc.org
 
-super + shift + i
-	emacsclient -s $EMACS_SERVER_SOCKET -c ~/docs/org/index.org
+# super + shift + i
+# 	emacsclient -s $EMACS_SERVER_SOCKET -c ~/docs/org/index.org
 
 #Lista wifi
 super + alt + i
@@ -72,7 +72,7 @@ super + alt + i
 # 	$TERMA -e bash -c "lfcd;$SHELL" 
 
 # kunst
-super + shift + k
+super + shift + c
 	kunst_handler
 
 # snippets
@@ -99,10 +99,10 @@ super + shift + alt + q
 
 # Browser
 super + w 
-	/usr/bin/brave-browser
+	/usr/bin/firefox
 
 super + shift + w 
-	/usr/bin/brave-browser --incognito
+	/usr/bin/firefox -private
 
 #calculadora
 super + alt + y
@@ -188,6 +188,10 @@ super + {k,j}
 super + {i,o}
 	bspc desktop -f {prev,next}.local
 
+# send current node to prev/next worskpace
+super + shift + {i,o}
+	bspc node -d {prev,next}.local --follow 
+ 
 # focus the last node/desktop
 super + {apostrophe,Tab}
 	bspc {node,desktop} -f last

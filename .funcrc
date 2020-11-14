@@ -22,13 +22,6 @@ e() {
 	fi
 }
 
-bspunhid(){
-  windows=($(bspc query -N -n .window.hidden))
-
-  index="$(for i in "${!windows[@]}"; do printf "%s %s\n" $i "$(xtitle ${windows[i]})"; done | dmenu)" &&
-      bspc node "${windows[${index%% *}]}" -g hidden=off
-}
-
 superls() { printf "\n" && colorls "$@" -a --sd && printf "\n"; }
 
 bim() { 
@@ -46,6 +39,10 @@ mkill() { for pid in $(ps -ef | awk '/'"$@"'/ {print $2}'); do kill -9 $pid; don
 unhistory () {
    LC_ALL=C sed -i '/'$1'/d' $HISTFILE
    histdb --forget "$1"
+}
+
+da () {
+   dit ls-files | grep "$1" | xargs git --git-dir=$HOME/.cfg/ --work-tree=$HOME add 
 }
 
 # lfcd () {

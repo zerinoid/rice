@@ -73,7 +73,6 @@ alias \
 # dotfiles git
 alias \
     dit='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'\
-    da="dit add" \
     gdc="dit commit -m"\
     ds="dit status"\
     dp="dit push"\

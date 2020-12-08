@@ -65,7 +65,7 @@ super + shift + e
 
 #Lista wifi
 super + alt + i
-	$TERMA -c 'pad' -e sh -c "nmcli device wifi rescan;nmcli device wifi list;$SHELL" &
+	$TERMB --class 'pad' -e sh -c "nmcli device wifi rescan;nmcli device wifi list;$SHELL" &
 
 # lf
 # super + r

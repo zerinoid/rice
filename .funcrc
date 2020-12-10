@@ -41,8 +41,19 @@ unhistory () {
    histdb --forget "$1"
 }
 
+#git dot add
 da () {
    dit ls-files | grep "$1" | xargs git --git-dir=$HOME/.cfg/ --work-tree=$HOME add 
+}
+
+#git dot difftool
+gdd () {
+   dit ls-files | grep "$1" | xargs git --git-dir=$HOME/.cfg/ --work-tree=$HOME diff
+}
+
+#git difftool
+gd () {
+   git ls-files | grep "$1" | xargs git  diff
 }
 
 # lfcd () {

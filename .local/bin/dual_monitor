@@ -8,6 +8,7 @@ if [[ ! $external_monitor = *disconnected* ]]; then
 else
     echo "Monitor desconectado"
     bspc monitor HDMI1 -r
+    bspc wm -o
     xrandr --output eDP1 --primary --mode 1366x768 --rotate normal --output HDMI1 --off
 fi
 

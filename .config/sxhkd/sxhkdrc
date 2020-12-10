@@ -197,7 +197,7 @@ super + shift + {i,o}
  
 # focus the last node/desktop
 super + {apostrophe,Tab}
-	bspc {node,desktop} -f last
+	bspc {monitor,desktop} -f last
 
 # focus the older or newer node in the focus history
 super + bracket{left,right}
@@ -215,7 +215,7 @@ super + {_,shift + }{1-9,0}
 
 # preselect the direction
 super + ctrl + {h,j,k,l}
-	bspc node -p {west,south,north,east}
+	bspc node -f {west,south,north,east}
 
 # preselect the ratio
 super + ctrl + {1-9}

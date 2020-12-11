@@ -172,9 +172,13 @@ super + ctrl + {m,x,y,z}
 # focus/swap
 #
 
-# focus the node in the given direction
+# focus desktop/send node to desktop the given direction
 super + {_,shift + }{h,l}
-	bspc node -{f,s} {west,east}
+	bspc {desktop -f, node -d} {prev,next}.local --follow
+
+# send node to monitor
+super + shift + {k,j}
+	bspc node -m {north,south} --follow
 
 # focus the node for the given path jump
 super + {p,b,comma,period}
@@ -187,17 +191,21 @@ super + {k,j}
 super + c
 	bspc node -f prev.!hidden.window.local
 
-# focus the next/previous desktop in the current monitor
+# DEPRECADO focus the next/previous desktop in the current monitor
 super + {i,o}
 	bspc desktop -f {prev,next}.local
 
-# send current node to prev/next worskpace
+# DEPRECADO send current node to prev/next worskpace
 super + shift + {i,o}
 	bspc node -d {prev,next}.local --follow 
  
 # focus the last node/desktop
 super + {apostrophe,Tab}
 	bspc {monitor,desktop} -f last
+
+# send node to last monitor
+super + shift + apostrophe
+	bspc node -m last --follow
 
 # focus the older or newer node in the focus history
 super + bracket{left,right}

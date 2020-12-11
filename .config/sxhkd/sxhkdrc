@@ -189,7 +189,7 @@ super + {k,j}
 	bspc node -f {next,prev}.!hidden.window.local
 
 super + c
-	bspc node -f prev.!hidden.window.local
+	bspc node -f last.!hidden.window.local
 
 # DEPRECADO focus the next/previous desktop in the current monitor
 super + {i,o}

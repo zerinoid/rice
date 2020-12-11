@@ -201,7 +201,7 @@ super + shift + {i,o}
  
 # focus the last node/desktop
 super + {apostrophe,Tab}
-	bspc {monitor,desktop} -f last
+	bspc {monitor -f last,desktop -f last.local}
 
 # send node to last monitor
 super + shift + apostrophe

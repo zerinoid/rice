@@ -75,7 +75,6 @@ This function should only modify configuration layer settings."
      version-control
      (treemacs :variables
                treemacs-width 27)
-     tide
      yaml
      docker
      (html :variables web-fmt-tool 'prettier
@@ -86,7 +85,8 @@ This function should only modify configuration layer settings."
                  js2-basic-offset 4
                  js-indent-level 4
                  js2-mode-show-parse-errors nil
-                 js2-mode-show-strict-warnings nil)
+                 js2-mode-show-strict-warnings nil
+                 javascript-fmt-on-save t)
      (typescript :variables
                  typescript-backend 'tide)
      react
@@ -572,7 +572,10 @@ before packages are loaded."
 
   (setq prettier-js-args '(
                            "--tab-width" "4"
-                           "--single-quote"
+                           "--trailing-comma" "none"
+                           "--arrow-parens" "avoid"
+                           "--print-width" "80"
+                           "--no-semi" 
                            ))
 
   (defun auto-lint ()

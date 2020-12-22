@@ -543,10 +543,15 @@ before packages are loaded."
 
   (setq create-lockfiles nil)
 
+  ;; macro remover classe
+  (fset 'remove-class
+        (kmacro-lambda-form [?F ?< ?f ?  ?d ?t ?>] 0 "%d"))
+
   (spacemacs/declare-prefix "o" "own-menu")
   (spacemacs/set-leader-keys "os" 'org-save-all-org-buffers)
   (spacemacs/set-leader-keys "oi" 'helm-org-agenda-files-headings)
   (spacemacs/set-leader-keys "oc" 'org-columns)
+  (spacemacs/set-leader-keys "od" 'remove-class)
   (spacemacs/set-leader-keys "skp" 'helm-projectile-ack)
 
   (setq default-directory "~/docs/")
@@ -616,6 +621,8 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
    ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
+ '(custom-safe-themes
+   '("4cf9ed30ea575fb0ca3cff6ef34b1b87192965245776afa9e9e20c17d115f3fb" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))
  '(evil-want-Y-yank-to-eol nil)
  '(helm-completion-style 'emacs)
  '(hl-todo-keyword-faces

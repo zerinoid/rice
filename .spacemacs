@@ -239,8 +239,11 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(gruvbox
-                         spacemacs-dark)
+   dotspacemacs-themes '(doom-dracula
+                         doom-Iosvkem
+                         doom-dark+
+                         gruvbox-dark-hard
+                         cherry-blossom)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
@@ -543,15 +546,24 @@ before packages are loaded."
 
   (setq create-lockfiles nil)
 
-  ;; macro remover classe
+  ;; macros
   (fset 'remove-class
         (kmacro-lambda-form [?F ?< ?f ?  ?d ?t ?>] 0 "%d"))
 
+  (fset 'insert-class
+    (kmacro-lambda-form [?f ?> ?i ?  ?c ?l ?a ?s ?s ?N ?a ?m ?e ?= escape] 0 "%d"))
+
+  (fset 'change-quote
+    (kmacro-lambda-form [?f ?\" ?c ?i ?\" ?\C-o] 0 "%d"))
+
+
   (spacemacs/declare-prefix "o" "own-menu")
   (spacemacs/set-leader-keys "os" 'org-save-all-org-buffers)
-  (spacemacs/set-leader-keys "oi" 'helm-org-agenda-files-headings)
+  ;; (spacemacs/set-leader-keys "oi" 'helm-org-agenda-files-headings)
+  (spacemacs/set-leader-keys "oa" 'change-quote)
   (spacemacs/set-leader-keys "oc" 'org-columns)
   (spacemacs/set-leader-keys "od" 'remove-class)
+  (spacemacs/set-leader-keys "oi" 'insert-class)
   (spacemacs/set-leader-keys "skp" 'helm-projectile-ack)
 
   (setq default-directory "~/docs/")
@@ -622,7 +634,7 @@ This function is called at the very end of Spacemacs initialization."
  '(ansi-color-names-vector
    ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
  '(custom-safe-themes
-   '("4cf9ed30ea575fb0ca3cff6ef34b1b87192965245776afa9e9e20c17d115f3fb" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))
+   '("939ea070fb0141cd035608b2baabc4bd50d8ecc86af8528df9d41f4d83664c6a" "76bfa9318742342233d8b0b42e824130b3a50dcc732866ff8e47366aed69de11" "d2e0c53dbc47b35815315fae5f352afd2c56fa8e69752090990563200daae434" "db7f422324a763cfdea47abf0f931461d1493f2ecf8b42be87bbbbbabf287bfe" "0cd00c17f9c1f408343ac77237efca1e4e335b84406e05221126a6ee7da28971" "a390bea70629258d80f41a42098bafcc636cd5f29f2449f00a86c1dabf68358d" "5f824cddac6d892099a91c3f612fcf1b09bb6c322923d779216ab2094375c5ee" "4cf9ed30ea575fb0ca3cff6ef34b1b87192965245776afa9e9e20c17d115f3fb" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))
  '(evil-want-Y-yank-to-eol nil)
  '(helm-completion-style 'emacs)
  '(hl-todo-keyword-faces

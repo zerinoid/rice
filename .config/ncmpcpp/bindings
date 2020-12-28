@@ -333,8 +333,8 @@ def_key "K"
 def_key "J"
   move_selected_items_down
 #
-#def_key "M"
-#  move_selected_items_to
+def_key "O"
+  move_selected_items_to
 #
 #def_key "A"
 #  add

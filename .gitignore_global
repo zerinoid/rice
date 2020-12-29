@@ -1,4 +1,6 @@
+.projectile
 .directory
 .nvmrc
 jsconfig.json
 .eslintrc.js
+.prettierrc*

@@ -3,6 +3,8 @@
 LOG="$HOME/dls/torrents/auto_move.log"
 data=$(date '+%Y-%m-%d %H:%M:%S')
 
+notify-send "acabou o downloads $TR_TORRENT_NAME"
+
 if [[ $(transmission-remote -t "$TR_TORRENT_ID" -f | egrep "264|265" | egrep -v "jpg|jpeg") ]]; then
 
 	echo "$data: Removendo chaves nos filenames" >> "$LOG"

@@ -99,10 +99,10 @@ super + shift + alt + q
 
 # Browser
 super + w 
-	/usr/bin/firefox
+	/usr/bin/brave-browser
 
 super + shift + w 
-	/usr/bin/firefox -private
+	/usr/bin/brave-browser --incognito
 
 #calculadora
 super + alt + y

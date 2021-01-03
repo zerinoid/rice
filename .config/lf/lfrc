@@ -150,7 +150,8 @@ map R rename # at the very end
 map r push R<a-b> # after extention
 map <c-t> rsyncext
 map <c-r> reload
-map <c-s> !mobt $fx
+# map <c-s> !mobt $fx
+map <c-s> !sendma $fx
 map x $$f
 map X &$f
 map <delete> delete

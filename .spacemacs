@@ -594,7 +594,7 @@ before packages are loaded."
                            "--trailing-comma" "none"
                            "--arrow-parens" "avoid"
                            "--print-width" "80"
-                           "--no-semi" 
+                           "--no-semi"
                            ))
 
   (defun auto-lint ()

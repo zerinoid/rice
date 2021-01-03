@@ -56,6 +56,7 @@ export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export PATH="$PATH:$HOME/.composer/vendor/bin"
 export PATH="$CARGO_HOME/bin:$PATH"
 # export PATH="$HOME/.cargo/bin:$PATH"
+export PATH=$PATH:/usr/local/go/bin
 
 # pkg-config
 export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig"

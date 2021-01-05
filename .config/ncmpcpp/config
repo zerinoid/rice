@@ -13,9 +13,8 @@ current_item_inactive_column_prefix = $(cyan)$r
 current_item_inactive_column_suffix = $/r$(end)
 
 visualizer_in_stereo = "no"
-visualizer_fifo_path = "/tmp/mpd.fifo"
+visualizer_data_source = "/tmp/mpd.fifo"
 visualizer_output_name = "my_fifo"
-visualizer_sync_interval = "10"
 visualizer_type = "spectrum"
 visualizer_look = "▋▋"
 
@@ -38,7 +37,7 @@ external_editor = "vim"
 media_library_sort_by_mtime = yes
 
 media_library_primary_tag = album_artist
-main_window_highlight_color = "white"
+# main_window_highlight_color = "white"
 media_library_albums_split_by_date = no
 
 progressbar_elapsed_color = "white"

@@ -34,6 +34,7 @@ handle_mime() {
     case "${mimetype}" in
 	text/html) w3m -dump "${FILE_PATH}" ;;
 	text/troff) man ./ "${FILE_PATH}" | col -b ;;
+	*/markdown) glow "${FILE_PATH}" ;;
 	text/* | */xml)
             if [ "$( stat --printf='%s' -- "${FILE_PATH}" )" -gt "${HIGHLIGHT_SIZE_MAX}" ]; then
                 exit 2

@@ -1,9 +1,9 @@
 "vimrc carai
 
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/plugged')
@@ -20,9 +20,15 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'jreybert/vimagit'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'dylanaraps/wal.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 " Plug 'jceb/vim-orgmode'
 
 call plug#end()
+
+let g:airline_powerline_fonts = 1
+let g:airline_theme='dark'
+let g:airline#extensions#whitespace#enabled = 1
 
 set go=a
 set mouse=a
@@ -49,43 +55,36 @@ let mapleader=" "
 
 set number
 
-" augroup numbertoggle
-"   autocmd!
-"   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-"   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-" augroup END
-
-
 """" Luke
 " Some basics:
-	nnoremap c "_c
-	set nocompatible
-	filetype plugin on
-	syntax on
-	set encoding=utf-8
+    nnoremap c "_c
+    set nocompatible
+    filetype plugin on
+    syntax on
+    set encoding=utf-8
 
 " Enable autocompletion:
-	set wildmode=longest,list,full
+    set wildmode=longest,list,full
 
 " Disables automatic commenting on newline:
-	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+    autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Shortcutting split navigation, saving a keypress:
-	map <C-h> <C-w>h
-	map <C-j> <C-w>j
-	map <C-k> <C-w>k
-	map <C-l> <C-w>l
+    map <C-h> <C-w>h
+    map <C-j> <C-w>j
+    map <C-k> <C-w>k
+    map <C-l> <C-w>l
 
     map <leader>s :!clear && shellcheck %<CR>
 
 " Replace ex mode with gq
-	map Q gq
+    map Q gq
 
 " Replace all is aliased to S.
-	nnoremap S :%s//g<Left><Left>
+    nnoremap S :%s//g<Left><Left>
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
-	set splitbelow splitright
+    set splitbelow splitright
 
 """" Shortcuts """"
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
@@ -122,15 +121,15 @@ silent! helptags ALL
 colorscheme wal
 
 " Run xrdb whenever Xdefaults or Xresources are updated.
-	autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
+    autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
 " Update binds when sxhkdrc is updated.
-	autocmd BufWritePost *sxhkdrc !pkill -USR1 sxhkd
+    autocmd BufWritePost *sxhkdrc !pkill -USR1 sxhkd
 " Update picom when picom.conf is updated.
-	autocmd BufWritePost *picom.conf !pkill -SIGUSR1 -x picom
+    autocmd BufWritePost *picom.conf !pkill -SIGUSR1 -x picom
 " Source bash aliases
-	autocmd BufWritePost *bash_aliases !source %
+    autocmd BufWritePost *bash_aliases !source %
 " relaunchar xplugd a cada atualizaçao
-	autocmd BufWritePost *xplugrc !xplugd
+    autocmd BufWritePost *xplugrc !xplugd
 
 " Copiar css do solinvictus
     " autocmd BufWritePost solinvictus.css !cat % | xclip -selection clipboard

@@ -68,7 +68,8 @@ super + shift + e
 
 #Lista wifi
 super + alt + i
-	$TERMB --class 'pad' -e sh -c "nmcli device wifi rescan;nmcli device wifi list;$SHELL" &
+	networkmanager_dmenu
+	# $TERMB --class 'pad' -e sh -c "nmcli device wifi rescan;nmcli device wifi list;$SHELL" &
 
 # lf
 # super + r

@@ -9,7 +9,7 @@ echo "$data" >> "$LOGINLOG"
 . "$HOME/.cache/wal/colors.sh"
 
 sxhkd &
-xrdb -load .Xdefaults &
+xrdb -load .Xresources &
 xset r rate 300 50 &
 xset +fp /home/zerinol/.local/share/fonts
 xset +fp /home/zerinol/.fonts
@@ -23,9 +23,9 @@ xset -b &
 # Set pulseaudio profile saida analogica
 pacmd set-card-profile alsa_card.pci-0000_00_1f.3 output:analog-stereo
 
-bspc monitor eDP-1 -d 1 2 3 4 5 
-bspc monitor HDMI-1 -d 6 7 8 9 0
-bspc wm -O eDP1 HDMI-1
+bspc monitor eDP1 -d 1 2 3 4 5
+bspc monitor HDMI1 -d 6 7 8 9 0
+bspc wm -O eDP1 HDMI1
 
 bspc config border_width        2
 bspc config window_gap          4
@@ -48,18 +48,18 @@ bspc config initial_polarity first_child
 
 bspc rule -a Gimp desktop='^8' state=floating follow=on
 bspc rule -a Chromium desktop='^2'
-bspc rule -a XCalc state=floating 
+bspc rule -a XCalc state=floating
 bspc rule -a Nm-connection-editor state=floating
 bspc rule -a Blueman-manager state=floating
 bspc rule -a Gedit state=floating
 bspc rule -a mpv state=floating rectangle=640x360+50+70
-bspc rule -a *:ncmpcpp state=floating rectangle=1300x412+25+183
+bspc rule -a ncmpcpp:* state=floating rectangle=1300x412+25+183
 bspc rule -a *:pad state=floating rectangle=716x356+400+30
 bspc rule -a Emacs state=floating rectangle=775x680+350+30
-bspc rule -a zoom state=floating 
+bspc rule -a zoom state=floating
 bspc rule -a Ramme state=floating
 bspc rule -a Zathura state=tiled
 bspc rule -a *:Kunst state=floating
 
-$HOME/.config/polybar/launch.sh 2>&1 >> "$LOGINLOG" &
-~/.fehbg
+$HOME/.config/polybar/forest/launch.sh 2>&1 >> "$LOGINLOG" &
+# feh --recursive --randomize --bg-fill ~/db/wp

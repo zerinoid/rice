@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # set up the two monitors for bspwm
-external_monitor=$(xrandr --query | grep 'HDMI-1')
+external_monitor=$(xrandr --query | grep 'HDMI1')
 if [[ ! $external_monitor = *disconnected* ]]; then
     echo "Monitor conectado"
-    xrandr --output eDP-1 --primary --mode 1366x768 --rotate normal --output HDMI-1 --mode 1920x1080 --rotate normal --above eDP-1
+    xrandr --output eDP1 --primary --mode 1366x768 --rotate normal --output HDMI1 --mode 1920x1080 --rotate normal --above eDP1
 else
     echo "Monitor desconectado"
-    bspc monitor HDMI-1 -r
+    bspc monitor HDMI1 -r
     bspc wm -o
-    xrandr --output eDP-1 --primary --mode 1366x768 --rotate normal --output HDMI-1 --off
+    xrandr --output eDP1 --primary --mode 1366x768 --rotate normal --output HDMI1 --off
 fi
 

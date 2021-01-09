@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-FOLDER=~/.config/snippet_paste 
-SNIPPETS="$(find $FOLDER -mindepth 1 -iname "*" | awk -F"/" '{ print $6}')"
+FOLDER=~/.config/snippet_paste
+SNIPPETS="$(find $FOLDER -mindepth 1 -iname "*" | sort | awk -F"/" '{ print $6}')"
 
 CHOSEN=$( echo "$SNIPPETS" | dmenu -p "copiar snippets" )
 

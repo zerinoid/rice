@@ -571,6 +571,8 @@ before packages are loaded."
 
   (spacemacs/toggle-spelling-checking-on)
 
+  (setq org-use-sub-superscripts '{})
+
   (add-hook 'org-mode-hook 'turn-on-auto-fill)
   (add-hook 'org-mode-hook 'org-indent-mode)
   (add-hook 'org-mode-hook 'emojify-mode)

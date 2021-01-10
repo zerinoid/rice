@@ -32,8 +32,8 @@ super + a
   "$TERMA" -c 'ncmpcpp' -e ncmpcpp
   # "$TERMB" --class ncmpcpp -e ncmpcpp
 
-shift + super + a
-  "$TERMB" --class ncmpcpp -e ncmpcpp -p 6700
+# shift + super + a
+#   "$TERMB" --class ncmpcpp -e ncmpcpp -p 6700
 
 # youtube-dl audio
 super + shift + a

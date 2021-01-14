@@ -12,7 +12,7 @@ picom >> "$LOGINLOG" 2>&1 &
 overgrive >> "$LOGINLOG" 2>&1 &
 transmission-daemon >> "$LOGINLOG" 2>&1 &
 xscreensaver -nosplash &
-mpd
+mpd &
 mpdas -c ~/.config/mpdasrc >> "$LOGINLOG" 2>&1 &
 unclutter &
 emacs --daemon &

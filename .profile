@@ -37,11 +37,12 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 # env vars
+[ -f /usr/bin/vim ] && export EDITOR="/usr/bin/vim"
+[ -f /usr/local/bin/vim ] && export EDITOR="/usr/local/bin/vim"
 export EMACS_SERVER_SOCKET="/run/user/$(id -u)/emacs/server"
 export TERMA="st"
 export TERMB="alacritty"
 # export VISUAL="emacsclient -s $EMACS_SERVER_SOCKET -c"
-export EDITOR="/usr/bin/vim"
 export LOGINLOG="$HOME/.local/login.log"
 export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"
 export KUNST_MUSIC_DIR="/home/zerinol/music/"

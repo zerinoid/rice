@@ -11,13 +11,13 @@ super + Return
   "$TERMB"
 
 super + alt + Return
-  "$TERMB" --class pad
+	"$TERMB" --class pad
 
 super + shift + Return
 	"$TERMA"
 
 super + d
-  dmenu_run
+	dmenu_run
 
 # toggle keyboard
 super + space
@@ -29,8 +29,8 @@ super + space
 
 # ncmpcpp
 super + a
-  "$TERMA" -c 'ncmpcpp' -e ncmpcpp
-  # "$TERMB" --class ncmpcpp -e ncmpcpp
+	"$TERMA" -c 'ncmpcpp' -e ncmpcpp
+	# "$TERMB" --class ncmpcpp -e ncmpcpp
 
 # shift + super + a
 #   "$TERMB" --class ncmpcpp -e ncmpcpp -p 6700
@@ -44,7 +44,7 @@ super + alt + b
 	blueman-applet
 
 # IDE
-super + alt + c 
+super + alt + c
 	codium
 
 # emojis
@@ -64,7 +64,7 @@ super + shift + e
 	emacsclient -s $EMACS_SERVER_SOCKET -c ~/docs/org/misc.org
 
 # super + shift + i
-# 	emacsclient -s $EMACS_SERVER_SOCKET -c ~/docs/org/index.org
+#	emacsclient -s $EMACS_SERVER_SOCKET -c ~/docs/org/index.org
 
 #Lista wifi
 super + alt + i
@@ -73,7 +73,7 @@ super + alt + i
 
 # lf
 # super + r
-# 	$TERMA -e bash -c "lfcd;$SHELL" 
+# 	$TERMA -e bash -c "lfcd;$SHELL"
 
 # kunst
 super + shift + c
@@ -93,19 +93,15 @@ super + ctrl + t
 super + shift + alt + t
  $TERMA -e sudo iotop
 
-# qutebrowser
-super + alt + u
-  qutebrowser
-
 # kill internets
 super + shift + alt + q
   killall overgrive transmission-da
 
 # Browser
-super + w 
+super + w
 	/usr/bin/brave-browser
 
-super + shift + w 
+super + shift + w
 	/usr/bin/brave-browser --incognito
 
 #calculadora
@@ -118,7 +114,7 @@ super + alt + y
 
 # desligar
 super + ctrl + q
-  dmenu_tools
+	dmenu_tools
 
 # reiniciar
 # super  ctrl + r
@@ -126,11 +122,11 @@ super + ctrl + q
 
 # suspender
 super + ctrl + s
-  systemctl suspend
+	systemctl suspend
 
 #toggle audio output
 super + ctrl + a
-  pacmd set-card-profile alsa_card.pci-0000_00_1f.3 output:{analog,hdmi}-stereo
+	pacmd set-card-profile alsa_card.pci-0000_00_1f.3 output:{analog,hdmi}-stereo
 
 #
 # bspwm hotkeys
@@ -201,8 +197,8 @@ super + {i,o}
 
 # DEPRECADO send current node to prev/next worskpace
 super + shift + {i,o}
-	bspc node -d {prev,next}.local --follow 
- 
+	bspc node -d {prev,next}.local --follow
+
 # focus the last node/desktop
 super + {apostrophe,Tab}
 	bspc {monitor -f last,desktop -f last.local}
@@ -266,12 +262,12 @@ super + x
 
 # unhide the most recently hidden window
 super + v
-    stack_file="$XDG_RUNTIME_DIR/bspwm_hidden_nodes.txt"; \
-    target_node=$(tail --lines=1 "$stack_file");          \
-    sed -i '$d' "$stack_file";                            \
-    bspc node "$target_node" --to-desktop focused;        \
-    bspc node "$target_node" --flag hidden=off;           \
-    bspc node -f "$target_node"
+	stack_file="$XDG_RUNTIME_DIR/bspwm_hidden_nodes.txt"; \
+	target_node=$(tail --lines=1 "$stack_file");          \
+	sed -i '$d' "$stack_file";                            \
+	bspc node "$target_node" --to-desktop focused;        \
+	bspc node "$target_node" --flag hidden=off;           \
+	bspc node -f "$target_node"
 
 #
 # Media Keys
@@ -279,12 +275,12 @@ super + v
 
 #Screenshot
 Print
-  maim $HOME/pics/pic-full-$(date '+%y%m%d-%H%M-%S').png
+	maim $HOME/pics/pic-full-$(date '+%y%m%d-%H%M-%S').png
 
 #Pick screenshot type
 
 shift + Print
-  maimpick
+	maimpick
 
 #Volume Control
 XF86AudioLowerVolume

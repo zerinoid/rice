@@ -1,5 +1,2 @@
 #!/bin/bash
-# for file in "$@"; do
-#   scp -Cpr "$file" zerinol@sedna:~/${!#:-tmp}
-# done
 rsync -vPhua "$@" zerinol@sedna:~/tmp

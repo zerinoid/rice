@@ -91,6 +91,7 @@ vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 map ç :FZF<CR>
 map <leader>, :vsp<CR>
 map <leader>. :sp<CR>
+map <leader>fs :w<CR>
 nnoremap <silent> <Leader>= :exe "vertical resize " . (winwidth(0) * 4/3)<CR>
 nnoremap <silent> <Leader>- :exe "vertical resize " . (winwidth(0) * 3/4)<CR>
 

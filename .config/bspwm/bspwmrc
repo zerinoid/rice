@@ -16,12 +16,10 @@ xset +fp /home/zerinol/.fonts
 xset fp rehash
 xset -b &
 
-# (ps x | grep bspswallow | grep -v grep) || bspswallow &
-
 [ -x $HOME/.local/bin/dual_monitor ] && dual_monitor  2>&1 >> "$LOGINLOG"
 
 # Set pulseaudio profile saida analogica
-pacmd set-card-profile alsa_card.pci-0000_00_1f.3 output:analog-stereo
+# pacmd set-card-profile alsa_card.pci-0000_00_1f.3 output:analog-stereo
 
 bspc monitor eDP1 -d 1 2 3 4 5
 bspc monitor HDMI1 -d 6 7 8 9 0

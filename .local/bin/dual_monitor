@@ -4,7 +4,7 @@
 external_monitor=$(xrandr --query | grep 'HDMI1')
 if [[ ! $external_monitor = *disconnected* ]]; then
     echo "Monitor conectado"
-    xrandr --output eDP1 --primary --mode 1366x768 --rotate normal --output HDMI1 --mode 1920x1080 --rotate normal --above eDP1
+    xrandr --output eDP1 --primary --mode 1366x768 --rotate normal --output HDMI1 --mode 1600x900 --rotate normal --above eDP1
 else
     echo "Monitor desconectado"
     bspc monitor HDMI1 -r

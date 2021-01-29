@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.42 for zerinol on Thu Jan 21 20:48:12 2021.
+# Written by xscreensaver-demo 5.42 for zerinol on Sun Jan 24 18:10:13 2021.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	0:25:00
@@ -24,7 +24,7 @@ fadeTicks:	20
 captureStderr:	True
 ignoreUninstalledPrograms:False
 font:		Hack Nerd Font:style=Regular:size=12
-dpmsEnabled:	True
+dpmsEnabled:	False
 dpmsQuickOff:	False
 dpmsStandby:	1:00:00
 dpmsSuspend:	0:00:00

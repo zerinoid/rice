@@ -82,7 +82,6 @@ alias \
 alias \
     bls="beet ls"\
     bla="beet ls -a"\
-    bf="find ~/music -mindepth 2 -type d -mtime 0 -exec beet import {} +; -exec beet embedart -y {} +"\
     bw="beet write"
 
 # with config

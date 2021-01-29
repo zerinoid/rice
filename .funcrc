@@ -24,12 +24,24 @@ e() {
 
 superls() { printf "\n" && colorls "$@" -a --sd && printf "\n"; }
 
-bim() { 
-  for album in "$@" 
-  do 
-    beet import ~/music/*/*"$album"*;
+bim() {
+  for album in "$@"
+  do
+    beet import -i ~/music/*/*"$album"*;
     beet embedart -y "$album"
   done
+}
+
+bf() {
+    IFS=$'\n'
+    NOVOS=( $(find ~/music -mindepth 2 -type d -mtime 0) )
+    unset IFS
+
+    for album in $NOVOS
+    do
+            beet import -i $album
+            beet embedart -y $album
+    done
 }
 
 pwlog() { git log "$@" --graph --oneline --decorate --color | less -SEXIER }
@@ -43,7 +55,7 @@ unhistory () {
 
 #git dot add
 da () {
-   dit ls-files | grep "$1" | xargs git --git-dir=$HOME/.cfg/ --work-tree=$HOME add 
+   dit ls-files | grep "$1" | xargs git --git-dir=$HOME/.cfg/ --work-tree=$HOME add
 }
 
 #git dot difftool
@@ -56,12 +68,3 @@ gd () {
    git ls-files | grep "$1" | xargs git  diff
 }
 
-# lfcd () {
-#     tmp="$(mktemp)"
-#     lf -last-dir-path="$tmp" "$@"
-#     if [ -f "$tmp" ]; then
-#         dir="$(cat "$tmp")"
-#         rm -f "$tmp"
-#         [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
-#     fi
-# }

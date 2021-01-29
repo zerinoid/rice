@@ -19,6 +19,9 @@ super + shift + Return
 super + d
 	dmenu_run
 
+super + alt + d
+	rofi -no-config -no-lazy-grab -show drun -modi drun -theme ~/.config/polybar/forest/scripts/rofi/launcher.rasi
+
 # toggle keyboard
 super + space
 	dt

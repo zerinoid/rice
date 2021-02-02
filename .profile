@@ -42,6 +42,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export EMACS_SERVER_SOCKET="/run/user/$(id -u)/emacs/server"
 export TERMA="st"
 export TERMB="alacritty"
+export TERM=$TERMB
 # export VISUAL="emacsclient -s $EMACS_SERVER_SOCKET -c"
 export LOGINLOG="$HOME/.local/login.log"
 export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"

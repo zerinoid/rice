@@ -22,9 +22,18 @@ super + d
 super + alt + d
 	rofi -no-config -no-lazy-grab -show drun -modi drun -theme ~/.config/polybar/forest/scripts/rofi/launcher.rasi
 
-# toggle keyboard
+#
+# Dunst
+#
+
 super + space
-	dt
+	dunstctl close
+
+super + shift + space
+	dunstctl action
+
+super + period
+	dunstctl history-pop
 
 #
 # Launch Stuff
@@ -184,8 +193,8 @@ super + shift + {k,j}
 	bspc node -m {north,south} --follow
 
 # focus the node for the given path jump
-super + {p,b,comma,period}
-	bspc node -f @{parent,brother,first,second}
+# super + {p,b,comma,period}
+# 	bspc node -f @{parent,brother,first,second}
 
 # focus the next/previous node in the current desktop
 super + {k,j}
@@ -341,4 +350,4 @@ super + {F9,F10}
 
 # Pause dunst
 super + F11
-	notify-send "DUNST_COMMAND_TOGGLE"
+	dunstctl set-paused toggle

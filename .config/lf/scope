@@ -32,10 +32,10 @@ HIGHLIGHT_STYLE='pablo'
 handle_mime() {
     local mimetype="${1}"
     case "${mimetype}" in
-	text/html) w3m -dump "${FILE_PATH}" ;;
-	text/troff) man ./ "${FILE_PATH}" | col -b ;;
-	*/markdown) glow "${FILE_PATH}" ;;
-	text/* | */xml)
+        text/html) w3m -dump "${FILE_PATH}" ;;
+        text/troff) man ./ "${FILE_PATH}" | col -b ;;
+        */markdown) glow "${FILE_PATH}" ;;
+        text/* | */xml)
             if [ "$( stat --printf='%s' -- "${FILE_PATH}" )" -gt "${HIGHLIGHT_SIZE_MAX}" ]; then
                 exit 2
             fi
@@ -52,6 +52,7 @@ handle_mime() {
         */pdf) pdftotext -l 10 -nopgbrk -q -- "${FILE_PATH}" - ;;
         *opendocument*) odt2txt "${FILE_PATH}" ;;
         *x-bittorrent) transmission-show "${FILE_PATH}" ;;
+        */json) cat "${FILE_PATH}" ;;
     esac
 }
 

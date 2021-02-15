@@ -90,7 +90,9 @@ This function should only modify configuration layer settings."
                  js2-mode-show-strict-warnings nil
                  javascript-fmt-on-save t)
      (typescript :variables
-                 typescript-backend 'tide)
+                 typescript-backend 'tide
+                 typescript-linter 'eslint
+                 typescript-fmt-on-save t)
      react
      themes-megapack
      )
@@ -567,7 +569,7 @@ before packages are loaded."
   (spacemacs/set-leader-keys "skp" 'helm-projectile-ack)
 
   (setq default-directory "~/docs/")
-  (setq flycheck-checker 'javascript-eslint)
+  ;; (setq flycheck-checker 'javascript-tide)
 
   (spacemacs/toggle-spelling-checking-on)
 

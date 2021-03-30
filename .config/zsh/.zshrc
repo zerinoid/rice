@@ -261,3 +261,13 @@ ENHANCD_FILTER="fzf"
 ENHANCD_COMMAND="c"
 
 _BORING_COMMANDS=($_BORING_COMMANDS "^unhistory")
+
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export ANDROID_HOME=$HOME/.local/share/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$HOME/.local/share/android-studio/bin
+
+export _JAVA_AWT_WM_NONREPARENTING=1

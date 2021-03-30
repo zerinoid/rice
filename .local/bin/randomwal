@@ -1,6 +1,6 @@
 #!/bin/bash
 IFS=$'\n'
-files=( $(fd jpg ~/db/wpp) )
+files=( $(find ~/db/wpp -type f) )
 unset IFS
 image=${files[$RANDOM % ${#files[@]} ]}
 #echo ${files[*]}

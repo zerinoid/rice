@@ -16,6 +16,7 @@ mpd &
 mpdas -c ~/.config/mpdasrc >> "$LOGINLOG" 2>&1 &
 unclutter &
 emacs --daemon &
+toucheeg &
 # kunst &
 
 ## wal colors

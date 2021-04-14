@@ -62,6 +62,9 @@ URxvt.urlLauncher: /usr/bin/xdg-open
 URxvt.underlineURLs: true
 URxvt.urlButton: 1
 
+Sxiv.foreground: #ff00bf
+Sxiv.background: #bfff00
+
 !! gruvbox: 
 *.color0: #000000
 *.color1: #cc241d

@@ -22,7 +22,7 @@ xset -b &
 # pacmd set-card-profile alsa_card.pci-0000_00_1f.3 output:analog-stereo
 
 bspc monitor eDP1 -d 1 2 3 4 5
-bspc monitor HDMI1 -d 6 7 8 9 0
+bspc monitor HDMI1 -d 6 7
 bspc wm -O eDP1 HDMI1
 
 bspc config border_width        2
@@ -60,6 +60,7 @@ bspc rule -a Zathura state=tiled
 bspc rule -a *:Kunst state=floating
 bspc rule -a PdWindow:* state=floating
 bspc rule -a HelpBrowser:* state=floating
+bspc rule -a Processing:* state=floating
 
 $HOME/.config/polybar/forest/launch.sh 2>&1 >> "$LOGINLOG" &
 feh --recursive --randomize --bg-fill ~/db/wpp

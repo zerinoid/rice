@@ -291,7 +291,7 @@ Print
 
 #Pick screenshot type
 
-shift + Print
+super + shift + s
 	maimpick
 
 #Volume Control

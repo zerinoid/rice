@@ -563,6 +563,7 @@ before packages are loaded."
   (spacemacs/set-leader-keys "oc" 'org-columns)
   (spacemacs/set-leader-keys "od" 'remove-class)
   (spacemacs/set-leader-keys "oi" 'insert-class)
+  (spacemacs/set-leader-keys "ot" 'insert-timestamp)
   (spacemacs/set-leader-keys "skp" 'helm-projectile-ack)
 
   (setq default-directory "~/docs/")
@@ -612,13 +613,17 @@ before packages are loaded."
     (evil-scroll-line-to-center (line-number-at-pos)))
 
   ;; all functions that should center after called
-  (advice-add #'spacemacs/jump-to-definition :after #'scroll-to-center-advice)  
+  (advice-add #'spacemacs/jump-to-definition :after #'scroll-to-center-advice)
   (advice-add #'evil-goto-mark :after #'scroll-to-center-advice)
   (advice-add #'evil-goto-mark-line :after #'scroll-to-center-advice)
 
+  ;; printar timestamp
+  (defvar timestamp-format " %Y-%m-%d %a %R")
+  (defun insert-timestamp ()
+    (interactive)
+    (insert (format-time-string timestamp-format (current-time))))
+
   )
-
-
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.

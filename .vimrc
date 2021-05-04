@@ -30,9 +30,16 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='dark'
 let g:airline#extensions#whitespace#enabled = 1
 
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 3
+let g:netrw_altv = 1
+let g:netrw_winsize = 15
+
 set go=a
 set mouse=a
 set clipboard+=unnamedplus
+set backspace=start
 
 set ruler
 set visualbell
@@ -111,10 +118,8 @@ nnoremap <leader>n  :tabnew<CR>
 nnoremap <leader>m  :tabm<Space>
 nnoremap <leader>d  :tabclose<CR>
 
-"powerline
-" python3 from powerline.vim import setup as powerline_setup
-" python3 powerline_setup()
-" python3 del powerline_setup
+" netrw
+nnoremap <leader>pt :Vex<CR>
 
 packloadall
 silent! helptags ALL
@@ -131,6 +136,8 @@ colorscheme wal
     autocmd BufWritePost *bash_aliases !source %
 " relaunchar xplugd a cada atualizaçao
     autocmd BufWritePost *xplugrc !xplugd
+" Reload vimrc
+    autocmd BufWritePost *vimrc :so $MYVIMRC
 
 " Copiar css do solinvictus
     " autocmd BufWritePost solinvictus.css !cat % | xclip -selection clipboard

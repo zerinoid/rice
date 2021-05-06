@@ -1,14 +1,16 @@
 "vimrc carai
 
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
+	echo "Downloading junegunn/vim-plug to manage plugins..."
+	silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
+	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
+	autocmd VimEnter * PlugInstall
 endif
 
-call plug#begin('~/.vim/plugged')
+set termguicolors
+
+call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
     Plug 'junegunn/vim-easy-align'
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'airblade/vim-gitgutter'
     Plug 'tpope/vim-eunuch'
     Plug 'tpope/vim-surround'
@@ -16,14 +18,31 @@ call plug#begin('~/.vim/plugged')
     Plug 'kovetskiy/sxhkd-vim'
     Plug 'yuezk/vim-js'
     Plug 'maxmellon/vim-jsx-pretty'
-    Plug 'jreybert/vimagit'
     Plug 'jeffkreeftmeijer/vim-numbertoggle'
-    Plug 'dylanaraps/wal.vim'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
+    Plug 'ghifarit53/tokyonight-vim'                      " Tokyo Night colorscheme
+    Plug 'norcalli/nvim-colorizer.lua'                    " Colorize hex codes
+    " Plug 'dylanaraps/wal.vim'
+    " Plug 'jreybert/vimagit'
     " Plug 'jceb/vim-orgmode'
+    " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 call plug#end()
+
+
+" Tokyo Night
+let g:tokyonight_style = 'storm' " available: night, storm
+let g:tokyonight_enable_italic = 1 " available: 0, 1
+
+" Set colorscheme
+colorscheme tokyonight
+
+" Lightline colorscheme
+let g:lightline = {'colorscheme': 'tokyonight'}
+
+" Required by Colorizer
+lua require'colorizer'.setup()
 
 " Variaveis
     let g:airline_powerline_fonts = 1
@@ -121,7 +140,7 @@ call plug#end()
     packloadall
     silent! helptags ALL
 
-    colorscheme wal
+    " colorscheme wal
 
 " Disables automatic commenting on newline:
     autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o

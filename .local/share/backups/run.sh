@@ -74,10 +74,10 @@ echo "Starting backup for $DATE"
 
 shopt -s globstar
 
-# teste
-borg create $BORG_OPTS \
-  $TARGET::$DATE-$$-teste \
-  $HOME/tmp/ass
+# # teste
+# borg create $BORG_OPTS \
+#   $TARGET::$DATE-$$-teste \
+#   $HOME/tmp/ass
 
 # DB
 borg create $BORG_OPTS \

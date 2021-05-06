@@ -38,7 +38,6 @@ export XDG_CACHE_HOME="$HOME/.cache"
 
 # env vars
 [ -f /usr/bin/vim ] && export EDITOR="/usr/bin/vim"
-[ -f /usr/local/bin/vim ] && export EDITOR="/usr/local/bin/vim"
 export EMACS_SERVER_SOCKET="/run/user/$(id -u)/emacs/server"
 export TERMA="st"
 export TERMB="alacritty"

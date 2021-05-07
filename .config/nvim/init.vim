@@ -34,6 +34,7 @@ call plug#end()
 " Tokyo Night
 let g:tokyonight_style = 'storm' " available: night, storm
 let g:tokyonight_enable_italic = 1 " available: 0, 1
+let g:tokyonight_transparent_background = 1
 
 " Set colorscheme
 colorscheme tokyonight
@@ -155,7 +156,7 @@ lua require'colorizer'.setup()
 " relaunchar xplugd a cada atualizaçao
     autocmd BufWritePost *xplugrc !xplugd
 " Reload vimrc
-    autocmd BufWritePost *vimrc :so $MYVIMRC
+    autocmd BufWritePost *init.vim :so $MYVIMRC
 
 " Copiar css do solinvictus
     " autocmd BufWritePost solinvictus.css !cat % | xclip -selection clipboard

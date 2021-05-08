@@ -240,6 +240,7 @@ zinit light sindresorhus/pure
 ##
 
 # bindkey '^h' _histdb-isearch
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white"
 
 # Usar histdb para sugestões do autosuggest
 _zsh_autosuggest_strategy_histdb_top_here() {

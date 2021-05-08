@@ -59,17 +59,17 @@ alert() {
 }
 
 #git dot add
-da () {
+da() {
    dit ls-files | grep "$1" | xargs git --git-dir=$HOME/.cfg/ --work-tree=$HOME add
 }
 
 #git dot difftool
-gdd () {
+gdd() {
    dit ls-files | grep "$1" | xargs git --git-dir=$HOME/.cfg/ --work-tree=$HOME diff
 }
 
 #git difftool
-gd () {
-   git ls-files | grep "$1" | xargs git  diff
+gdt() {
+   dit ls-files | grep "$1" | xargs git --git-dir=$HOME/.cfg/ --work-tree=$HOME difftool -y
 }
 

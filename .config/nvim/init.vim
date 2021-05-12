@@ -26,7 +26,8 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
     " Plug 'dylanaraps/wal.vim'
     " Plug 'jreybert/vimagit'
     " Plug 'jceb/vim-orgmode'
-    " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'VincentCordobes/vim-translate'
 
 call plug#end()
 
@@ -61,6 +62,7 @@ lua require'colorizer'.setup()
     set mouse=a
     set clipboard+=unnamedplus
     set backspace=start
+    set complete+=kspell
 
     set nocompatible
     filetype plugin on
@@ -136,6 +138,14 @@ lua require'colorizer'.setup()
 
     " netrw
     nnoremap <leader>pt :Vex<CR>
+    
+    " translation
+    nnoremap <silent> <leader>tt :Translate<CR>
+    vnoremap <silent> <leader>tt :TranslateVisual<CR>
+    vnoremap <silent> <leader>tr :TranslateReplace<CR>
+
+    nmap <leader>ts <Plug>Translate
+    nmap <leader>tr <Plug>TranslateReplace
 
 " sei la
     packloadall

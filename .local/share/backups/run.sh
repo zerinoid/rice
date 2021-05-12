@@ -105,6 +105,7 @@ borg create $BORG_OPTS \
 #   $HOME/.ban
 
 echo "Completed backup for $DATE"
+alert
 
 # Just to be completely paranoid
 sync

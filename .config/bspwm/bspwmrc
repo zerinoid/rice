@@ -61,7 +61,7 @@ bspc rule -a PdWindow:* state=floating
 bspc rule -a HelpBrowser:* state=floating
 bspc rule -a Processing:* state=floating
 
-$HOME/.config/bspwm/mark.sh &
+# [ -z $(ps aux | grep mark.sh | grep -v grep) ] && $HOME/.config/bspwm/mark.sh &
 
 $HOME/.config/polybar/forest/launch.sh 2>&1 >> "$LOGINLOG" &
 feh --recursive --randomize --bg-fill ~/db/wpp

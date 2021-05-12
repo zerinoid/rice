@@ -2,12 +2,12 @@
 
 TEMKUNST=$(ps aux | grep kunst | egrep -v 'grep|handler' | awk '{ print $2}')
 
-if [ ! -z $TEMKUNST ]; then 
-    for p in $TEMKUNST; do 
+if [ ! -z $TEMKUNST ]; then
+    for p in $TEMKUNST; do
         kill $p;
     done
     kunst
-else 
-    ifinstalled kunst || exit 
+else
+    ifinstalled kunst || exit
     kunst
 fi

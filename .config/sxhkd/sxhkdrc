@@ -8,13 +8,13 @@ super + Escape
 
 # terminal emulator
 super + Return
-  "$TERMB"
+  "$TERMA"
 
 super + alt + Return
-	"$TERMB" --class pad
+	"$TERMA" --class pad
 
 super + shift + Return
-	"$TERMA"
+	"$TERMB"
 
 super + d
 	dmenu_run
@@ -41,11 +41,11 @@ super + period
 
 # ncmpcpp
 super + a
-	"$TERMA" -c 'ncmpcpp' -e ncmpcpp
-	# "$TERMB" --class ncmpcpp -e ncmpcpp
+	"$TERMB" -c 'ncmpcpp' -e ncmpcpp
+	# "$TERMA" --class ncmpcpp -e ncmpcpp
 
 # shift + super + a
-#   "$TERMB" --class ncmpcpp -e ncmpcpp -p 6700
+#   "$TERMA" --class ncmpcpp -e ncmpcpp -p 6700
 
 # youtube-dl audio
 super + shift + a
@@ -81,7 +81,7 @@ super + shift + e
 #Lista wifi
 super + alt + i
 	networkmanager_dmenu
-	# $TERMB --class 'pad' -e sh -c "nmcli device wifi rescan;nmcli device wifi list;$SHELL" &
+	# $TERMA --class 'pad' -e sh -c "nmcli device wifi rescan;nmcli device wifi list;$SHELL" &
 
 # lf
 # super + r
@@ -97,10 +97,10 @@ super + alt + s
 
 #System monitor
 super + alt + t
-	$TERMA -e ytop
+	$TERMB -e ytop
 
 super + ctrl + t
-	$TERMA -e htop
+	$TERMB -e htop
 
 super + shift + alt + t
  $TERMA -e sudo iotop

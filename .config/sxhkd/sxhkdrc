@@ -41,8 +41,8 @@ super + period
 
 # ncmpcpp
 super + a
-	"$TERMB" -c 'ncmpcpp' -e ncmpcpp
-	# "$TERMA" --class ncmpcpp -e ncmpcpp
+	"$TERMA" --class ncmpcpp,ncmpcpp -e ncmpcpp
+	# "$TERMB" -c 'ncmpcpp' -e ncmpcpp
 
 # shift + super + a
 #   "$TERMA" --class ncmpcpp -e ncmpcpp -p 6700
@@ -75,13 +75,16 @@ super + e
 super + shift + e
 	emacsclient -s $EMACS_SERVER_SOCKET -c ~/docs/org/misc.org
 
-# super + shift + i
-#	emacsclient -s $EMACS_SERVER_SOCKET -c ~/docs/org/index.org
+super + i
+	$TERMA --class 'pad' -e sh -c "nmcli device wifi rescan;nmcli device wifi list;$SHELL" &
+
+#troca wifi
+super + shift + i
+	netswitch
 
 #Lista wifi
 super + alt + i
 	networkmanager_dmenu
-	# $TERMA --class 'pad' -e sh -c "nmcli device wifi rescan;nmcli device wifi list;$SHELL" &
 
 # lf
 # super + r
@@ -202,14 +205,6 @@ super + {k,j}
 
 super + c
 	bspc node -f last.!hidden.window.local
-
-# DEPRECADO focus the next/previous desktop in the current monitor
-super + {i,o}
-	bspc desktop -f {prev,next}.local
-
-# DEPRECADO send current node to prev/next worskpace
-super + shift + {i,o}
-	bspc node -d {prev,next}.local --follow
 
 # focus the last node/desktop
 super + {apostrophe,Tab}

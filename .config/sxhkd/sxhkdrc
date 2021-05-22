@@ -75,7 +75,7 @@ super + e
 super + shift + e
 	emacsclient -s $EMACS_SERVER_SOCKET -c ~/docs/org/misc.org
 
-super + i
+super + ctrl + i
 	$TERMA --class 'pad' -e sh -c "nmcli device wifi rescan;nmcli device wifi list;$SHELL" &
 
 #troca wifi
@@ -304,6 +304,12 @@ XF86MonBrightnessUp
 	xbacklight -inc 5
 
 #Audio control
+super + i
+	mpc volume -3
+
+super + o
+	mpc volume +3
+
 XF86AudioPlay
 	mpc toggle
 

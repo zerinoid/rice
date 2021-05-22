@@ -98,7 +98,6 @@ alias \
     ytv="straw-viewer --player=mpv"\
     ffmpeg="ffmpeg -hide_banner"\
     trem="transmission-remote" \
-    mp3tag="wine ~/fixo/progs/mp3tag/Mp3tag.exe"\
 	kbd="setxkbmap -model abnt2 -layout br\
 		-option caps:escape"\
 	kbn="setxkbmap -model abnt2 -layout br\

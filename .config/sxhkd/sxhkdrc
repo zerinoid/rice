@@ -51,6 +51,10 @@ super + a
 super + shift + a
 	yta
 
+# email
+super + b
+	gnome-terminal -e neomutt
+
 # bluetooth
 super + alt + b
 	blueman-applet

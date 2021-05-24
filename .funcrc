@@ -78,3 +78,7 @@ gdt() {
 gt() {
    git ls-files | grep "$1" | xargs git difftool -y
 }
+
+snpadd(){
+    echo $1 >> ~/.config/snippet_paste/$2
+}

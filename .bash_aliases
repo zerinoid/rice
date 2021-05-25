@@ -11,6 +11,17 @@ alias \
     apf="apt-file search"
 
 # ls
+# F classify with indiator (*/=>@|)
+# A almost all (not . and ..)
+# R subdirs recursively
+# t sort by time
+# H follow symlink listed on the cli
+# d list dirs themselves
+# 1 one file per line. avoid \n
+# s print size
+# S sort by size
+# c sort by ctime (last mod of file status info)
+# r reverse order
 alias \
     l="ls -lFh"\
     la="ls -lAFh"\

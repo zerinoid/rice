@@ -80,19 +80,22 @@ This function should only modify configuration layer settings."
      lsp
      (html :variables web-fmt-tool 'prettier
             scss-enable-lsp t
+            indent-size 2
             flycheck-scss-lint-executable 'scss-lint)
      (javascript :variables
                  javascript-backend 'tide
+                 javascript-linter 'eslint
                  javascript-fmt-tool 'prettier
-                 js2-basic-offset 4
-                 js-indent-level 4
+                 node-add-modules-path t
+                 js2-basic-offset 2
+                 js-indent-level 2
                  js2-mode-show-parse-errors nil
-                 js2-mode-show-strict-warnings nil
-                 javascript-fmt-on-save t)
+                 js2-mode-show-strict-warnings nil)
      (typescript :variables
-                 typescript-backend 'tide
+                 javascript-backend 'tide
+                 typescript-indent-level 2
                  typescript-linter 'eslint
-                 typescript-fmt-on-save t)
+                 typescript-fmt-tool 'prettier)
      react
      themes-megapack
      )
@@ -537,7 +540,7 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (setq initial-buffer-choice (lambda () (get-buffer "*scratch*")))
+  (setq initial-buffer-choice (lambda () (get-buffer "*Messages*")))
   (add-to-list 'auto-mode-alist '("\\.js$" . rjsx-mode))
   (require 'iso-transl)
   (treemacs-resize-icons 16)
@@ -591,12 +594,13 @@ before packages are loaded."
 
   (add-hook 'prog-mode-hook #'line-space-hook)
 
+  (setq-default typescript-indent-level 2)
   (setq prettier-js-args '(
-                           "--tab-width" "4"
+                           "--tab-width" "2"
                            "--trailing-comma" "none"
                            "--arrow-parens" "avoid"
-                           "--print-width" "100"
-                           "--no-semi"
+                           "--print-width" "80"
+                           "--single-quote"
                            ))
 
   ;; (defun auto-lint ()

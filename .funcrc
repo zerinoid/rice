@@ -82,3 +82,16 @@ gt() {
 snpadd(){
     echo $1 >> ~/.config/snippet_paste/$2
 }
+
+snped() {
+    find ~/.config/snippet_paste -iname "*$@*" -type f -print0 | xargs -0 vim
+}
+
+snprm() {
+    found=$(find ~/.config/snippet_paste -iname "*$@*" -type f)
+    set -f
+    printf "%s\n\t" $found
+    printf "remove snippet?[y/N]"
+    read ans
+    [ $ans = "y" ] && mv $found ~/.local/share/Trash/files
+}

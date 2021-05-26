@@ -5,4 +5,4 @@ SNIPPETS="$(find $FOLDER -mindepth 1 -iname "*" | sort | awk -F"/" '{ print $6}'
 
 CHOSEN=$( echo "$SNIPPETS" | dmenu -p "copiar snippets" )
 
-cat $FOLDER/$CHOSEN | xargs echo -n | xclip -selection clipboard
+cat $FOLDER/$CHOSEN | xargs echo -n | xclip -sel p -f | xclip -sel c

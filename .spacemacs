@@ -601,18 +601,18 @@ before packages are loaded."
     (setq ispell-dictionary "pt_BR,en_US"))
 
   (defun line-space-hook ()
-    (setq line-spacing 0.4))
+    (setq line-spacing 1.1))
 
   (add-hook 'prog-mode-hook #'line-space-hook)
 
   (setq-default typescript-indent-level 2)
-  (setq prettier-js-args '(
-                           "--tab-width" "2"
-                           "--trailing-comma" "none"
-                           "--arrow-parens" "avoid"
-                           "--print-width" "80"
-                           "--single-quote"
-                           ))
+  ;; (setq prettier-js-args '(
+  ;;                          "--tab-width" "2"
+  ;;                          "--trailing-comma" "none"
+  ;;                          "--arrow-parens" "avoid"
+  ;;                          "--print-width" "80"
+  ;;                          "--single-quote"
+  ;;                          ))
 
   ;; (defun auto-lint ()
   ;;   (when (eq major-mode 'scss-mode)

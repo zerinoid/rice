@@ -531,11 +531,8 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  ;; (add-to-list 'exec-path "/home/zerinol/.nvm/versions/node/v14.5.0/bin" t)
-  (add-to-list 'auto-mode-alist '("\\.marko\\'" . web-mode))
-  ;; (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
   (add-to-list 'auto-mode-alist '("index.org" . org-mode))
-
+  (add-to-list 'auto-mode-alist '("\\.js$" . rjsx-mode))
   )
 
 (defun dotspacemacs/user-load ()
@@ -552,7 +549,6 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (setq initial-buffer-choice (lambda () (get-buffer "*Messages*")))
-  (add-to-list 'auto-mode-alist '("\\.js$" . rjsx-mode))
   (require 'iso-transl)
   (treemacs-resize-icons 16)
   (setq helm-ff-keep-cached-candidates nil)

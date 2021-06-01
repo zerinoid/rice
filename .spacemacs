@@ -548,42 +548,47 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (setq initial-buffer-choice (lambda () (get-buffer "*Messages*")))
+
+  ; BASICS
   (require 'iso-transl)
-  (treemacs-resize-icons 16)
+  (setq initial-buffer-choice (lambda () (get-buffer "*Messages*")))
   (setq helm-ff-keep-cached-candidates nil)
   (setq create-lockfiles nil)
-  (setq org-startup-folded "overview")
+  (setq default-directory "~/docs/")
+  (treemacs-resize-icons 16)
 
-  (defun eslint-checker ()
-    (setq flycheck-checker 'javascript-eslint))
-  (add-hook 'rjsx-mode-hook 'eslint-checker )
+  ;; swap ` '
+  (define-key evil-normal-state-map (kbd "`") 'evil-goto-mark-line)
+  (define-key evil-normal-state-map (kbd "'") 'evil-goto-mark)
 
-  ;; macros
-  (fset 'remove-class
-        (kmacro-lambda-form [?F ?< ?f ?  ?d ?t ?>] 0 "%d"))
+  ;; functions that should center after called
+  (defun scroll-to-center-advice (&rest args)
+    (evil-scroll-line-to-center (line-number-at-pos)))
+  (advice-add #'spacemacs/jump-to-definition :after #'scroll-to-center-advice)
+  (advice-add #'evil-goto-mark :after #'scroll-to-center-advice)
+  (advice-add #'evil-goto-mark-line :after #'scroll-to-center-advice)
 
-  (fset 'insert-class
-    (kmacro-lambda-form [?f ?> ?i ?  ?c ?l ?a ?s ?s ?= ?\C-o] 0 "%d"))
-
-  (fset 'change-quote
-    (kmacro-lambda-form [?f ?\" ?c ?i ?\" ?\C-o] 0 "%d"))
-
-
+  ; OWN MENU
   (spacemacs/declare-prefix "o" "own-menu")
-  (spacemacs/set-leader-keys "os" 'org-save-all-org-buffers)
-  ;; (spacemacs/set-leader-keys "oi" 'helm-org-agenda-files-headings)
   (spacemacs/set-leader-keys "oa" 'change-quote)
   (spacemacs/set-leader-keys "oc" 'org-columns)
   (spacemacs/set-leader-keys "od" 'remove-class)
   (spacemacs/set-leader-keys "oi" 'insert-class)
+  (spacemacs/set-leader-keys "or" 'revert-buffer)
+  (spacemacs/set-leader-keys "os" 'org-save-all-org-buffers)
   (spacemacs/set-leader-keys "ot" 'insert-timestamp)
   (spacemacs/set-leader-keys "skp" 'helm-projectile-ack)
 
-  (setq default-directory "~/docs/")
+  ; MACROS
+  (fset 'remove-class
+        (kmacro-lambda-form [?F ?< ?f ?  ?d ?t ?>] 0 "%d"))
+  (fset 'insert-class
+        (kmacro-lambda-form [?f ?> ?i ?  ?c ?l ?a ?s ?s ?= ?\C-o] 0 "%d"))
+  (fset 'change-quote
+        (kmacro-lambda-form [?f ?\" ?c ?i ?\" ?\C-o] 0 "%d"))
 
-  (spacemacs/toggle-spelling-checking-on)
-
+  ; ORG
+  (setq org-startup-folded "overview")
   (setq org-use-sub-superscripts '{})
 
   (add-hook 'org-mode-hook 'turn-on-auto-fill)
@@ -591,20 +596,27 @@ before packages are loaded."
   (add-hook 'org-mode-hook 'emojify-mode)
   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
-  (with-eval-after-load "ispell"
-    (setq ispell-program-name "hunspell")
-    ;; ispell-set-spellchecker-params has to be called
-    ;; before ispell-hunspell-add-multi-dic will work
-    (ispell-set-spellchecker-params)
-    (ispell-hunspell-add-multi-dic "pt_BR,en_US")
-    (setq ispell-dictionary "pt_BR,en_US"))
+  ;; printar timestamp
+  (defvar timestamp-format " %Y-%m-%d %a %R")
+  (defun insert-timestamp ()
+    (interactive)
+    (insert (format-time-string timestamp-format (current-time))))
+
+  ; DEV
+  (defun eslint-checker ()
+    (setq flycheck-checker 'javascript-eslint))
+  (add-hook 'rjsx-mode-hook 'eslint-checker )
 
   (defun line-space-hook ()
     (setq line-spacing 1.1))
-
   (add-hook 'prog-mode-hook #'line-space-hook)
 
-  (setq-default typescript-indent-level 2)
+  ;; (defun auto-lint ()
+  ;;   (when (eq major-mode 'scss-mode)
+  ;;     (web-beautify-css)))
+  ;; (add-hook 'before-save-hook #'auto-lint)
+
+  ;; (setq-default typescript-indent-level 2)
   ;; (setq prettier-js-args '(
   ;;                          "--tab-width" "2"
   ;;                          "--trailing-comma" "none"
@@ -613,30 +625,15 @@ before packages are loaded."
   ;;                          "--single-quote"
   ;;                          ))
 
-  ;; (defun auto-lint ()
-  ;;   (when (eq major-mode 'scss-mode)
-  ;;     (web-beautify-css)))
-
-  ;; (add-hook 'before-save-hook #'auto-lint)
-
-  ;; swap ` '
-  (define-key evil-normal-state-map (kbd "`") 'evil-goto-mark-line)
-  (define-key evil-normal-state-map (kbd "'") 'evil-goto-mark)
-
-  (defun scroll-to-center-advice (&rest args)
-    (evil-scroll-line-to-center (line-number-at-pos)))
-
-  ;; all functions that should center after called
-  (advice-add #'spacemacs/jump-to-definition :after #'scroll-to-center-advice)
-  (advice-add #'evil-goto-mark :after #'scroll-to-center-advice)
-  (advice-add #'evil-goto-mark-line :after #'scroll-to-center-advice)
-
-  ;; printar timestamp
-  (defvar timestamp-format " %Y-%m-%d %a %R")
-  (defun insert-timestamp ()
-    (interactive)
-    (insert (format-time-string timestamp-format (current-time))))
-
+  ; SPELL
+  (spacemacs/toggle-spelling-checking-on)
+  (with-eval-after-load "ispell"
+    (setq ispell-program-name "hunspell")
+    ;; ispell-set-spellchecker-params has to be called
+    ;; before ispell-hunspell-add-multi-dic will work
+    (ispell-set-spellchecker-params)
+    (ispell-hunspell-add-multi-dic "pt_BR,en_US")
+    (setq ispell-dictionary "pt_BR,en_US"))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

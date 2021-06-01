@@ -6,5 +6,5 @@ then
   [ "$(printf "No\\nYes" | dmenu -i -p "Kill emacs daemon?")" = "Yes" ] && kill $(pgrep -x emacs) && notify-send "emacs daemon killed."
 else
 	ifinstalled emacs || exit
-	[ "$(printf "No\\nYes" | dmenu -i -p "Start emacs daemon?")" = "Yes" ] && emacs --daemon && notify-send "emacs in daemon mode started."
+	[ "$(printf "No\\nYes" | dmenu -i -p "Start emacs daemon?")" = "Yes" ] && emacs --daemon && notify-send "emacs in daemon mode started." && emacsclient -s $EMACS_SERVER_SOCKET -c
 fi

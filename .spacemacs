@@ -559,6 +559,10 @@ before packages are loaded."
   (setq create-lockfiles nil)
   (setq org-startup-folded "overview")
 
+  (defun eslint-checker ()
+    (setq flycheck-checker 'javascript-eslint))
+  (add-hook 'rjsx-mode-hook 'eslint-checker )
+
   ;; macros
   (fset 'remove-class
         (kmacro-lambda-form [?F ?< ?f ?  ?d ?t ?>] 0 "%d"))
@@ -581,7 +585,6 @@ before packages are loaded."
   (spacemacs/set-leader-keys "skp" 'helm-projectile-ack)
 
   (setq default-directory "~/docs/")
-  ;; (setq flycheck-checker 'javascript-tide)
 
   (spacemacs/toggle-spelling-checking-on)
 

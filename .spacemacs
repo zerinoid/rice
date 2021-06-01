@@ -77,10 +77,10 @@ This function should only modify configuration layer settings."
                treemacs-width 27)
      yaml
      docker
-     lsp
-     (html :variables web-fmt-tool 'prettier
-            scss-enable-lsp t
-            indent-size 2
+     (html :variables
+            web-fmt-tool 'prettier
+            ;; scss-enable-lsp t
+            indent-size 4
             flycheck-scss-lint-executable 'scss-lint)
      (javascript :variables
                  javascript-backend 'tide

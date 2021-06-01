@@ -3,4 +3,5 @@
 .nvmrc
 jsconfig.json
 .eslintrc.js
-.prettierrc*
+.prettierrc
+.dir-locals.el

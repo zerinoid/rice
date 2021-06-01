@@ -82,21 +82,32 @@ This function should only modify configuration layer settings."
             ;; scss-enable-lsp t
             indent-size 4
             flycheck-scss-lint-executable 'scss-lint)
-     (javascript :variables
-                 javascript-backend 'tide
-                 javascript-linter 'eslint
-                 javascript-fmt-tool 'prettier
-                 node-add-modules-path t
-                 js2-basic-offset 2
-                 js-indent-level 2
-                 js2-mode-show-parse-errors nil
-                 js2-mode-show-strict-warnings nil)
+     (react :variables
+            sgml-basic-offset 4
+            flycheck-checker 'tsx-tide
+            )
      (typescript :variables
                  javascript-backend 'tide
-                 typescript-indent-level 2
+                 typescript-fmt-tool 'prettier
                  typescript-linter 'eslint
-                 typescript-fmt-tool 'prettier)
-     react
+                 flycheck-checker 'tsx-tide
+                 typescript-indent-level 4
+                 web-mode-markup-indent-offset 4
+                 web-mode-code-indent-offset 4
+                 tide-tsserver-executable (concat (getenv "NVM_BIN") "/tsserver")
+                 )
+     (javascript :variables
+                 javascript-backend 'tide
+                 javascript-fmt-tool 'prettier
+                 javascript-lsp-linter 'nil
+                 node-add-modules-path t
+                 javascript-linter 'eslint
+                 flycheck-checker 'javascript-eslint
+                 js2-basic-offset 4
+                 js-indent-level 4
+                 js2-mode-show-parse-errors nil
+                 js2-mode-show-strict-warnings nil
+                 )
      themes-megapack
      )
 
@@ -626,9 +637,6 @@ before packages are loaded."
   (defun insert-timestamp ()
     (interactive)
     (insert (format-time-string timestamp-format (current-time))))
-
-  (eval-after-load 'rjsx-mode
-    '(add-hook 'js-mode-hook #'add-node-modules-path))
 
   )
 

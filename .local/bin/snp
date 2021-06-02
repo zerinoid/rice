@@ -3,6 +3,10 @@
 FOLDER=~/.config/snippet_paste
 SNIPPETS="$(find $FOLDER -mindepth 1 -iname "*" | sort | awk -F"/" '{ print $6}')"
 
-CHOSEN=$( echo "$SNIPPETS" | dmenu -p "copiar snippets" )
+if ! CHOSEN=$( echo "$SNIPPETS" | dmenu -p "copiar snippets" ); then
+    notify-send -u critical -t 2000 "nada copiado."
+    exit 1
+fi
 
 cat $FOLDER/$CHOSEN | xargs echo -n | xclip -sel p -f | xclip -sel c
+notify-send -u low "$(cat "$FOLDER/$CHOSEN") copiado para o clipboard."

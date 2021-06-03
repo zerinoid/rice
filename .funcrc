@@ -53,9 +53,10 @@ unhistory () {
    histdb --forget "$1"
 }
 
-alert() {
+alertd() {
+    success=$?
     export DISPLAY=:0
-    notify-send --urgency=low -i "$([ $? = 0 ] && echo info || echo error)" "Terminou o birinights"
+    notify-send --urgency=low -i "$([ $success = 0 ] && echo info || echo error)" "Terminou o birinights"
     aplay ~/.local/share/sounds/chime31.wav 2>/dev/null
 }
 

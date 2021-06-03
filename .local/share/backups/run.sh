@@ -9,8 +9,8 @@
 sleep 5
 
 # Output visual
-export DISPLAY=:0 
-st -e bash -c "journalctl -u automatic-backup -n 30 --user" &
+# export DISPLAY=:0 
+# st -e bash -c "journalctl -u automatic-backup -n 30 --user" &
 
 #
 # Script configuration
@@ -104,8 +104,11 @@ borg create $BORG_OPTS \
 #   $TARGET::$DATE-$$-lenny \
 #   $HOME/.ban
 
+success=$?
+export DISPLAY=:0 
+notify-send -u low -t 0 -i "$([ $success = 0 ] && echo info || echo error)" "Terminou o birinights"
+aplay /home/zerinol/.local/share/sounds/chime31.wav
 echo "Completed backup for $DATE"
-alert
 
 # Just to be completely paranoid
 sync

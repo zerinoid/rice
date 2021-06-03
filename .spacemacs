@@ -532,7 +532,6 @@ configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (add-to-list 'auto-mode-alist '("index.org" . org-mode))
-  (add-to-list 'auto-mode-alist '("\\.js$" . rjsx-mode))
   )
 
 (defun dotspacemacs/user-load ()
@@ -548,6 +547,8 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  ; DEFAULT MODES
+  (add-to-list 'auto-mode-alist '("\\.js$" . rjsx-mode))
 
   ; BASICS
   (require 'iso-transl)

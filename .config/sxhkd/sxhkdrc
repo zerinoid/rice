@@ -65,7 +65,7 @@ super + alt + c
 
 # emojis
 super + u
-	dunicode
+	snp
 
 # ytb-dl
 super + shift + d

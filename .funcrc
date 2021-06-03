@@ -95,3 +95,8 @@ snprm() {
     read ans
     [ $ans = "y" ] && mv $found ~/.local/share/Trash/files
 }
+
+lem() {
+    files=$@
+    emacsclient -s $EMACS_SERVER_SOCKET -c ${files:="."} & disown
+}

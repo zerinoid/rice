@@ -77,7 +77,7 @@ super + e
 
 # emacs
 super + shift + e
-	emacsclient -s $EMACS_SERVER_SOCKET -c ~/docs/org/misc.org
+	emacsclient -s $EMACS_SERVER_SOCKET -c -e "(org-journal-new-entry nil)"
 
 super + ctrl + i
 	$TERMA --class 'pad' -e sh -c "nmcli device wifi rescan;nmcli device wifi list;$SHELL" &

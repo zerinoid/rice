@@ -82,6 +82,8 @@ This function should only modify configuration layer settings."
             ;; scss-enable-lsp t
             indent-size 4
             flycheck-scss-lint-executable 'scss-lint)
+     ;; (json :variables
+     ;;       flycheck-checker 'json-python-json)
      (react :variables
             sgml-basic-offset 4
             flycheck-checker 'tsx-tide
@@ -604,13 +606,11 @@ before packages are loaded."
     (insert (format-time-string timestamp-format (current-time))))
 
   ; DEV
+  (setq terminal-here-linux-terminal-command 'alacritty)
+
   (defun line-space-hook ()
     (setq line-spacing 1.0))
   (add-hook 'prog-mode-hook #'line-space-hook)
-
-  (defun json-checker ()
-    (setq flycheck-checker 'json-python-json))
-  (add-hook 'json-mode-hook #'json-checker)
 
   ;; (defun auto-lint ()
   ;;   (when (eq major-mode 'scss-mode)

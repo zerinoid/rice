@@ -5,3 +5,4 @@ jsconfig.json
 .eslintrc.js
 .prettierrc
 .dir-locals.el
+/.stylelintrc.json

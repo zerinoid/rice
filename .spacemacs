@@ -78,21 +78,13 @@ This function should only modify configuration layer settings."
      yaml
      docker
      (html :variables
-            web-fmt-tool 'prettier
-            ;; scss-enable-lsp t
-            indent-size 4
-            flycheck-scss-lint-executable 'scss-lint)
-     ;; (json :variables
-     ;;       flycheck-checker 'json-python-json)
-     (react :variables
-            sgml-basic-offset 4
-            flycheck-checker 'tsx-tide
-            )
+            indent-size 4)
+     json
+     (react :variables sgml-basic-offset 4)
      (typescript :variables
                  javascript-backend 'tide
                  typescript-fmt-tool 'prettier
                  typescript-linter 'eslint
-                 flycheck-checker 'tsx-tide
                  typescript-indent-level 4
                  web-mode-markup-indent-offset 4
                  web-mode-code-indent-offset 4
@@ -104,7 +96,6 @@ This function should only modify configuration layer settings."
                  javascript-lsp-linter 'nil
                  node-add-modules-path t
                  javascript-linter 'eslint
-                 flycheck-checker 'javascript-eslint
                  js2-basic-offset 4
                  js-indent-level 4
                  js2-mode-show-parse-errors nil

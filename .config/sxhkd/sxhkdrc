@@ -286,7 +286,7 @@ super + v
 
 #Screenshot
 Print
-	maim $HOME/pics/pic-full-$(date '+%y%m%d-%H%M-%S').png
+	maim $HOME/pics/SC/pic-full-$(date '+%y%m%d-%H%M-%S').png
 
 #Pick screenshot type
 

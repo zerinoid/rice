@@ -599,6 +599,10 @@ before packages are loaded."
   ; DEV
   (setq terminal-here-linux-terminal-command 'alacritty)
 
+  (defun tsx-checker ()
+    (setq flycheck-checker 'tsx-tide))
+  (add-hook 'typescript-tsx-mode-hook #'tsx-checker)
+
   (defun line-space-hook ()
     (setq line-spacing 1.0))
   (add-hook 'prog-mode-hook #'line-space-hook)

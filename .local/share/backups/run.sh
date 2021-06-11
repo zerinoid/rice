@@ -105,9 +105,8 @@ borg create $BORG_OPTS \
 #   $HOME/.ban
 
 success=$?
-export DISPLAY=:0 
 notify-send -u low -t 0 -i "$([ $success = 0 ] && echo info || echo error)" "Terminou o birinights"
-aplay /home/zerinol/.local/share/sounds/chime31.wav
+aplay /home/zerinol/.local/share/sounds/chime31.wav 2> /dev/null
 echo "Completed backup for $DATE"
 
 # Just to be completely paranoid

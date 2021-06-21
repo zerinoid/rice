@@ -63,6 +63,8 @@ This function should only modify configuration layer settings."
           org-todo-keyword-faces '(("TODO" . org-warning)
                                    ("CANC" . (:foreground "white" :background "#4d4d4d" :weight bold))
                                    ("NEXT" .  "#4f97d7"))
+          org-download-screenshot-method "xclip -s clipboard -t image/png %s"
+          org-download-image-dir "~/docs/org/media"
           )
      journal
      (shell :variables
@@ -569,7 +571,7 @@ before packages are loaded."
   (spacemacs/set-leader-keys "od" 'remove-class)
   (spacemacs/set-leader-keys "oi" 'insert-class)
   (spacemacs/set-leader-keys "or" 'revert-buffer)
-  (spacemacs/set-leader-keys "os" 'org-save-all-org-buffers)
+  (spacemacs/set-leader-keys "os" 'org-download-clipboard)
   (spacemacs/set-leader-keys "ot" 'insert-timestamp)
   (spacemacs/set-leader-keys "skp" 'helm-projectile-ack)
 

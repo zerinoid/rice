@@ -17,8 +17,8 @@ set ratios 1:1
 cmd open ${{
     case $(file --mime-type $f -b) in
       text/troff) man ./ $f;;
-        text/*) $EDITOR $fx;;
-  image/x-xcf|image/svg+xml) setsid gimp $f >/dev/null 2>&1 & ;;
+        text/*|*/json) $EDITOR $fx;;
+  image/x-xcf|image/svg+xml) setsid brave-browser $f >/dev/null 2>&1 & ;;
   image/*) rotdir $f | setsid sxiv -aio 2>/dev/null | lf-select & ;;
   audio/*) mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f ;;
   video/*) setsid mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f -quiet >/dev/null 2>&1 & ;;

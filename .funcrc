@@ -81,7 +81,8 @@ gt() {
 }
 
 snpadd(){
-    echo $1 >> ~/.config/snippet_paste/$2
+    echo $2 >> ~/.config/snippet_paste/$1
+    echo "criado snippet $1"
 }
 
 snped() {

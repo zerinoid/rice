@@ -171,6 +171,8 @@ lua require'colorizer'.setup()
 " Copiar css do solinvictus
     " autocmd BufWritePost solinvictus.css !cat % | xclip -selection clipboard
 
+    autocmd BufWritePost branch !cat % | xargs echo -n | xclip -sel c; notify-send copiou %
+
 " Highlight fix no vimdiff
 if &diff
 "     highlight! link DiffText MatchParen

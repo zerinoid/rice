@@ -6,11 +6,11 @@
 
 PICPATH="$HOME/pics/SC"
 
-case "$(printf "a selected area\\ncurrent window\\nfull screen\\na selected area (copy)\\ncurrent window (copy)\\nfull screen (copy)" | dmenu -l 6 -p "Screenshot which area?")" in
-  "a selected area") maim -s $PICPATH/pic-selected-"$(date '+%y%m%d-%H%M-%S').png" ;;
-  "current window") maim -i "$(xdotool getactivewindow)" $PICPATH/pic-window-"$(date '+%y%m%d-%H%M-%S').png" ;;
-  "full screen") sleep 1; maim $PICPATH/pic-full-"$(date '+%y%m%d-%H%M-%S').png" ;;
+case "$(printf "a selected area (copy)\\na selected area\\ncurrent window (copy)\\ncurrent window\\nfull screen (copy)\\nfull screen" | dmenu -l 6 -p "Screenshot which area?")" in
   "a selected area (copy)") maim -s | xclip -selection clipboard -t image/png ;;
+  "a selected area") maim -s $PICPATH/pic-selected-"$(date '+%y%m%d-%H%M-%S').png" ;;
   "current window (copy)") maim -i "$(xdotool getactivewindow)" | xclip -selection clipboard -t image/png ;;
+  "current window") maim -i "$(xdotool getactivewindow)" $PICPATH/pic-window-"$(date '+%y%m%d-%H%M-%S').png" ;;
   "full screen (copy)") sleep 1; maim | xclip -selection clipboard -t image/png ;;
+  "full screen") sleep 1; maim $PICPATH/pic-full-"$(date '+%y%m%d-%H%M-%S').png" ;;
 esac

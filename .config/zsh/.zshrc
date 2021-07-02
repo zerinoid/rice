@@ -58,6 +58,18 @@ lfcd () {
 }
 bindkey -s '^o' 'lfcd\n'
 
+lfsel () {
+    [ "$TERM" = "alacritty" ] && TERM=xterm-256color #hack pro alacritty abrir o lf
+    tmp="~/lftmp"
+    lf -selection-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dirs="$(cat "$tmp")"
+        rm -f "$tmp"
+        echo $dirs
+        cat "$dirs"
+    fi
+}
+
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
@@ -263,28 +275,28 @@ ENHANCD_COMMAND="c"
 
 _BORING_COMMANDS=($_BORING_COMMANDS "^unhistory")
 
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-export ANDROID_HOME=$HOME/.local/share/Android/Sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH=$PATH:$HOME/.local/share/android-studio/bin
+# export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+# export ANDROID_HOME=$HOME/.local/share/Android/Sdk
+# export PATH=$PATH:$ANDROID_HOME/emulator
+# export PATH=$PATH:$ANDROID_HOME/tools
+# export PATH=$PATH:$ANDROID_HOME/tools/bin
+# export PATH=$PATH:$ANDROID_HOME/platform-tools
+# export PATH=$PATH:$HOME/.local/share/android-studio/bin
 
-export _JAVA_AWT_WM_NONREPARENTING=1
+# export _JAVA_AWT_WM_NONREPARENTING=1
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/zerinol/.local/share/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/zerinol/.local/share/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/zerinol/.local/share/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/zerinol/.local/share/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+# __conda_setup="$('/home/zerinol/.local/share/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/home/zerinol/.local/share/miniconda3/etc/profile.d/conda.sh" ]; then
+#         . "/home/zerinol/.local/share/miniconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/home/zerinol/.local/share/miniconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
 # <<< conda initialize <<<
 

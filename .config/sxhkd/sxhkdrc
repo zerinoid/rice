@@ -60,8 +60,8 @@ super + alt + b
 	blueman-applet
 
 # IDE
-super + alt + c
-	codium
+# super + alt + c
+# 	codium
 
 # emojis
 super + u

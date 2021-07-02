@@ -52,6 +52,7 @@ bspc rule -a Gedit state=floating
 bspc rule -a mpv state=floating rectangle=640x360+50+70
 bspc rule -a ncmpcpp:* state=floating rectangle=1300x412+25+183
 bspc rule -a *:pad state=floating rectangle=716x356+400+30
+bspc rule -a *:tremc state=floating rectangle=800x600+400+50
 bspc rule -a Emacs state=floating rectangle=775x680+350+30
 bspc rule -a zoom state=floating
 bspc rule -a Ramme state=floating

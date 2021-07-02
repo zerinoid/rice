@@ -6,4 +6,4 @@ ifinstalled tremc transmission-cli || exit
 
 # && sleep 3 && pkill -RTMIN+7 "${STATUSBAR:?}"
 
-$TERMA -e tremc
+$TERMA --class tremc -e tremc

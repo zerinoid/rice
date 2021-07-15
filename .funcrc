@@ -102,3 +102,13 @@ lem() {
     files=$@
     emacsclient -s $EMACS_SERVER_SOCKET -c ${files:="."} & disown
 }
+
+
+# crop=width:height:initial-x:initial-y
+# par expansion da ext = ${file##*.}
+cropedp() {
+    for file in $@ 
+    do
+        ffmpeg -i $file -vf crop=1366:768:0:900 ${file%%.*}.jpg
+    done
+}

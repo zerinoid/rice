@@ -93,7 +93,7 @@ This function should only modify configuration layer settings."
                  web-mode-markup-indent-offset 4
                  web-mode-code-indent-offset 4
                  tide-tsserver-executable (concat (getenv "NVM_BIN") "/tsserver")
-                 typescript-fmt-on-save t
+                 ;; typescript-fmt-on-save t
                  )
      (javascript :variables
                  javascript-backend 'tide
@@ -573,6 +573,7 @@ before packages are loaded."
   (spacemacs/set-leader-keys "oc" 'org-columns)
   (spacemacs/set-leader-keys "od" 'remove-class)
   (spacemacs/set-leader-keys "oi" 'insert-class)
+  (spacemacs/set-leader-keys "oo" 'find-file)
   (spacemacs/set-leader-keys "or" 'revert-buffer)
   (spacemacs/set-leader-keys "os" 'org-download-clipboard)
   (spacemacs/set-leader-keys "ot" 'insert-timestamp)

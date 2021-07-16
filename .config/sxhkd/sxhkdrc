@@ -104,7 +104,7 @@ super + alt + s
 
 #System monitor
 super + alt + t
-	$TERMB -e ytop
+	$TERMB -e btm
 
 super + ctrl + t
 	$TERMB -e htop

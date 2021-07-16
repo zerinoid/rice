@@ -109,6 +109,7 @@ alias \
     ytv="straw-viewer --player=mpv"\
     ffmpeg="ffmpeg -hide_banner"\
     trem="transmission-remote" \
+    slsk="/home/zerinol/fixo/progs/SoulseekQt-2018-1-30-64bit.AppImage"
 	kbd="setxkbmap -model abnt2 -layout br\
 		-option caps:escape"\
 	kbn="setxkbmap -model abnt2 -layout br\

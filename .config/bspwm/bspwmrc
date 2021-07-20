@@ -58,6 +58,7 @@ bspc rule -a zoom state=floating
 bspc rule -a Ramme state=floating
 bspc rule -a Zathura state=tiled
 bspc rule -a *:Kunst state=floating
+bspc rule -a *:float_sc state=floating
 bspc rule -a PdWindow:* state=floating
 bspc rule -a HelpBrowser:* state=floating
 bspc rule -a Processing:* state=floating

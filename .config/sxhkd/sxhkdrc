@@ -59,17 +59,17 @@ super + b
 super + alt + b
 	blueman-applet
 
-# IDE
-# super + alt + c
-# 	codium
+# kunst
+super + shift + c
+	kunst_handler
 
-# emojis
-super + u
-	snp
+# ytb-dl
+super + ctrl + d
+	ytd
 
 # ytb-dl
 super + shift + d
-	ytd
+	maimtemp
 
 # emacs
 super + e
@@ -90,13 +90,13 @@ super + shift + i
 super + alt + i
 	networkmanager_dmenu
 
+# kill internets
+super + shift + alt + q
+  killall overgrive transmission-da
+
 # lf
 # super + r
 # 	$TERMA -e bash -c "lfcd;$SHELL"
-
-# kunst
-super + shift + c
-	kunst_handler
 
 # snippets
 super + alt + s
@@ -112,9 +112,9 @@ super + ctrl + t
 super + shift + alt + t
  $TERMA -e sudo iotop
 
-# kill internets
-super + shift + alt + q
-  killall overgrive transmission-da
+# emojis
+super + u
+	snp
 
 # Browser
 super + w

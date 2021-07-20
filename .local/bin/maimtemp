@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PICPATH="$HOME/pics/SC"
+PICPATH="/tmp"
 SELFILE="$PICPATH/temp--$(date '+%y%m%d-%H%M-%S').png" 
 
 maim -us | tee $SELFILE | xclip -selection clipboard -t image/png && sxiv -bN float_sc -g $(identify $SELFILE | awk -F" " '{ print $3}') $SELFILE

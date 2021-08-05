@@ -35,15 +35,15 @@ case $(transmission-remote --torrent "$TR_TORRENT_ID" -i | awk -F "%2F" '/magnet
     echo "============================================" >> "$LOG"
     echo "$data: $TR_TORRENT_NAME baixado" >> "$LOG"
 
-    echo "${data}: Movendo ${TR_TORRENT_NAME} para redacted" >> "$LOG"
     transmission-remote --torrent "$TR_TORRENT_ID" --move "$HOME/music/redacted/" >> "$LOG"
+    echo "${data}: ${TR_TORRENT_NAME} movido para redacted" >> "$LOG"
     ;;
   home.opsfet.ch)
     echo "============================================" >> "$LOG"
     echo "$data: $TR_TORRENT_NAME baixado" >> "$LOG"
 
-    echo "${data}: Movendo ${TR_TORRENT_NAME} para apollo" >> "$LOG"
     transmission-remote --torrent "$TR_TORRENT_ID" --move "$HOME/music/apollo/" >> "$LOG"
+    echo "${data}: ${TR_TORRENT_NAME} movido para apollo" >> "$LOG"
     ;;
   tracker.brokenstones*)
     echo "============================================" >> "$LOG"

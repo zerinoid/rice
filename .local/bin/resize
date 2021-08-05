@@ -1,27 +1,28 @@
 #!/bin/bash
 
-MAX_SIZE=900
-MAX_DIMENSION=1200
+MAX_SIZE=880
+MAX_DIMENSION=1280
 
-for f in $@; do
-    SIZE=$(ls -s1 $f | awk -F" " '{ print $1}')
-    WIDTH=$(identify $f | awk -F" " '{ print $3}' | cut -d 'x' -f 1)
-    HEIGHT=$(identify $f | awk -F" " '{ print $3}' | cut -d 'x' -f 2)
+for f in "$@"; do
+    SIZE=$(ls -s1 "$f" | awk -F" " '{ print $1}')
+    WIDTH=$(identify "$f" | awk -F" " '{ print $3}' | cut -d 'x' -f 1)
+    HEIGHT=$(identify "$f" | awk -F" " '{ print $3}' | cut -d 'x' -f 2)
 
     if (( $SIZE > $MAX_SIZE )); then
         echo " "
         echo "-----------------------"
-        echo $f is too big
+        echo "$f" is too big. Backing it up...
+        cp -vf "$f" ~/tmp/pic_bkp/
         echo "size: ${SIZE}kb | dimensions: ${WIDTH}x${HEIGHT}"
 
         if (( $WIDTH > $HEIGHT )); then
-            echo $f is LANDSCAPE
-            chafa -s 80x25 $f
-            ffmpeg -i $f -vf "scale=1280:-2" ${f%%.*}.jpg
+            echo "$f" is LANDSCAPE
+            chafa -s 25x80 "$f"
+            ffmpeg -hide_banner -y -i "$f" -vf "scale=$MAX_DIMENSION:-2" "${f%%.*}".jpg
         else
-            echo $f is PORTRAIT
-            chafa -s 25x80 $f
-            ffmpeg -i $f -vf "scale=-2:1280" ${f%%.*}.jpg
+            echo "$f" is PORTRAIT
+            chafa -s 25x80 "$f"
+            ffmpeg -hide_banner -y -i "$f" -vf "scale=-2:$MAX_DIMENSION" "${f%%.*}".jpg
         fi
         echo " "
     fi

@@ -112,3 +112,10 @@ cropedp() {
         ffmpeg -i $file -vf crop=1366:768:0:900 ${file%%.*}.jpg
     done
 }
+
+crophdmi() {
+    for file in $@ 
+    do
+        ffmpeg -i $file -vf crop=1600:900:0:0 ${file%%.*}.jpg
+    done
+}

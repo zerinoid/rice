@@ -112,9 +112,13 @@ super + ctrl + t
 super + shift + alt + t
  $TERMA -e sudo iotop
 
-# emojis
+# snippet
 super + u
 	snp
+
+# snippet paste enter
+super + shift + u
+	snp 1
 
 # Browser
 super + w
@@ -228,6 +232,15 @@ super + bracket{left,right}
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
+
+# desktop pessoal
+super + {_,shift +} p
+	bspc {desktop -f,node -d} '^4'
+
+# desktop profssional
+# super + {_,shift +} o
+# 	bspc {desktop -f,node -d} '^3'
+
 #
 # preselect
 #
@@ -333,9 +346,12 @@ super + shift + period
 # F-KEYS
 #
 
-# xkll
+# xkill
 super + F2
 	xkill
+
+super + F5
+	rotate_sinks
 
 # Start torrent daemon/open interface
 super + F6

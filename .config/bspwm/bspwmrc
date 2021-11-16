@@ -62,6 +62,7 @@ bspc rule -a *:float_sc state=floating
 bspc rule -a PdWindow:* state=floating
 bspc rule -a HelpBrowser:* state=floating
 bspc rule -a Processing:* state=floating
+bspc rule -a Ripcord:* state=floating
 
 # [ -z $(ps aux | grep mark.sh | grep -v grep) ] && $HOME/.config/bspwm/mark.sh &
 

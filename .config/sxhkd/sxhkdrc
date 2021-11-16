@@ -308,9 +308,9 @@ super + shift + s
 
 #Volume Control
 XF86AudioLowerVolume
-	amixer set Master 1%-
+	amixer -D pulse set Master 1%-
 XF86AudioRaiseVolume
-	amixer set Master 1%+; amixer -D pulse set Master unmute
+	amixer -D pulse set Master 1%+; amixer -D pulse set Master unmute
 XF86AudioMute
 	amixer -D pulse set Master 1+ toggle
 
@@ -322,10 +322,10 @@ XF86MonBrightnessUp
 
 #Audio control
 super + i
-	mpc volume -3
+	amixer -D pulse set Master 1%-
 
 super + o
-	mpc volume +3
+	amixer -D pulse set Master 1%+; amixer -D pulse set Master unmute
 
 XF86AudioPlay
 	mpc toggle

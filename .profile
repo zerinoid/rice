@@ -50,6 +50,7 @@ export KUNST_POSITION="-260-20"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export ZSHZ_DATA="$ZDOTDIR/.z"
 export GPG_TTY=$(tty)
+export NODE_EXTRA_CA_CERTS="$(mkcert -CAROOT)/rootCA.pem"
 
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"

@@ -1,8 +1,8 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.42 for zerinol on Sun Jan 24 18:10:13 2021.
+# Written by xscreensaver-demo 5.42 for zerinol on Mon Sep 27 21:05:47 2021.
 # https://www.jwz.org/xscreensaver/
 
-timeout:	0:25:00
+timeout:	0:10:00
 cycle:		0:05:00
 lock:		False
 lockTimeout:	0:30:00
@@ -26,8 +26,8 @@ ignoreUninstalledPrograms:False
 font:		Hack Nerd Font:style=Regular:size=12
 dpmsEnabled:	False
 dpmsQuickOff:	False
-dpmsStandby:	1:00:00
-dpmsSuspend:	0:00:00
+dpmsStandby:	0:45:00
+dpmsSuspend:	1:30:00
 dpmsOff:	0:00:00
 grabDesktopImages:  True
 grabVideoFrames:    True
@@ -35,7 +35,7 @@ chooseRandomImages: True
 imageDirectory:	/home/zerinol/db/memesp
 
 mode:		one
-selected:	205
+selected:	188
 
 textMode:	url
 textLiteral:	XScreenSaver

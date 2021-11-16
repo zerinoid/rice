@@ -88,6 +88,7 @@ This function should only modify configuration layer settings."
      json
      (react :variables sgml-basic-offset 4)
      (typescript :variables
+                 javascript-import-tool 'import-js
                  javascript-backend 'tide
                  typescript-fmt-tool 'prettier
                  ;; typescript-linter 'eslint
@@ -105,6 +106,7 @@ This function should only modify configuration layer settings."
                  javascript-linter 'eslint
                  js2-basic-offset 4
                  js-indent-level 4
+                 javascript-import-tool 'import-js
                  js2-mode-show-parse-errors nil
                  js2-mode-show-strict-warnings nil
                  )

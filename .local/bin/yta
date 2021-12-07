@@ -2,4 +2,4 @@
 
 VIDEO=$(xclip -selection clipboard -o)
 
-$TERMA --class pad -e bash -c "youtube-dl -x -i -o '~/music/internet/%(playlist)s/%(title)s.%(ext)s' --no-mtime --embed-thumbnail --add-metadata --audio-format mp3 $VIDEO;read -p 'da enter papai'"
+$TERMA --class pad -e bash -c "youtube-dl -x -i -o '~/music/internet/%(playlist)s/%(title)s.%(ext)s' --no-mtime --embed-thumbnail --add-metadata --audio-format mp3 $VIDEO --cookies $HOME/tmp/yt.txt;read -p 'da enter papai'"

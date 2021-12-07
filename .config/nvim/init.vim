@@ -28,6 +28,8 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
     " Plug 'jceb/vim-orgmode'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'VincentCordobes/vim-translate'
+    Plug 'leafgarland/typescript-vim'
+    Plug 'peitalin/vim-jsx-typescript'
 
 call plug#end()
 
@@ -172,6 +174,9 @@ lua require'colorizer'.setup()
     " autocmd BufWritePost solinvictus.css !cat % | xclip -selection clipboard
 
     autocmd BufWritePost branch !cat % | xargs echo -n | xclip -sel c; notify-send copiou %
+
+" set filetypes as typescriptreact
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 
 " Highlight fix no vimdiff
 if &diff

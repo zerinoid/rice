@@ -559,6 +559,7 @@ before packages are loaded."
   (setq create-lockfiles nil)
   (setq default-directory "~/docs/")
   (treemacs-resize-icons 16)
+  (global-so-long-mode 1)
 
   ;; swap ` '
   (define-key evil-normal-state-map (kbd "`") 'evil-goto-mark-line)

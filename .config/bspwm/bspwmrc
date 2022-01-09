@@ -21,6 +21,7 @@ xset -b &
 # Set pulseaudio profile saida analogica
 # pacmd set-card-profile alsa_card.pci-0000_00_1f.3 output:analog-stereo
 
+bspc monitor LVDS-1-2 -r
 bspc monitor LVDS -d 1 2 3 4 5
 bspc monitor DisplayPort-0 -d 6 7
 bspc wm -O LVDS DisplayPort-0

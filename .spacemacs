@@ -89,6 +89,7 @@ This function should only modify configuration layer settings."
      (react :variables sgml-basic-offset 4)
      (typescript :variables
                  typescript-backend 'tide
+                 tide-disable-suggestions t
                  ;; typescript-lsp-linter 'nil
                  typescript-linter 'eslint
                  typescript-fmt-tool 'prettier

@@ -106,7 +106,7 @@ __git_files () {
 # (cat ~/.cache/wal/sequences &)
 
 # To add support for TTYs this line can be optionally added.
-source ~/.cache/wal/colors-tty.sh
+#source ~/.cache/wal/colors-tty.sh
 
 #color manpages
 export LESS_TERMCAP_mb=$'\e[1;31m'     # begin bold
@@ -198,7 +198,7 @@ bindkey "^f" forward-word-dir
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
     command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.zinit/bin" && \
         print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
         print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
@@ -210,12 +210,8 @@ autoload -Uz _zinit
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit light-mode for \
-    zinit-zsh/z-a-rust \
-    zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-bin-gem-node \
     zsh-users/zsh-autosuggestions \
-    zdharma/fast-syntax-highlighting
+    zdharma-continuum/fast-syntax-highlighting
 
 ### End of Zinit's installer chunk
 
@@ -274,29 +270,4 @@ ENHANCD_FILTER="fzf"
 ENHANCD_COMMAND="c"
 
 _BORING_COMMANDS=($_BORING_COMMANDS "^unhistory")
-
-# export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-# export ANDROID_HOME=$HOME/.local/share/Android/Sdk
-# export PATH=$PATH:$ANDROID_HOME/emulator
-# export PATH=$PATH:$ANDROID_HOME/tools
-# export PATH=$PATH:$ANDROID_HOME/tools/bin
-# export PATH=$PATH:$ANDROID_HOME/platform-tools
-# export PATH=$PATH:$HOME/.local/share/android-studio/bin
-
-# export _JAVA_AWT_WM_NONREPARENTING=1
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/home/zerinol/.local/share/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/home/zerinol/.local/share/miniconda3/etc/profile.d/conda.sh" ]; then
-#         . "/home/zerinol/.local/share/miniconda3/etc/profile.d/conda.sh"
-#     else
-#         export PATH="/home/zerinol/.local/share/miniconda3/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
-# <<< conda initialize <<<
 

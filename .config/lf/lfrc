@@ -17,17 +17,21 @@ set ratios 1:1
 cmd open ${{
     case $(file --mime-type $f -b) in
       text/troff) man ./ $f;;
-        text/*|*/json) $EDITOR $fx;;
-  image/x-xcf|image/svg+xml) setsid brave-browser $f >/dev/null 2>&1 & ;;
-  image/*) rotdir $f | setsid sxiv -aio 2>/dev/null | lf-select & ;;
-  audio/*) mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f ;;
-  video/*) setsid mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f -quiet >/dev/null 2>&1 & ;;
-  application/pdf) setsid zathura $fx >/dev/null 2>&1 & ;;
-        *) for f in $fx; do setsid $OPENER $f >/dev/null 2>&1 & done;;
+      text/*|*/json) $EDITOR $fx;;
+      image/x-xcf|image/svg+xml) setsid brave-browser $f >/dev/null 2>&1 & ;;
+      image/*) rotdir $f | setsid sxiv -aiobN float_sc -g getGeo 2>/dev/null | lf-select & ;;
+      audio/*) mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f ;;
+      video/*) setsid mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f -quiet >/dev/null 2>&1 & ;;
+      application/pdf) setsid zathura $fx >/dev/null 2>&1 & ;;
+      *) for f in $fx; do setsid $OPENER $f >/dev/null 2>&1 & done;;
     esac
 }}
 
 # cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
+
+cmd getGeo ${{
+    identify $fx | awk -F" " '{ print $3}'
+}}
 
 cmd delete ${{
   set -f

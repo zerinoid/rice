@@ -1,0 +1,15 @@
+#!/bin/sh
+
+brightness=$(cat /sys/class/backlight/gmux_backlight/brightness)
+if [ $1 = '-inc' ] ; then
+  newbrightness=$(expr $brightness + $2 \* 431)
+elif [ $1 = '-dec' ] ; then
+  newbrightness=$(expr $brightness - $2 \* 431)
+fi
+
+if [ $newbrightness -lt 0 ] ; then
+  newbrightness=0
+fi
+
+echo $newbrightness | tee /sys/class/backlight/gmux_backlight/brightness
+

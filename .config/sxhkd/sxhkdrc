@@ -104,7 +104,7 @@ super + alt + s
 
 #System monitor
 super + alt + t
-	$TERMB -e btm
+	$TERMA -e btm
 
 super + ctrl + t
 	$TERMB -e htop
@@ -129,7 +129,7 @@ super + shift + w
 
 #calculadora
 super + alt + y
-	xcalc
+	gnome-calculator
 
 #
 # Operaçoes
@@ -316,9 +316,9 @@ XF86AudioMute
 
 #Brightness control
 XF86MonBrightnessDown
-	xbacklight -dec 5
+	gbacklight -dec 5
 XF86MonBrightnessUp
-	xbacklight -inc 5
+	gbacklight -inc 5
 
 #Audio control
 super + i

@@ -1,15 +1,35 @@
 #!/bin/bash
 
+INTEGRADO=LVDS
+EXTERNO=DisplayPort-0
+
+getRes() {
+    xrandr -q | grep -A 1 $1 | awk 'FNR == 2 {print $1}'
+}
+
+
 # set up the two monitors for bspwm
-external_monitor=$(xrandr --query | grep 'HDMI1')
+external_monitor=$(xrandr --query | grep $EXTERNO)
 if [[ ! $external_monitor = *disconnected* ]]; then
     echo "Monitor conectado"
-    xrandr --output eDP1 --primary --mode 1366x768 --rotate normal --output HDMI1 --mode 1600x900 --rotate normal --above eDP1
+    xrandr --output $INTEGRADO \
+        --primary \
+        --mode $(getRes $INTEGRADO) \
+        --rotate normal \
+        --output $EXTERNO \
+        --mode $(getRes $EXTERNO) \
+        --rotate normal \
+        --above $INTEGRADO
+
     bspc config top_padding 0
 else
     echo "Monitor desconectado"
-    bspc monitor HDMI1 -r
+    bspc monitor $EXTERNO -r
     bspc wm -o
-    xrandr --output eDP1 --primary --mode 1366x768 --rotate normal --output HDMI1 --off
+    xrandr --output $INTEGRADO \
+        --primary \
+        --mode 1440x900 \
+        --rotate normal \
+        --output $EXTERNO --off
 fi
 

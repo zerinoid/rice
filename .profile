@@ -50,7 +50,7 @@ export KUNST_POSITION="-260-20"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export ZSHZ_DATA="$ZDOTDIR/.z"
 export GPG_TTY=$(tty)
-export NODE_EXTRA_CA_CERTS="$(mkcert -CAROOT)/rootCA.pem"
+#export NODE_EXTRA_CA_CERTS="$(mkcert -CAROOT)/rootCA.pem"
 
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
@@ -70,7 +70,7 @@ export WEECHAT_HOME="$HOME/.config/weechat"
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
 
 # NVM
-export NVM_DIR="$HOME/.nvm"
+export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
@@ -140,3 +140,4 @@ ex=🎯:\
 "
 # Start graphical server on tty1 if not already running.
 [ "$(tty)" = "/dev/tty1" ] && ! pgrep -x Xorg >/dev/null && exec startx
+. "/home/zerinol/.local/share/cargo/env"

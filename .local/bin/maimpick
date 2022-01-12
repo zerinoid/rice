@@ -1,14 +1,19 @@
 #!/usr/bin/env sh
 
 PICPATH="$HOME/pics/SC"
+[ ! -d $PICPATH ] && mkdir -p $PICPATH
+
 MOMENT="$(date '+%y%m%d-%H%M-%S').png" 
 SELFILE="$PICPATH/pic-selected-$MOMENT"
 
-case "$(printf "a selected area (copy)\\na selected area\\ncurrent window (copy)\\ncurrent window\\nfull screen (copy)\\nfull screen" | dmenu -l 6 -p "Screenshot which area?")" in
+case "$(printf "a selected area\\na selected area (copy)\\ncurrent window\\ncurrent window (copy)\\nfull screen\\nfull screen (copy)" | dmenu -l 6 -p "Screenshot which area?")" in
+  "a selected area")\
+      maim -us $SELFILE &&\
+      sxiv -bN float_sc -g $(identify $SELFILE | awk -F" " '{ print $3}') $SELFILE;\
+      echo $SELFILE | xclip -selection clipboard;;
   "a selected area (copy)") maim -us | xclip -selection clipboard -t image/png ;;
-  "a selected area") maim -us $SELFILE && sxiv -bN float_sc -g $(identify $SELFILE | awk -F" " '{ print $3}') $SELFILE;;
-  "current window (copy)") maim -i "$(xdotool getactivewindow)" | xclip -selection clipboard -t image/png ;;
   "current window") maim -i "$(xdotool getactivewindow)" $PICPATH/pic-window-"$(date '+%y%m%d-%H%M-%S').png" ;;
-  "full screen (copy)") sleep 1; maim | xclip -selection clipboard -t image/png ;;
+  "current window (copy)") maim -i "$(xdotool getactivewindow)" | xclip -selection clipboard -t image/png ;;
   "full screen") sleep 1; maim $PICPATH/pic-full-"$(date '+%y%m%d-%H%M-%S').png" ;;
+  "full screen (copy)") sleep 1; maim | xclip -selection clipboard -t image/png ;;
 esac

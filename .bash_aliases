@@ -69,7 +69,8 @@ alias \
 	doc="docker-compose exec workspace"\
 	ngso="ng s --open"\
 	pas="php artisan serve"\
-	nrw="npm run watch"
+	nrd="npm run dev"\
+	nrb="npm run build"
 
 # git
 alias \

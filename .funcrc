@@ -120,6 +120,9 @@ crophdmi() {
     done
 }
 
-medula() {
-    rsync -vPhua $@ zerinol@192.168.0.35:~
-}
+# medula() {
+#     port=$1
+#     shift
+#     files=$@
+#     rsync -vPhua $files zerinol@192.168.0.${port:="35"}:~
+# }

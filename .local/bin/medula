@@ -1,0 +1,5 @@
+#!/bin/bash
+port=$1
+shift
+files=$@
+rsync -vPhua "$files" zerinol@192.168.0.${port:="35"}:~

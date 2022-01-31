@@ -70,7 +70,7 @@ This function should only modify configuration layer settings."
           org-start-notification-daemon-on-startup t
           org-pomodoro-finished-sound (concat (getenv "HOME") "/.local/share/sounds/custombell.wav")
           )
-     ;; journal
+     journal
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
@@ -561,7 +561,7 @@ before packages are loaded."
   (setq create-lockfiles nil)
   (setq default-directory "~/docs/")
   (treemacs-resize-icons 16)
-  (global-so-long-mode 1)
+  ;; (global-so-long-mode 1)
   (setq default-frame-alist '((font . "Source Code Pro-10")))
 
   ;; swap ` '

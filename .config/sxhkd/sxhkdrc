@@ -53,7 +53,7 @@ super + shift + a
 
 # email
 super + b
-	gnome-terminal -e neomutt
+	$TERMA -e neomutt
 
 # bluetooth
 super + alt + b
@@ -322,10 +322,10 @@ XF86MonBrightnessUp
 
 #Audio control
 super + i
-	pulsemixer --change-volume -3
+	pulsemixer --change-volume -2
 
 super + o
-	pulsemixer --change-volume +3; amixer -D pulse set Master unmute
+	pulsemixer --change-volume +2; amixer -D pulse set Master unmute
 
 XF86AudioPlay
 	mpc toggle

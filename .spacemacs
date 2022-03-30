@@ -98,7 +98,7 @@ This function should only modify configuration layer settings."
                  web-mode-markup-indent-offset 4
                  web-mode-code-indent-offset 4
                  tide-tsserver-executable (concat (getenv "NVM_BIN") "/tsserver")
-                 ;; typescript-fmt-on-save t
+                 typescript-fmt-on-save t
                  )
      (javascript :variables
                  javascript-backend 'tern
@@ -578,16 +578,18 @@ before packages are loaded."
   ; OWN MENU
   (spacemacs/declare-prefix "o" "own-menu")
   (spacemacs/set-leader-keys "oa" 'change-quote)
+  (spacemacs/set-leader-keys "ob" 'smerge-keep-all)
   (spacemacs/set-leader-keys "oc" 'org-columns)
   (spacemacs/set-leader-keys "od" 'remove-class)
+  (spacemacs/set-leader-keys "of" (lambda () (interactive) (find-file "~/docs/org/pro/tarefas.org")))
   (spacemacs/set-leader-keys "oi" 'insert-class)
-  (spacemacs/set-leader-keys "om" 'smerge-keep-mine)
+  (spacemacs/set-leader-keys "ol" 'smerge-keep-lower)
   (spacemacs/set-leader-keys "on" 'smerge-next)
-  (spacemacs/set-leader-keys "oo" 'smerge-keep-other)
   ;; (spacemacs/set-leader-keys "oo" 'find-file)
   (spacemacs/set-leader-keys "or" 'revert-buffer)
   (spacemacs/set-leader-keys "os" 'org-download-clipboard)
   (spacemacs/set-leader-keys "ot" 'insert-timestamp)
+  (spacemacs/set-leader-keys "ou" 'smerge-keep-upper)
   (spacemacs/set-leader-keys "skp" 'helm-projectile-ack)
 
   ; MACROS
@@ -654,6 +656,14 @@ before packages are loaded."
   ; PUBLISH
   (setq org-latex-compiler "lualatex")
   (add-to-list 'org-latex-packages-alist '("margin=1cm" "geometry" t))
+
+  ; useState Snippet
+  (defun capitalize-first-only (&optional string)
+    "Capitalize only the first character of the input STRING."
+    (when (and string (> (length string) 0))
+      (let ((first-char (substring string nil 1))
+            (rest-str   (substring string 1)))
+        (concat (capitalize first-char) rest-str))))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

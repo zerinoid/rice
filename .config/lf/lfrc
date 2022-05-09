@@ -113,7 +113,7 @@ cmd recol %{{
 }}
 
 cmd copypath & {{
-    readlink -fn $f | xclip -sel p -f | xclip -sel c
+    readlink -fn $fx | xclip -sel p -f | xclip -sel c
 }}
 
 # Bindings
@@ -136,6 +136,7 @@ map gf cd ~/fixo
 map gh cd ~
 map gm cd ~/music
 map go cd ~/docs/org
+map gp cd ~/pics
 map gr cd ~/drive
 map gs cd ~/fixo/source
 map gt cd ~/docs/txt

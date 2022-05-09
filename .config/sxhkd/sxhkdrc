@@ -82,6 +82,9 @@ super + shift + e
 super + ctrl + i
 	$TERMA --class 'pad' -e sh -c "nmcli device wifi rescan;nmcli device wifi list;$SHELL" &
 
+super + ctrl + shift + i
+	$TERMA --class 'pad' -e sh -c "rfkill block wlan; sleep 3; rfkill unblock wlan;$SHELL" &
+
 #troca wifi
 super + shift + i
 	netswitch
@@ -166,6 +169,9 @@ super + {_,shift + }q
 # alternate between the tiled and monocle layout
 super + m
 	bspc desktop -l next
+
+super + shift + m
+	bspc config window_gap {0,4}
 
 # send the newest marked node to the newest preselected node
 super + y

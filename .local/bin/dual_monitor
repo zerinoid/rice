@@ -12,7 +12,6 @@ getRes() {
 external_monitor=$(xrandr --query | grep $EXTERNO)
 if [[ ! $external_monitor = *disconnected* ]]; then
     echo "Monitor conectado"
-    bspc monitor LVDS-1-2 -r
     xrandr --output $INTEGRADO \
         --primary \
         --mode $(getRes $INTEGRADO) \
@@ -21,11 +20,10 @@ if [[ ! $external_monitor = *disconnected* ]]; then
         --mode $(getRes $EXTERNO) \
         --rotate normal \
         --above $INTEGRADO
-
     bspc config top_padding 0
+    bspc monitor LVDS-1-2 -r
 else
     echo "Monitor desconectado"
-    bspc monitor LVDS-1-2 -r
     bspc monitor $EXTERNO -r
     bspc wm -o
     xrandr --output $INTEGRADO \
@@ -33,5 +31,6 @@ else
         --mode $(getRes $INTEGRADO) \
         --rotate normal \
         --output $EXTERNO --off
+    bspc monitor LVDS-1-2 -r
 fi
 

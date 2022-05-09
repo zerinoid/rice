@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.42 for zerinol on Mon Sep 27 21:05:47 2021.
+# Written by xscreensaver-demo 5.45 for zerinol on Wed Apr 20 20:00:21 2022.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	0:10:00
@@ -32,10 +32,10 @@ dpmsOff:	0:00:00
 grabDesktopImages:  True
 grabVideoFrames:    True
 chooseRandomImages: True
-imageDirectory:	/home/zerinol/db/memesp
+imageDirectory:	/home/zerinol/db/wpp/adhd
 
 mode:		one
-selected:	188
+selected:	205
 
 textMode:	url
 textLiteral:	XScreenSaver
@@ -277,6 +277,15 @@ programs:								      \
   GL: 				peepers -root				    \n\
   GL: 				razzledazzle -root			    \n\
 				vfeedback -root				    \n\
+				scooter -root				    \n\
+- GL: 				deepstars -root				    \n\
+- GL: 				gravitywell -root			    \n\
+- GL: 				beats -root				    \n\
+- GL: 				covid19 -root				    \n\
+- GL: 				etruscanvenus -root			    \n\
+- GL: 				gibson -root				    \n\
+- GL: 				headroom -root				    \n\
+- GL: 				sphereeversion -root			    \n\
 
 
 pointerPollTime:    0:00:05

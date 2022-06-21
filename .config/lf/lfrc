@@ -158,8 +158,8 @@ map r push R<a-b> # after extention
 map <c-t> rsyncext
 map <c-r> reload
 # map <c-t> !mobt $fx
-map <c-s> !medula 217 $fx
-map <c-S> !medula 35 $fx
+map <c-s> !medula $fx
+map <c-S> !medula $fx
 map x $$f
 map X &$f
 map Y copypath

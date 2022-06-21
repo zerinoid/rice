@@ -6,7 +6,7 @@ alias \
 	aps="sudo apt install"\
 	apd="sudo apt update"\
     apdl="apt list --upgradable"\
-	apg="sudo apt upgrade"\
+	apg="sudo DEBIAN_FRONTEND=noninteractive apt upgrade"\
     apr="sudo apt remove"\
     apf="apt-file search"
 

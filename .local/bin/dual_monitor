@@ -11,7 +11,7 @@ getRes() {
 # set up the two monitors for bspwm
 external_monitor=$(xrandr --query | grep $EXTERNO)
 if [[ ! $external_monitor = *disconnected* ]]; then
-    echo "Monitor conectado"
+    echo "Monitor conectado" 2>&1
     xrandr --output $INTEGRADO \
         --primary \
         --mode $(getRes $INTEGRADO) \
@@ -19,18 +19,23 @@ if [[ ! $external_monitor = *disconnected* ]]; then
         --output $EXTERNO \
         --mode $(getRes $EXTERNO) \
         --rotate normal \
-        --above $INTEGRADO
+        --above $INTEGRADO 2>> $LOGINLOG
     bspc config top_padding 0
-    bspc monitor LVDS-1-2 -r
 else
-    echo "Monitor desconectado"
-    bspc monitor $EXTERNO -r
-    bspc wm -o
+    echo "Monitor desconectado" 2>&1
     xrandr --output $INTEGRADO \
         --primary \
         --mode $(getRes $INTEGRADO) \
         --rotate normal \
-        --output $EXTERNO --off
-    bspc monitor LVDS-1-2 -r
+        --output $EXTERNO --off 2>> $LOGINLOG
+    if [[ $(bspc wm -g | grep $EXTERNO) ]]; then 
+        echo "removendo monitores deconectados"
+        bspc monitor $EXTERNO -r 2>> $LOGINLOG
+        bspc wm -o 2>> $LOGINLOG
+    fi 
+fi
+
+if [[ $(bspc wm -g | grep "LVDS-1-2") ]]; then 
+    bspc monitor LVDS-1-2 -r 2>> $LOGINLOG
 fi
 

@@ -4,6 +4,7 @@ data=$(date '+%Y-%m-%d %H:%M:%S')
 
 echo "= .xprofile ========================= $data" >> "$LOGINLOG"
 
+sxhkd >> "$LOGINLOG" 2>&1 &
 mpd &
 xplugd >> "$LOGINLOG" 2>&1 &
 ~/.fehbg >> "$LOGINLOG" 2>&1 &

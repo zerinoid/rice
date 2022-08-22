@@ -6,7 +6,7 @@ echo "= bspwm =============================" >> "$LOGINLOG"
 echo "$data" >> "$LOGINLOG"
 
 ## wal colors
-[ -f $HOME/.config/bspwm/colors/sh ] && . "$HOME/.config/bspwm/colors.sh"
+[ -f $HOME/.config/bspwm/colors.sh ] && . "$HOME/.config/bspwm/colors.sh"
 
 #sxhkd 2>&1 >> "$LOGINLOG" &
 xrdb -load .Xresources &

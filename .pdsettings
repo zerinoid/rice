@@ -1,0 +1,29 @@
+audioapi: 1
+noaudioin: False
+audioindev1: 0 2
+audioindevname1: HDA Intel PCH (hardware)
+noaudioout: False
+audiooutdev1: 0 2
+audiooutdevname1: HDA Intel PCH (hardware)
+audiobuf: 25
+rate: 44100
+callback: 0
+blocksize: 64
+midiapi: 0
+nomidiin: True
+nomidiout: True
+path1: /home/zerinol/docs/PD/externals
+path2: /home/zerinol/docs/PD/externals/moonlib
+path3: /home/zerinol/docs/PD/externals/iemlib
+path4: /home/zerinol/docs/PD/externals/tof
+path5: /home/zerinol/docs/PD/externals/Gem/abstractions
+path6: /home/zerinol/docs/PD/externals/Gem
+npath: 6
+standardpath: 1
+verbose: 0
+loadlib1: Gem
+nloadlib: 1
+defeatrt: 0
+flags: -lib Gem
+zoom: 1
+loading: no

@@ -60,12 +60,12 @@ alertd() {
     aplay ~/.local/share/sounds/chime31.wav 2>/dev/null
 }
 
-#git dot add
+#dit add
 da() {
    dit ls-files | grep "$1" | xargs git --git-dir=$HOME/.cfg/ --work-tree=$HOME add
 }
 
-#git dot difftool
+#dit diff
 gdd() {
    dit ls-files | grep "$1" | xargs git --git-dir=$HOME/.cfg/ --work-tree=$HOME diff
 }
@@ -75,7 +75,7 @@ gdt() {
    dit ls-files | grep "$1" | xargs git --git-dir=$HOME/.cfg/ --work-tree=$HOME difftool -y
 }
 
-#dit difftool
+#git difftool
 gt() {
    git ls-files | grep "$1" | xargs git difftool -y
 }
@@ -121,8 +121,5 @@ crophdmi() {
 }
 
 # medula() {
-#     port=$1
-#     shift
-#     files=$@
-#     rsync -vPhua $files zerinol@192.168.0.${port:="35"}:~
+#     rsync -vPhua $@ zerinol@192.168.0.217:~
 # }

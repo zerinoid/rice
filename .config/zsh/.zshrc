@@ -106,7 +106,7 @@ __git_files () {
 # (cat ~/.cache/wal/sequences &)
 
 # To add support for TTYs this line can be optionally added.
-source ~/.cache/wal/colors-tty.sh
+#source ~/.cache/wal/colors-tty.sh
 
 #color manpages
 export LESS_TERMCAP_mb=$'\e[1;31m'     # begin bold
@@ -169,9 +169,6 @@ bindkey "^i" expand-or-complete-prefix
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
-# zsh-autosuggestions
-bindkey "^ " autosuggest-accept
-
 # funções especiais para back/forward baseados na pasta "/"
 backward-kill-dir () {
     local WORDCHARS=${WORDCHARS_/\/}
@@ -194,34 +191,38 @@ forward-word-dir () {
 zle -N forward-word-dir
 bindkey "^f" forward-word-dir
 
+###
+## ZINIT
+###
+
 ### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit/zinit.git" && command chmod g-rwX "$HOME/.local/share/zinit/zinit.git"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
 fi
 
-source "$HOME/.zinit/bin/zinit.zsh"
+source "$HOME/.local/share/zinit/zinit.git/zinit.git/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit light-mode for \
-    zinit-zsh/z-a-rust \
-    zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-bin-gem-node \
-    zsh-users/zsh-autosuggestions \
-    zdharma/fast-syntax-highlighting
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust \
 
-### End of Zinit's installer chunk
+###
+## Plugins
+###
 
-##
-# Plugins
-##
+zinit light zdharma-continuum/fast-syntax-highlighting
+zinit light zsh-users/zsh-autosuggestions
+bindkey "^ " autosuggest-accept
 
 zinit ice pick"sqlite-history.zsh" src"histdb-interactive.zsh"
 zinit load larkery/zsh-histdb
@@ -240,9 +241,9 @@ zinit snippet OMZP::colorize
 zinit ice load'[[ $PWD == *webdev* ]]' lucid
 zinit snippet OMZP::nvm
 
-##
-# Tema
-##
+###
+## Tema
+###
 
 zinit ice pick"async.zsh" src"pure.zsh"
 zinit light sindresorhus/pure
@@ -284,19 +285,3 @@ _BORING_COMMANDS=($_BORING_COMMANDS "^unhistory")
 # export PATH=$PATH:$HOME/.local/share/android-studio/bin
 
 # export _JAVA_AWT_WM_NONREPARENTING=1
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/home/zerinol/.local/share/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/home/zerinol/.local/share/miniconda3/etc/profile.d/conda.sh" ]; then
-#         . "/home/zerinol/.local/share/miniconda3/etc/profile.d/conda.sh"
-#     else
-#         export PATH="/home/zerinol/.local/share/miniconda3/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
-# <<< conda initialize <<<
-

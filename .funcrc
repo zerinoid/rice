@@ -119,3 +119,7 @@ crophdmi() {
         ffmpeg -i $file -vf crop=1600:900:0:0 ${file%%.*}.jpg
     done
 }
+
+saturno() {
+    rsync -vPhua $@ zerinol@192.168.0.10:~
+}

@@ -159,7 +159,8 @@ map r push R<a-b> # after extention
 map <c-t> rsyncext
 map <c-r> reload
 # map <c-t> !mobt $fx
-map <c-s> !medula $fx
+map <c-s> !saturno $fx
+map V $vimdiff $fx
 map x $$f
 map X &$f
 map Y copypath

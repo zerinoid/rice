@@ -83,7 +83,7 @@ super + ctrl + i
 	$TERMA --class 'pad' -e sh -c "nmcli device wifi rescan;nmcli device wifi list;$SHELL" &
 
 super + ctrl + shift + i
-	$TERMA --class 'pad' -e sh -c "rfkill block wlan; sleep 3; rfkill unblock wlan;$SHELL" &
+	$TERMA --class 'pad' -e sh -c "sudo rfkill block wlan; sleep 3; sudo rfkill unblock wlan" &
 
 #troca wifi
 super + shift + i
@@ -93,6 +93,9 @@ super + shift + i
 super + alt + i
 	networkmanager_dmenu
 
+#insomnia com vars
+super + shift + o
+	ins
 # kill internets
 super + shift + alt + q
   killall overgrive transmission-da

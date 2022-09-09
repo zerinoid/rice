@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.45 for zerinol on Wed Apr 20 20:00:21 2022.
+# Written by xscreensaver-demo 5.45 for zerinol on Tue Sep  6 00:27:14 2022.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	0:10:00
@@ -35,7 +35,7 @@ chooseRandomImages: True
 imageDirectory:	/home/zerinol/db/wpp/adhd
 
 mode:		one
-selected:	205
+selected:	233
 
 textMode:	url
 textLiteral:	XScreenSaver

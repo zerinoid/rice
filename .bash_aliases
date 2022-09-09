@@ -103,7 +103,7 @@ alias \
 # misc
 alias \
     v="vim"\
-    nmset="rfkill block wlan; sleep 3; rfkill unblock wlan"\
+    nmset="sudo rfkill block wlan; sleep 3; sudo rfkill unblock wlan"\
     pbc="xclip -selection clipboard"\
 	pbp="xclip -selection clipboard -o"\
     ytv="straw-viewer --player=mpv"\

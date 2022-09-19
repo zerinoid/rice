@@ -68,7 +68,7 @@ export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig"
 export GIMP2_DIRECTORY=".config/gimp-2.8"
 export WEECHAT_HOME="$HOME/.config/weechat"
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
-
+export NVM_AUTOLOAD=1
 # NVM
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -137,6 +137,14 @@ ex=🎯:\
 *.ged=👪:\
 *.part=💔:\
 *.torrent=🔽:\
+*.stories.*=🪶:\
+*.tsx=🔮:\
+*.ts=🤖:\
+*.js=🫀:\
+*.css=🤍:\
+*.scss=💖:\
+*.json=🦾:\
+*.yml=🚀:\
 "
 # Start graphical server on tty1 if not already running.
 [ "$(tty)" = "/dev/tty1" ] && ! pgrep -x Xorg >/dev/null && exec startx

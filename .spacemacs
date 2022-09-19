@@ -68,7 +68,6 @@ This function should only modify configuration layer settings."
      git
      html
      lsp
-     tide
      json
      prettier
      import-js
@@ -79,7 +78,7 @@ This function should only modify configuration layer settings."
      (typescript :variables
                  typescript-linter 'eslint
                  typescript-fmt-tool 'prettier
-                 typescript-backend 'tide
+                 typescript-backend 'lsp
                  node-add-modules-path t
                  typescript-fmt-on-save t
                  javascript-import-tool 'import-js
@@ -88,7 +87,7 @@ This function should only modify configuration layer settings."
                  web-mode-code-indent-offset 2
                  js2-basic-offset 2
                  js-indent-level 2
-                 tide-tsserver-executable (concat (getenv "NVM_BIN") "/tsserver")
+                 ;; tide-tsserver-executable (concat (getenv "NVM_BIN") "/tsserver")
                  )
      (shell :variables
             shell-default-height 30
@@ -673,28 +672,6 @@ before packages are loaded."
       (let ((first-char (substring string nil 1))
             (rest-str   (substring string 1)))
         (concat (capitalize first-char) rest-str))))
-
-    ; flycheck no bottom
-    ;; (add-to-list 'display-buffer-alist
-    ;;             '(my-window-bottom-left-side-window-p
-    ;;               (display-buffer-in-side-window)
-    ;;               (window-height . 0.30)
-    ;;               (window-width . 0.55)
-    ;;               (dedicated . t)
-    ;;               (side . bottom)
-    ;;               (slot . 0)
-    ;;               (window-parameters . ((no-other-window . t)
-    ;;                                     (no-delete-other-windows . t)
-    ;;                                     (mode-line-format . 'none)))))
-
-    ;; (defvar my-window-bottom-left-modes '())
-
-    ;; (defun my-window-bottom-left-side-window-p (buf act)
-    ;;   (with-current-buffer buf (member major-mode my-window-bottom-left-modes)))
-
-    ;; ;; Then down in the flycheck configuration
-
-    ;; (add-to-list 'my-window-bottom-left-modes 'flycheck-error-list-mode)
   )
 
 

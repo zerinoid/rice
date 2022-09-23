@@ -75,8 +75,10 @@ This function should only modify configuration layer settings."
            web-mode-markup-indent-offset 2
            web-mode-code-indent-offset 2
            web-mode-css-indent-offset 2 ; indentação de css
+           indent-size 2
            css-enable-lsp t ; lsp automatico no css-mode
-           indent-size 2)
+           lsp-css-lint-unknown-at-rules "ignore"
+           )
      (react :variables
             sgml-basic-offset 2)
      (typescript :variables
@@ -114,10 +116,10 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(lsp-tailwindcss)
 
    ;; A list of packages that cannot be updated.
-   dotspacemacs-frozen-packages '()
+   dotspacemacs-frozen-packages '(lsp-mode lsp-ui)
 
    ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '()
@@ -598,6 +600,7 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  (setq lsp-tailwindcss-add-on-mode nil)
 )
 
 
@@ -630,11 +633,16 @@ before packages are loaded."
   (advice-add #'evil-goto-mark :after #'scroll-to-center-advice)
   (advice-add #'evil-goto-mark-line :after #'scroll-to-center-advice)
 
+  (defun copy-template-base ()
+    (locate-file "base" "/home/zerinol/webdev/people/inovacao-react")
+    ;; (copy-directory)
+    )
+
   ; OWN MENU
   (spacemacs/declare-prefix "o" "own-menu")
   (spacemacs/set-leader-keys "oa" 'change-quote)
   (spacemacs/set-leader-keys "ob" 'smerge-keep-all)
-  (spacemacs/set-leader-keys "oc" 'org-columns)
+  (spacemacs/set-leader-keys "oc" 'copy-template-base)
   (spacemacs/set-leader-keys "od" 'remove-class)
   (spacemacs/set-leader-keys "of" (lambda () (interactive) (find-file "~/docs/org/pro/tarefas.org")))
   (spacemacs/set-leader-keys "oi" 'insert-class)
@@ -670,8 +678,6 @@ before packages are loaded."
     (setq ispell-dictionary "pt_BR,en_US"))
 
   ; DEV
-  ;; (require 'lsp-tailwindcss)
-
   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
   (defun line-space-hook ()
     (setq line-spacing 1.0))

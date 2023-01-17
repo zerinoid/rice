@@ -42,6 +42,7 @@ export EMACS_SERVER_SOCKET="/run/user/$(id -u)/emacs/server"
 export TERMA="alacritty"
 export TERMB="st"
 export TERM=$TERMA
+export TERMINAL=$TERMA
 # export VISUAL="emacsclient -s $EMACS_SERVER_SOCKET -c"
 export LOGINLOG="$HOME/.local/login.log"
 export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"

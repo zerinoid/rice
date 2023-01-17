@@ -21,6 +21,7 @@ if [ "$3" = "disconnected" ]; then
     bspc monitor HDMI1 -r
     xrandr --output $2 --off
     bspc wm -r
+    bspc wm -o
     exit 0
 fi
 

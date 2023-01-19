@@ -49,9 +49,11 @@ let g:lightline = {'colorscheme': 'tokyonight'}
 lua require'colorizer'.setup()
 
 " Variaveis
-    let g:airline_powerline_fonts = 1
     let g:airline_theme='tokyonight'
+    let g:airline_powerline_fonts = 1
     let g:airline#extensions#whitespace#enabled = 1
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#whitespace#mixed_indent_algo = 1
 
     let g:netrw_banner = 0
     let g:netrw_liststyle = 3

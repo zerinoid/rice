@@ -648,7 +648,7 @@ before packages are loaded."
   ;; (spacemacs/set-leader-keys "oo" 'find-file)
   (spacemacs/set-leader-keys "or" 'revert-buffer)
   (spacemacs/set-leader-keys "os" 'org-download-clipboard)
-  (spacemacs/set-leader-keys "ot" 'insert-timestamp)
+  (spacemacs/set-leader-keys "ot" 'template-copy)
   (spacemacs/set-leader-keys "ou" 'smerge-keep-upper)
   (spacemacs/set-leader-keys "skp" 'helm-projectile-ack)
 
@@ -679,6 +679,36 @@ before packages are loaded."
     (when (eq major-mode 'css-mode)
       (web-beautify-css)))
   (add-hook 'before-save-hook #'auto-lint)
+
+  (defun template-copy ()
+    (interactive)
+    (setq template-copy-destination (format "%s" (read-directory-name "Destino: " nil default-directory)))
+    (setq template-copy-comp-name (format "%s" (read-from-minibuffer "Nome do componente: ")))
+    (setq template-copy-folder-name (format "%s" (read-from-minibuffer "Nome da pasta: ")))
+    (shell-command (concat
+                     (format "template-copy %s " (projectile-project-root default-directory))
+                     template-copy-destination " "
+                     template-copy-comp-name " "
+                     template-copy-folder-name))
+    (find-file (concat
+                 template-copy-destination
+                 template-copy-folder-name "/"
+                 template-copy-comp-name ".stories.tsx")))
+
+  ;; (defun copy-template ()
+  ;;   (interactive)
+  ;;   (treemacs--copy-or-move
+  ;;    :action 'copy
+  ;;    :no-node-msg "There is nothing to move here."
+  ;;    :wrong-type-msg "Only files and directories can be copied."
+  ;;    :action-fn (lambda (to)
+  ;;                 (let ((source (concat (projectile-project-root) '/src/components/templates/base/'))))
+  ;;                 (if (file-directory-p source)
+  ;;                     (copy-directory source to)
+  ;;                   (copy-file source to)))
+  ;;    :prompt "Copy to: "
+  ;;    :flat-prompt "File to copy: "
+  ;;    :finish-verb "Copied"))
 
   ; useState Snippet
   (defun capitalize-first-only (&optional string)

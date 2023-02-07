@@ -116,10 +116,12 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(lsp-tailwindcss)
+   dotspacemacs-additional-packages '(
+                                      ;; lsp-tailwindcss
+                                      )
 
    ;; A list of packages that cannot be updated.
-   dotspacemacs-frozen-packages '(lsp-mode lsp-ui)
+   dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '()
@@ -651,7 +653,7 @@ before packages are loaded."
   ;; (spacemacs/set-leader-keys "oo" 'find-file)
   (spacemacs/set-leader-keys "or" 'revert-buffer)
   (spacemacs/set-leader-keys "os" 'org-download-clipboard)
-  (spacemacs/set-leader-keys "ot" 'insert-timestamp)
+  (spacemacs/set-leader-keys "ot" 'template-copy)
   (spacemacs/set-leader-keys "ou" 'smerge-keep-upper)
   (spacemacs/set-leader-keys "skp" 'helm-projectile-ack)
 
@@ -699,6 +701,21 @@ before packages are loaded."
       (let ((first-char (substring string nil 1))
             (rest-str   (substring string 1)))
         (concat (capitalize first-char) rest-str))))
+
+  (defun template-copy ()
+    (interactive)
+    (setq template-copy-destination (format "%s" (read-directory-name "Destino: " nil default-directory)))
+    (setq template-copy-comp-name (format "%s" (read-from-minibuffer "Nome do componente: ")))
+    (setq template-copy-folder-name (format "%s" (read-from-minibuffer "Nome da pasta: ")))
+    (shell-command (concat
+                    (format "template-copy %s " (projectile-project-root default-directory))
+                    template-copy-destination " "
+                    template-copy-comp-name " "
+                    template-copy-folder-name))
+    (find-file (concat
+                template-copy-destination
+                template-copy-folder-name "/"
+                template-copy-comp-name ".stories.tsx")))
   )
 
 

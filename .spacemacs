@@ -644,7 +644,8 @@ before packages are loaded."
   (spacemacs/declare-prefix "o" "own-menu")
   (spacemacs/set-leader-keys "oa" 'change-quote)
   (spacemacs/set-leader-keys "ob" 'smerge-keep-all)
-  (spacemacs/set-leader-keys "oc" 'copy-template-base)
+  (spacemacs/set-leader-keys "oc" 'change-template-string)
+  (spacemacs/set-leader-keys "oC" 'remove-template-string)
   (spacemacs/set-leader-keys "od" 'remove-class)
   (spacemacs/set-leader-keys "of" (lambda () (interactive) (find-file "~/docs/org/pro/tarefas.org")))
   (spacemacs/set-leader-keys "oi" 'insert-class)
@@ -656,14 +657,21 @@ before packages are loaded."
   (spacemacs/set-leader-keys "ot" 'template-copy)
   (spacemacs/set-leader-keys "ou" 'smerge-keep-upper)
   (spacemacs/set-leader-keys "skp" 'helm-projectile-ack)
+  (spacemacs/set-leader-keys "oy" 'insert-style)
 
  ; MACROS
   (fset 'remove-class
         (kmacro-lambda-form [?F ?< ?f ?  ?d ?t ?>] 0 "%d"))
   (fset 'insert-class
-        (kmacro-lambda-form [?F ?< ?e ?a ?  ?c ?l ?a ?s ?s ?N ?a ?m ?e ?= ?\C-o] 0 "%d"))
+        (kmacro-lambda-form [?F ?< ?e ?a ?  ?c ?l ?a ?s ?s ?N ?a ?m ?e ?= ?\C-\] ?\C-o] 0 "%d"))
+  (fset 'insert-style
+        (kmacro-lambda-form [?F ?< ?e ?a ?  ?c ?l ?a ?s ?s ?N ?a ?m ?e ?= ?f ?d ?d ?s ?\" ?i ?{ ?s ?t ?y ?l ?e ?s ?\. ?} ?f ?d ?b ?a] 0 "%d"))
   (fset 'change-quote
-        (kmacro-lambda-form [?f ?\" ?c ?i ?\" ?\C-o] 0 "%d"))
+        (kmacro-lambda-form [?f ?\" ?c ?i ?\" ?\C-\] ?\C-o] 0 "%d"))
+  (fset 'change-template-string
+        (kmacro-lambda-form [?v ?i ?} ?s ?} ?i ?\$ ?f ?d ?v ?i ?} ?s ?\`] 0 "%d"))
+  (fset 'remove-template-string
+        (kmacro-lambda-form [?d ?s ?} ?d ?s ?\` ?x] 0 "%d"))
 
   ; ORG
   (add-hook 'org-mode-hook 'turn-on-auto-fill)

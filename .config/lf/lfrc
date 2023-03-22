@@ -144,6 +144,7 @@ map gw cd ~/webdev
 map zc cd ~/.config
 map zm cd /mnt
 
+map <c-c> $cat $f | xclip -selection clipboard
 map i $~/.config/lf/pv.sh $f | less -R
 map I $$TERMA -e sh -c '~/.config/lf/pv.sh "$f" | less -R' &
 # map J $lf -remote "send $id cd $(cut -d' ' -f2- ~/.config/directories | fzf)" # ir para dir definido

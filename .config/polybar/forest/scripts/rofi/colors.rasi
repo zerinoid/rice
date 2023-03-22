@@ -5,6 +5,6 @@
   bg:   #1F1626FF;
   bga:  #292030FF;
   fg:   #FFFFFFFF;
-  ac:   #D94084FF;
-  se:   #4F5D95FF;
+  ac:   #EDB83FFF;
+  se:   #6D8895FF;
 }

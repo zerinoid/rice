@@ -17,10 +17,10 @@ super + shift + Return
 	"$TERMB"
 
 super + d
-	dmenu_run
+	~/.config/polybar/forest/scripts/launcher.sh
 
 super + alt + d
-	rofi -no-config -no-lazy-grab -show drun -modi drun -theme ~/.config/polybar/forest/scripts/rofi/launcher.rasi
+	dmenu_run
 
 #
 # Dunst
@@ -50,6 +50,9 @@ super + a
 # youtube-dl audio
 super + shift + a
 	yta
+
+super + ctrl + a
+	"$TERMA" --class cal -e sh -c "ncal -bw3; $SHELL" &
 
 # email
 super + b
@@ -372,7 +375,7 @@ super + F7
 
 # toggle emacs daemon
 super + F8
-	demacs
+	demacs & disown
 
 # Mount a USB drive or Android device
 super + {F9,F10}

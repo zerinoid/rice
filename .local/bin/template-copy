@@ -5,7 +5,7 @@ TARGET=$2
 COMP_NAME=$3
 COMP_FOLDER=$4
 
-cp -vur "$PROJECT_ROOT"src/components/templates/base $TARGET
+cp -vur "$PROJECT_ROOT"src/templates/base $TARGET
 find $TARGET -maxdepth 2 -type f -name 'BaseTemplate*' -exec sed -i 's/BaseTemplate/'${COMP_NAME}'/g' {} +
 rename 's/BaseTemplate*/'${COMP_NAME}'/' "$TARGET"base/*
 mv "$TARGET"base "$TARGET""$COMP_FOLDER"

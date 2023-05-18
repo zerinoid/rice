@@ -27,6 +27,7 @@ bspc wm -O eDP1 HDMI1
 
 bspc config border_width        2
 bspc config window_gap          4
+# bspc config top_padding         34
 
 bspc config normal_border_color $color1
 bspc config focused_border_color $color4
@@ -62,7 +63,8 @@ bspc rule -a *:float_sc state=floating
 bspc rule -a PdWindow:* state=floating
 bspc rule -a HelpBrowser:* state=floating
 bspc rule -a Processing:* state=floating
-bspc rule -a Ripcord:* state=floating
+bspc rule -a Peek:* state=floating rectangle=716x356+400+30
+bspc rule -a Gnome-calculator state=floating
 
 # [ -z $(ps aux | grep mark.sh | grep -v grep) ] && $HOME/.config/bspwm/mark.sh &
 

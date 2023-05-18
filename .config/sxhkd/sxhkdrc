@@ -22,6 +22,9 @@ super + alt + d
 super + d
 	~/.config/polybar/forest/scripts/launcher.sh
 
+super + p
+	~/.config/polybar/launch.sh --forest
+
 #
 # Dunst
 #
@@ -104,7 +107,7 @@ super + alt + s
 
 #System monitor
 super + alt + t
-	$TERMB -e btm
+	$TERMB -e btm --mem_as_value
 
 super + ctrl + t
 	$TERMB -e htop
@@ -121,15 +124,18 @@ super + shift + u
 	snp 1
 
 # Browser
-super + w
-	/usr/bin/brave-browser
+super +  w
+	/usr/bin/microsoft-edge
 
 super + shift + w
-	/usr/bin/brave-browser --incognito
+	/usr/bin/microsoft-edge --inprivate
+
+super + alt + w
+	/usr/bin/brave-browser
 
 #calculadora
 super + alt + y
-	xcalc
+	gnome-calculator
 
 #
 # Operaçoes
@@ -167,6 +173,8 @@ super + {_,shift + }q
 super + m
 	bspc desktop -l next
 
+super + shift + m
+	bspc config window_gap {0,4}
 # send the newest marked node to the newest preselected node
 super + y
 	bspc node newest.marked.local -n newest.!automatic.local
@@ -234,8 +242,8 @@ super + {_,shift + }{1-9,0}
 
 
 # desktop pessoal
-super + {_,shift +} p
-	bspc {desktop -f,node -d} '^4'
+# super + {_,shift +} p
+# 	bspc {desktop -f,node -d} '^4'
 
 # desktop profssional
 # super + {_,shift +} o

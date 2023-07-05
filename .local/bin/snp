@@ -9,6 +9,7 @@ if ! CHOSEN=$( echo "$SNIPPETS" | dmenu -i -l 30 -p "copiar snippets" ); then
 fi
 
 if [ -n "$1" ]; then
+    setxkbmap -model abnt2 -layout br -option caps:escape
     xdotool type "$(cat $FOLDER/$CHOSEN | xargs echo -n )"
     xdotool key KP_Enter
 else

@@ -61,7 +61,7 @@ cmd rsyncto ${{
   set -f
   clear; echo "Copy to where?"
   dest="$(fd . ~ -t d | fzf)" &&
-  eval rsync -vPhua '$fx' $dest &&
+  eval sudo rsync -vPhua '$fx' $dest &&
   notify-send "📋 File(s) rsynced." "File(s) rsynced to $dest."
 }}
 

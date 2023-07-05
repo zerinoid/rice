@@ -14,7 +14,7 @@ picom >> "$LOGINLOG" 2>&1 &
 /opt/thefanclub/overgrive/overgrive >> "$LOGINLOG" 2>&1 &
 transmission-daemon >> "$LOGINLOG" 2>&1 &
 xscreensaver -nosplash &
-mpdas -c ~/.config/mpdasrc >> "$LOGINLOG" 2>&1 &
+/usr/bin/mpdas -c ~/.config/mpdasrc >> "$LOGINLOG" 2>&1 &
 unclutter &
 emacs --daemon &
 touchegg &

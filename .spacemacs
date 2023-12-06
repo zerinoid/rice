@@ -22,14 +22,12 @@ This function should only modify configuration layer settings."
    ;; (default 'unused)
    dotspacemacs-enable-lazy-installation 'unused
 
-
-
    ;; If non-nil then Spacemacs will ask for confirmation before installing
    ;; a layer lazily. (default t)
    dotspacemacs-ask-for-lazy-installation t
 
    ;; List of additional paths where to look for configuration layers.
-   ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
+   ;; Paths must have a trailing slash (i.e. "~/.mycontribs/")
    dotspacemacs-configuration-layer-path '()
 
    ;; List of configuration layers to load.
@@ -40,20 +38,19 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ;; markdown
-     (colors :variables colors-enable-nyan-cat-progress-bar t
-             colors-colorize-identifiers 'nil)
-     yaml
      auto-completion
      better-defaults
      emacs-lisp
+     git
      helm
+     lsp
+     ;; markdown
+     multiple-cursors
      (org :variables
           org-enable-org-journal-support t
           org-journal-dir "~/docs/org/journal"
           org-journal-file-format "%Y-%m-%d"
           org-directory "~/docs/org"
-          org-default-notes-file (concat org-directory "/pro/tarefas.org")
           org-download-screenshot-method "xclip -s clipboard -t image/png %s"
           org-download-image-dir "~/docs/org/media"
           fill-column 75
@@ -65,12 +62,11 @@ This function should only modify configuration layer settings."
                                    ("NEXT" .  "#4f97d7"))
           )
      journal
-     git
-     lsp
-     ;; tide
-     json
-     prettier
-     import-js
+     ;; (shell :variables
+     ;;        shell-default-height 30
+     ;;        shell-default-position 'bottom)
+     ;; spell-checking
+     syntax-checking
      (html :variables
            css-indent-offset 2
            web-mode-markup-indent-offset 2
@@ -80,37 +76,20 @@ This function should only modify configuration layer settings."
            indent-size 2)
      (react :variables
             sgml-basic-offset 2)
+     import-js
      (javascript :variables
                  javascript-fmt-tool 'prettier
-                 javascript-backend 'lsp
                  javascript-fmt-on-save t
                  javascript-import-tool 'import-js
                  js2-basic-offset 2
                  js-indent-level 2
                  js2-mode-show-parse-errors nil
-                 js2-mode-show-strict-warnings nil
-                 )
+                 js2-mode-show-strict-warnings nil)
      (typescript :variables
                  typescript-linter 'eslint
                  typescript-fmt-tool 'prettier
-                 typescript-backend 'lsp
-                 node-add-modules-path t
-                 typescript-fmt-on-save t
-                 typescript-indent-level 2
-                 web-mode-markup-indent-offset 2
-                 web-mode-code-indent-offset 2
-                 ;; tide-tsserver-executable (concat (getenv "NVM_BIN") "/tsserver")
-                 )
-     (shell :variables
-            shell-default-height 30
-            shell-default-position 'bottom)
+                 typescript-fmt-on-save t)
      version-control
-     themes-megapack
-     (spell-checking :variables
-                     spell-checking-enable-by-default nil)
-     (syntax-checking :variables
-                      flycheck-stylelintrc ".stylelintrc.json")
-     multiple-cursors
      treemacs)
 
 
@@ -122,11 +101,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(
-                                      ;; lsp-tailwindcss
-                                      sqlite3
-                                      mocha-snippets
-                                      )
+   dotspacemacs-additional-packages '(doom-themes)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -299,16 +274,14 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(doom-city-lights
-                         doom-gruvbox-light
-                         ;; doom-dracula
-                         ;; doom-Iosvkem
-                         ;; doom-dark+
-                         ;; gruvbox-dark-hard
-                         ;; cherry-blossom
-                         )
+   dotspacemacs-themes '(doom-snazzy
+                         doom-city-lights
+                         doom-peacock
+                         doom-sourcerer
+                         doom-xcode
+                         spacemacs-light)
 
-   ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
+   ;; Set the t-brighter-comment sheme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
    ;; first three are spaceline themes. `doom' is the doom-emacs mode-line.
    ;; `vanilla' is default Emacs mode-line. `custom' is a user defined themes,
@@ -427,12 +400,12 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
-   ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   ;; (default t) (Emacs 24.4+ only)
+   dotspacemacs-maximized-at-startup t
 
    ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
-   ;; variable with `dotspacemacs-maximized-at-startup' in OSX to obtain
-   ;; borderless fullscreen. (default nil)
+   ;; variable with `dotspacemacs-maximized-at-startup' to obtain fullscreen
+   ;; without external boxes. Also disables the internal border. (default nil)
    dotspacemacs-undecorated-at-startup nil
 
    ;; A value from the range (0..100), in increasing opacity, which describes
@@ -444,6 +417,11 @@ It should only modify the values of Spacemacs settings."
    ;; the transparency level of a frame when it's inactive or deselected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
    dotspacemacs-inactive-transparency 90
+
+   ;; A value from the range (0..100), in increasing opacity, which describes the
+   ;; transparency level of a frame background when it's active or selected. Transparency
+   ;; can be toggled through `toggle-background-transparency'. (default 90)
+   dotspacemacs-background-transparency 90
 
    ;; If non-nil show the titles of transient states. (default t)
    dotspacemacs-show-transient-state-title t
@@ -483,8 +461,7 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers '(:relative t
-                               :disabled-for-modes org-mode)
+   dotspacemacs-line-numbers nil
 
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
@@ -555,7 +532,9 @@ It should only modify the values of Spacemacs settings."
    ;; (default nil - same as frame-title-format)
    dotspacemacs-icon-title-format nil
 
-   ;; Show trailing whitespace (default t)
+   ;; Color highlight trailing whitespace in all prog-mode and text-mode derived
+   ;; modes such as c++-mode, python-mode, emacs-lisp, html-mode, rst-mode etc.
+   ;; (default t)
    dotspacemacs-show-trailing-whitespace t
 
    ;; Delete whitespace while saving buffer. Possible values are `all'
@@ -613,7 +592,6 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  (setq lsp-tailwindcss-add-on-mode nil)
 )
 
 
@@ -631,29 +609,13 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (setq org-hide-emphasis-markers t)
-  (setq create-lockfiles nil)
-  (treemacs-resize-icons 16)
   (setq default-directory "~/docs/")
-  (setq org-file-apps
-        (quote
-         ((auto-mode . emacs)
-          ("\\.mm\\'" . default)
-          ("\\.x?html?\\'" . "/usr/bin/microsoft-edge %s")
-          ("\\.pdf\\'" . default))))
 
   ;; swap ` '
   (define-key evil-normal-state-map (kbd "`") 'evil-goto-mark-line)
   (define-key evil-normal-state-map (kbd "'") 'evil-goto-mark)
 
-  ;; functions that should center after called
-  (defun scroll-to-center-advice (&rest args)
-    (evil-scroll-line-to-center (line-number-at-pos)))
-  (advice-add #'spacemacs/jump-to-definition :after #'scroll-to-center-advice)
-  (advice-add #'evil-goto-mark :after #'scroll-to-center-advice)
-  (advice-add #'evil-goto-mark-line :after #'scroll-to-center-advice)
-
-  ; OWN MENU
+  ;; OWN MENU
   (spacemacs/declare-prefix "o" "own-menu")
   (spacemacs/set-leader-keys "oa" 'change-quote)
   (spacemacs/set-leader-keys "ob" 'smerge-keep-all)
@@ -674,90 +636,30 @@ before packages are loaded."
   (spacemacs/set-leader-keys "skp" 'helm-projectile-ack)
   (spacemacs/set-leader-keys "oy" 'insert-style)
 
- ; MACROS
-  (fset 'remove-class
-        (kmacro-lambda-form [?F ?< ?f ?  ?d ?t ?>] 0 "%d"))
-  (fset 'insert-class
-        (kmacro-lambda-form [?F ?< ?e ?a ?  ?c ?l ?a ?s ?s ?N ?a ?m ?e ?= ?\C-o] 0 "%d"))
-  (fset 'insert-style
-        (kmacro-lambda-form [?F ?< ?e ?a ?  ?c ?l ?a ?s ?s ?N ?a ?m ?e ?= ?f ?d ?d ?s ?\" ?i ?{ ?s ?t ?y ?l ?e ?s ?\. ?} ?f ?d ?b ?a] 0 "%d"))
-  (fset 'change-quote
-        (kmacro-lambda-form [?f ?\" ?c ?i ?\" ?\C-o] 0 "%d"))
-  (fset 'change-template-string
-        (kmacro-lambda-form [?v ?i ?} ?s ?} ?i ?\$ ?f ?d ?v ?i ?} ?s ?\`] 0 "%d"))
-  (fset 'remove-template-string
-        (kmacro-lambda-form [?d ?s ?} ?d ?s ?\` ?x] 0 "%d"))
-
-  ; ORG
+  ;; ORG
   (add-hook 'org-mode-hook 'turn-on-auto-fill)
   (add-hook 'org-mode-hook 'org-indent-mode)
   (setq org-use-sub-superscripts '{})
-
-  ; DEV
-  (add-hook 'prog-mode-hook 'display-line-numbers-mode)
-  (defun line-space-hook ()
-    (setq line-spacing 1.0))
-  (add-hook 'prog-mode-hook #'line-space-hook)
 
   (defun org-line-hook ()
     (setq line-spacing 0.3))
   (add-hook 'org-mode-hook #'org-line-hook)
 
-  (defun auto-lint ()
-    (when (eq major-mode 'css-mode)
-      (web-beautify-css)))
-  (add-hook 'before-save-hook #'auto-lint)
+  ;; DEV
+  (add-hook 'prog-mode-hook 'display-line-numbers-mode)
+  (defun line-space-hook ()
+    (setq line-spacing 0.7))
+  (add-hook 'prog-mode-hook #'line-space-hook)
 
-   (setq x "RandomBaseName")
-   (setq transformed-string (replace-regexp-in-string "\\([A-Z]\\)" "-\\1" x))
-   (setq transformed-string (replace-regexp-in-string "^-" "" transformed-string))
-   (message transformed-string)
-
-   (defun get-comp-folder (str)
-     (let ((case-fold-search nil))
-       (setq transformed-string (replace-regexp-in-string "\\([A-Z]\\)" "-\\1" str))
-       (setq transformed-string (replace-regexp-in-string "^-" "" transformed-string))
-       (setq transformed-string (downcase transformed-string))
-       transformed-string))
-
-  (defun template-copy ()
-    (interactive)
-    (setq template-copy-destination (format "%s" (read-directory-name "Destino: " nil default-directory)))
-    (setq template-copy-comp-name (format "%s" (read-from-minibuffer "Nome do componente: ")))
-    (setq template-copy-folder-name (get-comp-folder template-copy-comp-name))
-    (shell-command (concat
-                     (format "template-copy %s " (projectile-project-root default-directory))
-                     template-copy-destination " "
-                     template-copy-comp-name " "
-                     template-copy-folder-name))
-    (find-file (concat
-                 template-copy-destination
-                 template-copy-folder-name "/"
-                 template-copy-comp-name ".stories.tsx")))
-
-  ;; (defun copy-template ()
-  ;;   (interactive)
-  ;;   (treemacs--copy-or-move
-  ;;    :action 'copy
-  ;;    :no-node-msg "There is nothing to move here."
-  ;;    :wrong-type-msg "Only files and directories can be copied."
-  ;;    :action-fn (lambda (to)
-  ;;                 (let ((source (concat (projectile-project-root) '/src/components/templates/base/'))))
-  ;;                 (if (file-directory-p source)
-  ;;                     (copy-directory source to)
-  ;;                   (copy-file source to)))
-  ;;    :prompt "Copy to: "
-  ;;    :flat-prompt "File to copy: "
-  ;;    :finish-verb "Copied"))
-
-  ; useState Snippet
+  ;; useState Snippet
   (defun capitalize-first-only (&optional string)
     "Capitalize only the first character of the input STRING."
     (when (and string (> (length string) 0))
       (let ((first-char (substring string nil 1))
             (rest-str   (substring string 1)))
         (concat (capitalize first-char) rest-str))))
-  )
+
+)
 
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -772,64 +674,12 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
- '(custom-safe-themes
-   '("939ea070fb0141cd035608b2baabc4bd50d8ecc86af8528df9d41f4d83664c6a" "76bfa9318742342233d8b0b42e824130b3a50dcc732866ff8e47366aed69de11" "d2e0c53dbc47b35815315fae5f352afd2c56fa8e69752090990563200daae434" "db7f422324a763cfdea47abf0f931461d1493f2ecf8b42be87bbbbbabf287bfe" "0cd00c17f9c1f408343ac77237efca1e4e335b84406e05221126a6ee7da28971" "a390bea70629258d80f41a42098bafcc636cd5f29f2449f00a86c1dabf68358d" "5f824cddac6d892099a91c3f612fcf1b09bb6c322923d779216ab2094375c5ee" "4cf9ed30ea575fb0ca3cff6ef34b1b87192965245776afa9e9e20c17d115f3fb" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))
- '(evil-want-Y-yank-to-eol nil)
- '(fringe-mode 6 nil (fringe))
- '(helm-completion-style 'emacs)
- '(hl-todo-keyword-faces
-   '(("TODO" . "#dc752f")
-     ("NEXT" . "#dc752f")
-     ("THEM" . "#2d9574")
-     ("PROG" . "#4f97d7")
-     ("OKAY" . "#4f97d7")
-     ("DONT" . "#f2241f")
-     ("FAIL" . "#f2241f")
-     ("DONE" . "#86dc2f")
-     ("NOTE" . "#b1951d")
-     ("KLUDGE" . "#b1951d")
-     ("HACK" . "#b1951d")
-     ("TEMP" . "#b1951d")
-     ("FIXME" . "#dc752f")
-     ("XXX+" . "#dc752f")
-     ("\\?\\?\\?+" . "#dc752f")))
- '(line-spacing nil)
- '(linum-format 'dynamic)
- '(org-agenda-files
-   '("~/docs/org/notas/misc.org" "~/docs/org/pro/tarefas.org" "~/docs/org/pes/compromissos.org" "~/docs/org/pes/todo.org"))
- '(org-capture-templates
-   '(("m" "Random note" entry
-      (file "~/docs/org/notas/misc.org")
-      "* TODO %?" :prepend t :jump-to-captured t :empty-lines-before 1)
-     ("1" "Energisa Portal Sprint 1" entry
-      (file+headline "~/docs/org/pro/tarefas.org" "EP - Sprint 01")
-      "* TODO %?
-%U
-%a")
-     ("2" "Energisa Portal Sprint 2" entry
-      (file+headline "~/docs/org/pro/tarefas.org" "Sprint 02")
-      "* TODO %?
-%U
-%a")
-     ("b" "Energisa Portal Backlog" entry
-      (file+headline "~/docs/org/pro/tarefas.org" "BACKLOG")
-      "* TODO %?
-%U
-%a")
-     ("3" "Energisa Portal Sprint 3" entry
-      (file+headline "~/docs/org/pro/tarefas.org" "Sprint 03")
-      "* TODO %?
-%U
-%a")))
  '(package-selected-packages
-   '(mocha-snippets sqlite3 lsp-tailwindcss grizzl mwim unfill tern org-wild-notifier add-node-modules-path lsp-origami origami import-js dap-mode posframe bui polymode super-save zenburn-theme zen-and-art-theme white-sand-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme rebecca-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme modus-vivendi-theme modus-operandi-theme minimal-theme material-theme majapahit-theme madhat2r-theme lush-theme light-soap-theme kaolin-themes jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme farmhouse-theme eziam-theme exotica-theme espresso-theme dracula-theme doom-themes django-theme darktooth-theme darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme chocolate-theme autothemer cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme rainbow-mode rainbow-identifiers color-identifiers-mode flymake-sass vmd-mode mmm-mode markdown-toc gh-md rjsx-mode flyspell-popup flyspell-correct-helm flyspell-correct auto-dictionary helm projectile package-lint helm-core adaptive-wrap org-journal yapfify utop tuareg caml seeing-is-believing rvm ruby-tools ruby-test-mode ruby-refactor ruby-hash-syntax rubocopfmt rubocop rspec-mode robe rbenv rake pytest pyenv-mode py-isort pippel pipenv pyvenv pip-requirements ocp-indent ob-elixir mvn minitest meghanada maven-test-mode lsp-python-ms lsp-java live-py-mode importmagic epc ctable concurrent deferred helm-pydoc groovy-mode groovy-imports pcache gradle-mode git-gutter-fringe+ fringe-helper git-gutter+ flycheck-ocaml merlin flycheck-credo emojify dune cython-mode company-emoji company-anaconda chruby bundler inf-ruby browse-at-remote blacken anaconda-mode pythonic alchemist elixir-mode lsp-ui lsp-treemacs helm-lsp lsp-mode markdown-mode dash-functional yaml-mode web-mode web-beautify tagedit slim-mode scss-mode sass-mode pug-mode prettier-js nodejs-repl livid-mode skewer-mode json-navigator hierarchy js2-refactor multiple-cursors js2-mode js-doc impatient-mode simple-httpd helm-css-scss haml-mode emmet-mode dockerfile-mode docker tablist json-mode docker-tramp json-snatcher json-reformat company-web web-completion-data xterm-color vterm treemacs-magit terminal-here smeargle shell-pop orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-cliplink org-brain multi-term magit-svn magit-section magit-gitflow magit-popup htmlize helm-org-rifle helm-org helm-gitignore helm-git-grep gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-org evil-magit magit git-commit with-editor transient eshell-z eshell-prompt-extras esh-help yasnippet-snippets tide typescript-mode helm-company helm-c-yasnippet fuzzy flycheck-pos-tip pos-tip company auto-yasnippet yasnippet ac-ispell auto-complete ws-butler writeroom-mode visual-fill-column winum volatile-highlights vi-tilde-fringe uuidgen treemacs-persp treemacs-evil toc-org symon symbol-overlay string-inflection spaceline-all-the-icons all-the-icons memoize spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode password-generator paradox spinner org-superstar open-junk-file move-text lorem-ipsum link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-purpose window-purpose imenu-list google-translate golden-ratio flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens evil-args evil-anzu anzu eval-sexp-fu editorconfig dumb-jump devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol aggressive-indent ace-link org-plus-contrib font-lock+ which-key use-package treemacs-projectile treemacs-icons-dired pcre2el overseer nameless macrostep hybrid-mode helm-xref helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag flycheck-package flycheck-elsa evil-mc emr elisp-slime-nav dotenv-mode diminish bind-map auto-compile ace-jump-helm-line))
- '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e")))
+   '(doom-themes mwim unfill import-js grizzl git-link git-messenger git-modes git-timemachine gitignore-templates helm-git-grep helm-ls-git orgit-forge orgit forge yaml ghub closql emacsql treepy smeargle treemacs-magit magit magit-section git-commit with-editor transient browse-at-remote git-gutter-fringe fringe-helper git-gutter company-web web-completion-data emmet-mode helm-css-scss impatient-mode pug-mode sass-mode haml-mode scss-mode slim-mode tagedit web-mode rjsx-mode js-doc js2-refactor multiple-cursors json-mode json-navigator hierarchy json-reformat json-snatcher livid-mode nodejs-repl npm-mode prettier-js skewer-mode js2-mode simple-httpd typescript-mode web-beautify ac-ispell auto-complete auto-yasnippet evil-org flycheck-pos-tip pos-tip fuzzy gnuplot helm-c-yasnippet helm-company company helm-lsp helm-org-rifle htmlize lsp-origami origami lsp-treemacs lsp-ui lsp-mode markdown-mode org-cliplink org-contrib org-download org-mime org-pomodoro alert log4e gntp org-present org-projectile org-project-capture org-category-capture org-rich-yank yasnippet-snippets yasnippet ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-descbinds helm-ag google-translate golden-ratio flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile all-the-icons aggressive-indent ace-link ace-jump-helm-line)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(highlight-parentheses-highlight ((nil (:weight ultra-bold))) t))
+ )
 )

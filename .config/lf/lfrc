@@ -15,10 +15,11 @@ set ratios 1:1
 
 # cmds/functions
 cmd open ${{
-    case $(file --mime-type $f -b) in
+    case $(gio info $f | grep "standard::content-type" | awk -F" " '{print $2}') in
+      */x-puredata) xdg-open $f;;
       text/troff) man ./ $f;;
       text/*|*/json) $EDITOR $fx;;
-      image/x-xcf|image/svg+xml) setsid brave-browser $f >/dev/null 2>&1 & ;;
+      image/x-xcf|image/svg+xml) setsid $BROWSER $f >/dev/null 2>&1 & ;;
       image/*) rotdir $f | setsid sxiv -aiobN float_sc -g getGeo 2>/dev/null | lf-select & ;;
       audio/*) mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f ;;
       video/*) setsid mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f -quiet >/dev/null 2>&1 & ;;
@@ -143,6 +144,7 @@ map gw cd ~/webdev
 map zc cd ~/.config
 map zm cd /mnt
 
+map <c-c> $cat $f | xclip -selection clipboard
 map i $~/.config/lf/pv.sh $f | less -R
 map I $$TERMA -e sh -c '~/.config/lf/pv.sh "$f" | less -R' &
 # map J $lf -remote "send $id cd $(cut -d' ' -f2- ~/.config/directories | fzf)" # ir para dir definido

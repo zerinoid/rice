@@ -57,11 +57,16 @@ alias \
     xdf="vim ~/.Xdefaults"\
 
 # du
+
+# ducks -
+# dud   - summarize + human readable
+# dush  - total pasta atual
+# dux   - ducks human readable (40 primeiros)
 alias \
     ducks="du -cks * | sort -rn | head"\
     dud="du -d 1 -h"\
     dush="du -sh"\
-    dux="du -hsx * | sort -rh | head -n 40"\
+    dux="du -chsx * | sort -rh | head -n 40"\
     dfth="df -Th | grep -e ^/dev -e Filesystem | grep -v loop"
 
 # development

@@ -1,28 +1,40 @@
-audioapi: 1
+audioapi: 5
 noaudioin: False
 audioindev1: 0 2
-audioindevname1: HDA Intel PCH (hardware)
+audioindevname1: JACK
 noaudioout: False
 audiooutdev1: 0 2
-audiooutdevname1: HDA Intel PCH (hardware)
+audiooutdevname1: JACK
 audiobuf: 25
-rate: 44100
+rate: 48000
 callback: 0
-blocksize: 64
-midiapi: 0
-nomidiin: True
+audioblocksize: 1024
+midiapi: 1
+nomidiin: False
+midiindev1: 0
+midiindevname1: ALSA MIDI device #1
+midiindev2: 0
+midiindevname2: ALSA MIDI device #1
 nomidiout: True
-path1: /home/zerinol/docs/PD/externals
-path2: /home/zerinol/docs/PD/externals/moonlib
-path3: /home/zerinol/docs/PD/externals/iemlib
-path4: /home/zerinol/docs/PD/externals/tof
-path5: /home/zerinol/docs/PD/externals/Gem/abstractions
-path6: /home/zerinol/docs/PD/externals/Gem
-npath: 6
+path1: /home/zerinol/fixo/pd/externals
+path2: /home/zerinol/fixo/pd/externals/else
+path3: /usr/local/lib/pd/extra/Gem
+path4: /home/zerinol/fixo/pd/externals/moonlib
+path5: /home/zerinol/fixo/pd/externals/mrpeach
+path6: /home/zerinol/fixo/pd/externals/moocow
+path7: /home/zerinol/fixo/pd/externals/cyclone
+path8: /home/zerinol/fixo/pd/externals/ofelia
+path9: /home/zerinol/fixo/pd/externals/easyflow
+path10: /home/zerinol/fixo/pd/externals/iemlib
+path11: /home/zerinol/fixo/pd/externals/zerino
+path12: /home/zerinol/fixo/pd/patches/utils
+npath: 12
 standardpath: 1
 verbose: 0
-loadlib1: Gem
-nloadlib: 1
+loadlib1: zexy
+loadlib2: Gem
+loadlib3: iemlib
+nloadlib: 3
 defeatrt: 0
 flags: -lib Gem
 zoom: 1

@@ -2,4 +2,4 @@
 
 VIDEO=$(xclip -selection clipboard -o)
 
-$TERMA --class pad -e bash -c "youtube-dl -c --add-metadata -i -o '~/dls/%(title)s.%(ext)s' --no-mtime $VIDEO;read -p 'da enter papai'"
+$TERMA --class pad -e bash -c "yt-dlp -c --add-metadata -i -o '~/dls/%(title)s.%(ext)s' --no-mtime $VIDEO;read -p 'da enter papai'"

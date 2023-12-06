@@ -1,2 +1,0 @@
-#!/bin/bash
-wine $HOME/fixo/progs/mp3tag/Mp3tag.exe

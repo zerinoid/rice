@@ -53,15 +53,18 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export ZSHZ_DATA="$ZDOTDIR/.z"
 export GPG_TTY=$(tty)
 #export NODE_EXTRA_CA_CERTS="$(mkcert -CAROOT)/rootCA.pem"
-
+export BROWSER="/usr/bin/microsoft-edge"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export NEEDRESTART_MODE=a
+export LV2_PATH="$HOME/.lv2:/usr/local/lib/lv2:/usr/lib/lv2"
 
 # vendor path
 # export PATH="$PATH:$HOME/.composer/vendor/bin"
 export PATH="$CARGO_HOME/bin:$PATH"
 # export PATH="$HOME/.cargo/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
+export PATH="$PATH:$HOME/.local/share/yabridge"
 
 # pkg-config
 export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig"

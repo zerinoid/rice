@@ -22,7 +22,7 @@ super + alt + d
 super + d
 	~/.config/polybar/forest/scripts/launcher.sh
 
-super + p
+super + equal
 	~/.config/polybar/launch.sh --forest
 
 #
@@ -55,12 +55,12 @@ super + shift + a
 	yta
 
 # email
-super + b
-	gnome-terminal -e neomutt
+# super + b
+# 	gnome-terminal -e neomutt
 
 # bluetooth
 super + alt + b
-	blueman-applet
+	blueman-manager
 
 # kunst
 super + shift + c
@@ -180,8 +180,8 @@ super + y
 	bspc node newest.marked.local -n newest.!automatic.local
 
 # swap the current node and the biggest node
-# super + g
-# 	bspc monitor --swap
+super + g
+	bspc node -s biggest.local
 
 # rotate layout
 super + r
@@ -196,8 +196,8 @@ super + {t,shift + t,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # set the node flags
-super + ctrl + {m,x,y,apostrophe}
-	bspc node -g {marked,locked,sticky,hidden}
+# super + ctrl + {m,x,y,apostrophe}
+# 	bspc node -g {marked,locked,sticky,hidden}
 
 #
 # focus/swap
@@ -212,8 +212,8 @@ super + shift + {k,j}
 	bspc node -m {north,south} --follow
 
 # focus the node for the given path jump
-# super + {p,b,comma,period}
-# 	bspc node -f @{parent,brother,first,second}
+super + {p,b,comma}
+	bspc node -f @{parent,brother,first}
 
 # focus the next/previous node in the current desktop
 super + {k,j}
@@ -272,6 +272,17 @@ super + ctrl + shift + space
 #
 # move/resize
 #
+
+# Smart resize, will grow or shrink depending on location.
+# Will always grow for floating nodes.
+super + ctrl + alt + {Left,Down,Up,Right}
+  n=10; \
+  { d1=left;   d2=right;  dx=-$n; dy=0;   \
+  , d1=bottom; d2=top;    dx=0;   dy=$n;  \
+  , d1=top;    d2=bottom; dx=0;   dy=-$n; \
+  , d1=right;  d2=left;   dx=$n;  dy=0;   \
+  } \
+  bspc node --resize $d1 $dx $dy || bspc node --resize $d2 $dx $dy
 
 # expand a window by moving one of its side outward
 super + alt + {h,j,k,l}

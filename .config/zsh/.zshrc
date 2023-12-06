@@ -126,7 +126,7 @@ export LS_OPTIONS='--color=auto'
 
 # colorize
 export ZSH_COLORIZE_STYLE="paraiso-dark"
-export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+# export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
 # export LESSOPEN='|~/.lessfilter %s'
 
@@ -239,6 +239,9 @@ zinit snippet OMZP::command-not-found
 zinit snippet OMZP::colorize
 
 zinit ice load'[[ $PWD == *webdev* ]]' lucid
+zinit snippet OMZP::nvm
+
+zinit ice load'[[ $PWD == *code* ]]' lucid
 zinit snippet OMZP::nvm
 
 ###

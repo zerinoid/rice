@@ -12,7 +12,7 @@ syncthing -no-browser &
 dunst >> "$LOGINLOG" 2>&1 &
 picom >> "$LOGINLOG" 2>&1 &
 /opt/thefanclub/overgrive/overgrive >> "$LOGINLOG" 2>&1 &
-transmission-daemon >> "$LOGINLOG" 2>&1 &
+# transmission-daemon >> "$LOGINLOG" 2>&1 &
 xscreensaver -nosplash &
 /usr/bin/mpdas -c ~/.config/mpdasrc >> "$LOGINLOG" 2>&1 &
 unclutter &

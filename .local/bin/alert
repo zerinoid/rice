@@ -1,0 +1,19 @@
+#!/bin/bash
+success=$1
+shift
+input=$@
+text="${input:=Terminou o birinaites}"
+
+if [[ $success = "0" ]]; then
+	urgency=low
+	icon=info
+else
+	urgency=critical
+	icon=error
+fi
+
+export DISPLAY=:0
+notify-send --urgency=$urgency -i $icon "$text"
+aplay /usr/share/sounds/sound-icons/electric-piano-3.wav 2>/dev/null
+sleep 1
+spd-say -l pt-br -t female3 "$text"

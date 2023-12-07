@@ -53,13 +53,6 @@ unhistory() {
 	histdb --forget "$1"
 }
 
-alertd() {
-	success=$?
-	export DISPLAY=:0
-	notify-send --urgency=low -i "$([ $success = 0 ] && echo info || echo error)" "Terminou o birinights"
-	aplay /usr/share/sounds/sound-icons/electric-piano-3.wav 2>/dev/null
-}
-
 #dit add
 da() {
 	dit ls-files | grep "$1" | xargs git --git-dir=$HOME/.cfg/ --work-tree=$HOME add

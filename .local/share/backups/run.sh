@@ -9,8 +9,8 @@
 sleep 5
 
 # Output visual
-# export DISPLAY=:0 
-# st -e bash -c "journalctl -u automatic-backup -n 30 --user" &
+export DISPLAY=:0
+$TERMA -e bash -c "journalctl -fu automatic-backup -n 30 --user" &
 
 #
 # Script configuration
@@ -30,17 +30,16 @@ BACKUPCFG=$HOME/.local/share/backups
 DISKS=$BACKUPCFG/backup.disks
 
 # Find whether the connected block device is a backup drive
-for uuid in $(lsblk --noheadings --list --output uuid)
-do
-        if grep --quiet --fixed-strings $uuid $DISKS; then
-                break
-        fi
-        uuid=
+for uuid in $(lsblk --noheadings --list --output uuid); do
+	if grep --quiet --fixed-strings $uuid $DISKS; then
+		break
+	fi
+	uuid=
 done
 
 if [ ! $uuid ]; then
-        echo "No backup disk found, exiting"
-        exit 0
+	echo "No backup disk found, exiting"
+	exit 0
 fi
 
 echo "Disk $uuid is a backup disk"
@@ -65,7 +64,7 @@ BORG_OPTS="--stats --list --one-file-system --compression lz4 --checkpoint-inter
 # No one can answer if Borg asks these questions, it is better to just fail quickly
 # instead of hanging.
 export BORG_RELOCATED_REPO_ACCESS_IS_OK=no
-export BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK=yes
+export BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK=no
 
 # Log Borg version
 borg --version
@@ -81,42 +80,47 @@ shopt -s globstar
 
 # DB
 borg create $BORG_OPTS \
-  $TARGET::$DATE-$$-db \
-  $HOME/db $HOME/docs
+	$TARGET::$DATE-$$-db \
+	$HOME/db $HOME/docs
 
 # pessoais
 borg create $BORG_OPTS \
-  --exclude "**/node_modules" \
-  $TARGET::$DATE-$$-pessoais \
-  $HOME/pics $HOME/videos/Webcam $HOME/webdev/PESSOAIS $HOME/webdev/ESTUDOS
+	--exclude "**/node_modules" \
+	$TARGET::$DATE-$$-pessoais \
+	$HOME/pics $HOME/videos
 
 # sistema
 borg create $BORG_OPTS \
-  $TARGET::$DATE-$$-sistema \
-  $HOME/.ssh $HOME/.env $HOME/.histdb
+	$TARGET::$DATE-$$-sistema \
+	$HOME/.ssh $HOME/.env $HOME/.histdb
 
 # musica
-borg create $BORG_OPTS \
-  $TARGET::$DATE-$$-musica \
-  $HOME/music
+# borg create $BORG_OPTS \
+# 	$TARGET::$DATE-$$-musica \
+# 	$HOME/music
 
 # borg create $BORG_OPTS \
 #   $TARGET::$DATE-$$-lenny \
 #   $HOME/.ban
 
 success=$?
-notify-send -u low -t 0 -i "$([ $success = 0 ] && echo info || echo error)" "Terminou o birinights"
-aplay /home/zerinol/.local/share/sounds/chime31.wav 2> /dev/null
-echo "Completed backup for $DATE"
+
+if [ ${success} -eq 0 ]; then
+	/usr/local/bin/alert $success "backup geral bem sucedido"
+	echo "Completed backup for "$0" in $DATE"
+else
+	/usr/local/bin/alert $success "backup geral mal sucedido"
+	echo "Failed backup for "$0" in $DATE"
+fi
 
 # Just to be completely paranoid
 sync
 
 if [ -f $BACKUPCFG/autoeject ]; then
-        sudo umount $MOUNTPOINT
-        sudo hdparm -Y $drive
+	sudo umount $MOUNTPOINT
+	sudo hdparm -Y $drive
 fi
 
 if [ -f $BACKUPCFG/backup-suspend ]; then
-        systemctl suspend
+	systemctl suspend
 fi

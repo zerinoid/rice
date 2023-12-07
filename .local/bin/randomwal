@@ -1,8 +1,9 @@
 #!/bin/bash
 IFS=$'\n'
-files=( $(find ~/db/wpp -type f) )
+files=($(find ~/db/wpp -type f))
 unset IFS
-image=${files[$RANDOM % ${#files[@]} ]}
+image=${files[$RANDOM % ${#files[@]}]}
 #echo ${files[*]}
 echo $image
-wal -a 92 -i "$image" -o ldunst.sh &
+wal -a 92 -i "$image" &
+# -o ldunst.sh &

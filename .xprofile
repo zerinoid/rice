@@ -2,26 +2,27 @@
 
 data=$(date '+%Y-%m-%d %H:%M:%S')
 
-echo "= .xprofile ========================= $data" >> "$LOGINLOG"
+echo "= .xprofile ========================= $data" >>"$LOGINLOG"
 
-sxhkd >> "$LOGINLOG" 2>&1 &
+sxhkd >>"$LOGINLOG" 2>&1 &
 mpd &
-xplugd >> "$LOGINLOG" 2>&1 &
-~/.fehbg >> "$LOGINLOG" 2>&1 &
+xplugd >>"$LOGINLOG" 2>&1 &
+~/.fehbg >>"$LOGINLOG" 2>&1 &
 syncthing -no-browser &
-dunst >> "$LOGINLOG" 2>&1 &
-picom >> "$LOGINLOG" 2>&1 &
-/opt/thefanclub/overgrive/overgrive >> "$LOGINLOG" 2>&1 &
+dunst >>"$LOGINLOG" 2>&1 &
+picom >>"$LOGINLOG" 2>&1 &
+/opt/thefanclub/overgrive/overgrive >>"$LOGINLOG" 2>&1 &
 # transmission-daemon >> "$LOGINLOG" 2>&1 &
 xscreensaver -nosplash &
-/usr/bin/mpdas -c ~/.config/mpdasrc >> "$LOGINLOG" 2>&1 &
+/usr/bin/mpdas -c ~/.config/mpdasrc >>"$LOGINLOG" 2>&1 &
 unclutter &
 emacs --daemon &
 touchegg &
-# xautolock -time 20 -locker slock -corners +000 -cornerdelay 1 -cornerredelay 8 & 
+# xautolock -time 20 -locker slock -corners +000 -cornerdelay 1 -cornerredelay 8 &
 # kunst &
 
 ## wal colors
-#wal -R 2>&1 >> "$LOGINLOG" &
-#. "$HOME/.cache/wal/colors.sh"
-#$HOME/.local/bin/randomwal & 2>&1 >> "$LOGINLOG"
+wal -R 2>&1 >>"$LOGINLOG" &
+. "$HOME/.cache/wal/colors.sh"
+$HOME/.local/bin/randomwal &
+2>&1 >>"$LOGINLOG"

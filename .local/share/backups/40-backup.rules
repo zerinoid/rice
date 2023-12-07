@@ -1,0 +1,2 @@
+ACTION=="add", SUBSYSTEM=="bdi", DEVPATH=="/devices/virtual/bdi/*",
+TAG+="systemd", ENV{SYSTEMD_USER_WANTS}="automatic-backup.service"

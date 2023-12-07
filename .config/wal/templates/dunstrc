@@ -175,13 +175,13 @@
     background = "{color3}"
     highlight = "{color8}"
     foreground = "{background}"
-    timeout = 8
+    timeout = 0
 
 [urgency_normal]
     background = "{color7}"
     highlight = "{color1}"
     foreground = "{background}"
-    timeout = 0
+    timeout = 8
 
 [backlight]
     appname = "Backlight"

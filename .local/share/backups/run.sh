@@ -10,7 +10,7 @@ sleep 5
 
 # Output visual
 export DISPLAY=:0
-$TERMA -e bash -c "journalctl -fu automatic-backup -n 30 --user" &
+st -e bash -c "journalctl -fu automatic-backup -n 30 --user; read -p 'opa'" &
 
 #
 # Script configuration
@@ -20,7 +20,7 @@ $TERMA -e bash -c "journalctl -fu automatic-backup -n 30 --user" &
 MOUNTPOINT=/mnt/backup
 
 # This is the location of the Borg repository
-TARGET=$MOUNTPOINT/borg-backups/backup.borg
+TARGET=$MOUNTPOINT/borg-backups/saturno2024.borg
 
 # Archive name schema
 DATE=$(date --iso-8601)-$(hostname)
@@ -75,8 +75,8 @@ shopt -s globstar
 
 # # teste
 # borg create $BORG_OPTS \
-#   $TARGET::$DATE-$$-teste \
-#   $HOME/tmp/ass
+# 	$TARGET::$DATE-$$-teste \
+# 	$HOME/docs
 
 # DB
 borg create $BORG_OPTS \
@@ -85,7 +85,6 @@ borg create $BORG_OPTS \
 
 # pessoais
 borg create $BORG_OPTS \
-	--exclude "**/node_modules" \
 	$TARGET::$DATE-$$-pessoais \
 	$HOME/pics $HOME/videos
 
@@ -95,9 +94,9 @@ borg create $BORG_OPTS \
 	$HOME/.ssh $HOME/.env $HOME/.histdb
 
 # musica
-# borg create $BORG_OPTS \
-# 	$TARGET::$DATE-$$-musica \
-# 	$HOME/music
+borg create $BORG_OPTS \
+	$TARGET::$DATE-$$-musica \
+	$HOME/music
 
 # borg create $BORG_OPTS \
 #   $TARGET::$DATE-$$-lenny \

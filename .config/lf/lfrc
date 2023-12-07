@@ -103,7 +103,7 @@ cmd extract ${{
 }}
 
 #Redrawn colunas
-cmd recol %{{
+cmd recol ${{
     w=$(tput cols)
     if [ $w -le 80 ]; then
         lf -remote "send $id set ratios 1:1"

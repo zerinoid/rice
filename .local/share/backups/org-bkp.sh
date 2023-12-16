@@ -8,6 +8,7 @@ BORG_OPTS="--stats --list --one-file-system --compression lz4 --checkpoint-inter
 
 BORG_REP=$HOME/drive/org-bkp/org.borg
 
+. /home/zerinol/.env
 ###########################
 export BORG_PASSPHRASE="${ORG_BKP_PASS}"
 # export BORG_PASSCOMMAND=something

@@ -15,6 +15,6 @@ fi
 export XDG_RUNTIME_DIR="/run/user/1000"
 export DISPLAY=:0
 notify-send --urgency=$urgency -i $icon "$text" 2>&1
-aplay /usr/share/sounds/sound-icons/electric-piano-3.wav 2>/dev/null 2>&1
-sleep 1 2>&1
+aplay /usr/share/sounds/sound-icons/electric-piano-3.wav 2>/dev/null
+sleep 1
 spd-say -l pt-br -t female3 "$text" 2>&1

@@ -40,14 +40,14 @@ prune_exit=$?
 global_exit=$((backup_exit > prune_exit ? backup_exit : prune_exit))
 
 if [ ${global_exit} -eq 0 ]; then
-	info "Backup and Prune finished successfully"
-	/usr/local/bin/alert $global_exit "$0" "terminado em $DATE"
+	info "Backup and Prune finished successfully for $0"
+	/usr/local/bin/alert $global_exit "backup ORG bem sucedido"
 elif [ ${global_exit} -eq 1 ]; then
-	info "Backup and/or Prune finished with warnings"
-	/usr/local/bin/alert $global_exit "$0" "deu erro em $DATE"
+	info "Backup and/or Prune finished with warnings for $0"
+	/usr/local/bin/alert $global_exit "backup ORG com ressalvas"
 else
-	info "Backup and/or Prune finished with errors"
-	/usr/local/bin/alert $global_exit "$0" "falhou $DATE"
+	info "Backup and/or Prune finished with errors for $0"
+	/usr/local/bin/alert $global_exit "backup ORG falhou"
 fi
 
 exit ${global_exit}

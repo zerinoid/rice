@@ -20,10 +20,10 @@ super + alt + d
 	dmenu_run
 
 super + d
-	~/.config/polybar/forest/scripts/launcher.sh
+  rofi -no-lazy-grab -show drun -theme ~/.config/rofi/rofi.rasi
 
 super + equal
-	~/.config/polybar/launch.sh --forest
+	~/.config/polybar/launch.sh
 
 #
 # Dunst

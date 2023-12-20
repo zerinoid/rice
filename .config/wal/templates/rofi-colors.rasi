@@ -1,0 +1,8 @@
+* {{
+  al:   {background}00;
+  bg:   {background}FF;
+  bga:  {color1}FF;
+  fg:   {color7}FF;
+  ac:   {color5}FF;
+  se:   {color3}FF;
+}}

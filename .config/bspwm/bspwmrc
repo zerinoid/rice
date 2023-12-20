@@ -77,5 +77,5 @@ bspc rule -a *:crx__chlffgpmiacpedhhbkiomidkjlcfhogd state=floating
 
 # [ -z $(ps aux | grep mark.sh | grep -v grep) ] && $HOME/.config/bspwm/mark.sh &
 
-$HOME/.config/polybar/launch.sh --forest 2>&1 >>"$HOME/.local/polybar.log" &
+$HOME/.config/polybar/launch.sh 2>&1 >>"$HOME/.local/polybar.log" &
 # feh --recursive --randomize --bg-fill ~/db/wpp

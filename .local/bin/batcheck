@@ -1,18 +1,27 @@
 #!/bin/bash
 
 BATTINFO=$(acpi -b)
-if [[ "$(echo $BATTINFO | grep Discharging)" && "$(echo $BATTINFO | cut -f 5 -d " ")" < 00:15:00 ]]; then
+ISDISCHARGING="$(echo $BATTINFO | grep Discharging)"
+TIMEREMAINING="$(echo $BATTINFO | cut -f 5 -d " ")"
 
-	export DISPLAY=:0
+export XDG_RUNTIME_DIR="/run/user/1000"
+export DISPLAY=:0
+
+if [[ $ISDISCHARGING && $TIMEREMAINING < 00:15:00 ]]; then
+
 	notify-send -u critical -i notification-battery-empty "$(echo -e "P-R-E-R-I-G-O \n \n$BATTINFO")"
+	aplay /usr/share/sounds/sound-icons/cembalo-2.wav
 
-elif [[ "$(echo $BATTINFO | grep Discharging)" && "$(echo $BATTINFO | cut -f 5 -d " ")" < 00:30:00 ]]; then
+	# while echo $BATTINFO | grep Discharging; do
+	# 	aplay /usr/share/sounds/sound-icons/cembalo-2.wav
+	# done
+
+elif [[ $ISDISCHARGING && $TIMEREMAINING < 00:30:00 ]]; then
 
 	# if [ -r "$HOME/.dbus/Xdbus" ]; then
 	#   . "$HOME/.dbus/Xdbus"
 	# fi
 
-	export DISPLAY=:0
 	notify-send -i notification-battery-low "$(echo -e "Ta ruim hein? Vai acabar!!! \n \n$BATTINFO")"
-
+	aplay /usr/share/sounds/sound-icons/cembalo-2.wav
 fi

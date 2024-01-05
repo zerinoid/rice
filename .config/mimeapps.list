@@ -1,0 +1,15 @@
+
+[Default Applications]
+text/html=microsoft-edge.desktop
+x-scheme-handler/http=microsoft-edge.desktop
+x-scheme-handler/https=microsoft-edge.desktop
+x-scheme-handler/about=microsoft-edge.desktop
+x-scheme-handler/unknown=microsoft-edge.desktop
+image/png=sxiv.desktop
+image/jpg=sxiv.desktop
+image/jpeg=sxiv.desktop
+x-scheme-handler/msteams=teams.desktop
+x-scheme-handler/whatsapp=microsoft-edge.desktop
+x-scheme-handler/webcal=microsoft-edge.desktop
+x-scheme-handler/mailto=microsoft-edge.desktop
+application/pdf=org.pwmt.zathura-pdf-poppler.desktop;

@@ -114,3 +114,26 @@ crophdmi() {
 mimegio() {
 	gio info $1 | grep "standard::content-type" | awk -F" " '{print $2}'
 }
+
+cvgen() {
+	if [[ -z $1 || $1 != "m" && $1 != "h" ]]; then
+		echo "m ou h"
+		return
+	fi
+
+	DATE=$(date +%y%m%d-%H%M%S)
+	FOLDER=~/docs/cv-typst
+
+	# for file in $(ls $FOLDER/*typ); do
+	# 	typst compile $file
+	# 	echo $file compilado para ${file%%.*}.pdf
+	# done
+
+	if [[ $1 == "m" ]]; then
+		typst compile $FOLDER/maquina.typ
+		cp $FOLDER/maquina.pdf ~/drive/curriculos/leonardo_zerino$DATE.pdf
+	elif [[ $1 == "h" ]]; then
+		typst compile $FOLDER/humano.typ
+		cp $FOLDER/humano.pdf ~/drive/curriculos/leonardo_zerino$DATE.pdf
+	fi
+}

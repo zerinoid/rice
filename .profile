@@ -10,25 +10,25 @@
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-    . "$HOME/.bashrc"
-    fi
+	# include .bashrc if it exists
+	if [ -f "$HOME/.bashrc" ]; then
+		. "$HOME/.bashrc"
+	fi
 fi
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
+if [ -d "$HOME/bin" ]; then
+	PATH="$HOME/bin:$PATH"
 fi
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
+if [ -d "$HOME/.local/bin" ]; then
+	PATH="$HOME/.local/bin:$PATH"
 fi
 
 # source no arquivo de env local
 if [ -f "$HOME/.env" ]; then
-    . "$HOME/.env"
+	. "$HOME/.env"
 fi
 
 # xdg-base-dirs
@@ -58,6 +58,7 @@ export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export NEEDRESTART_MODE=a
 export LV2_PATH="$HOME/.lv2:/usr/local/lib/lv2:/usr/lib/lv2"
+export TEXMFHOME="$XDG_CONFIG_HOME/texmf"
 
 # vendor path
 # export PATH="$PATH:$HOME/.composer/vendor/bin"
@@ -65,6 +66,7 @@ export PATH="$CARGO_HOME/bin:$PATH"
 # export PATH="$HOME/.cargo/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 export PATH="$PATH:$HOME/.local/share/yabridge"
+export PATH="$HOME/.local/texlive/2023/bin/x86_64-linux:$PATH"
 
 # pkg-config
 export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig"
@@ -76,7 +78,7 @@ export WEECHAT_HOME="$HOME/.config/weechat"
 
 export NVM_AUTOLOAD=1
 export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 . "/home/zerinol/.local/share/cargo/env"
 
@@ -146,4 +148,3 @@ ex=🎯:\
 "
 # Start graphical server on tty1 if not already running.
 [ "$(tty)" = "/dev/tty1" ] && ! pgrep -x Xorg >/dev/null && exec startx
-

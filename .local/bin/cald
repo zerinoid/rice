@@ -1,0 +1,11 @@
+#!/bin/bash
+
+DAY=$(date +'%e')
+
+ACTION=$(dunstify 'Calendar' "$(cal | sed -e "s/$DAY\b/<u>$DAY<\/u>/g")" --action 'default,more')
+
+if [[ "$ACTION" == 'default' ]];then
+  microsoft-edge http://calendar.google.com
+fi
+
+exit 0

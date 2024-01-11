@@ -62,6 +62,10 @@ super + shift + a
 super + alt + b
 	blueman-manager
 
+# cald
+super + alt + c
+  cald
+
 # kunst
 super + shift + c
 	kunst_handler

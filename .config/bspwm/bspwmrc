@@ -7,10 +7,7 @@ echo "$data" >>"$LOGINLOG"
 
 randomwal
 . ~/.cache/wal/colors.sh
-## wal colors
-# [ -f $HOME/.config/bspwm/colors.sh ] && . "$HOME/.config/bspwm/colors.sh"
 
-#sxhkd 2>&1 >> "$LOGINLOG" &
 xrdb -load .Xresources &
 xset r rate 300 50 &
 xset +fp /home/zerinol/.local/share/fonts
@@ -76,6 +73,5 @@ bspc rule -a Ardour-7.5.240:* state=floating
 bspc rule -a *:crx__chlffgpmiacpedhhbkiomidkjlcfhogd state=floating
 
 # [ -z $(ps aux | grep mark.sh | grep -v grep) ] && $HOME/.config/bspwm/mark.sh &
-
 $HOME/.config/polybar/launch.sh 2>&1 >>"$HOME/.local/polybar.log" &
 # feh --recursive --randomize --bg-fill ~/db/wpp

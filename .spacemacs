@@ -49,6 +49,7 @@ This function should only modify configuration layer settings."
      ;; markdown
      multiple-cursors
      (org :variables
+          org-hide-leading-stars t
           org-enable-org-journal-support t
           org-journal-dir "~/docs/org/journal"
           org-journal-file-format "%Y-%m-%d"
@@ -57,6 +58,10 @@ This function should only modify configuration layer settings."
           org-download-image-dir "~/docs/org/media"
           fill-column 75
           org-use-fast-todo-selection "expert"
+          org-pomodoro-start-sound "/usr/share/sounds/sound-icons/cembalo-6.wav"
+          org-pomodoro-finished-sound "/usr/share/sounds/sound-icons/xylofon.wav"
+          org-pomodoro-long-break-sound "/usr/share/sounds/sound-icons/trumpet-1.wav"
+          org-pomodoro-short-break-sound "/usr/share/sounds/sound-icons/prompt.wav"
           org-todo-keywords '((sequence "TODO(t!)" "NEXT(n!)" "TEST(e!)" "|" "CANC(c!)" "DONE(d!)"))
           org-todo-keyword-faces '(("TODO" . org-warning)
                                    ("CANC" . (:foreground "white" :background "#4d4d4d" :weight bold))
@@ -64,9 +69,9 @@ This function should only modify configuration layer settings."
                                    ("NEXT" .  "#4f97d7"))
           )
      journal
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
+     (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom)
      ;; spell-checking
      syntax-checking
      (html :variables
@@ -103,7 +108,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(doom-themes)
+   dotspacemacs-additional-packages '(doom-themes ewal-spacemacs-themes ewal)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -611,7 +616,7 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (setq default-directory "~/docs/")
+  ;; (setq default-directory "~/docs/")
 
   ;; swap ` '
   (define-key evil-normal-state-map (kbd "`") 'evil-goto-mark-line)
@@ -626,6 +631,7 @@ before packages are loaded."
   (spacemacs/set-leader-keys "oC" 'remove-template-string)
   (spacemacs/set-leader-keys "od" 'remove-class)
   (spacemacs/set-leader-keys "of" (lambda () (interactive) (find-file "~/docs/org/pro/tarefas.org")))
+  (spacemacs/set-leader-keys "og" 'org-columns)
   (spacemacs/set-leader-keys "oi" 'insert-class)
   (spacemacs/set-leader-keys "ol" 'smerge-keep-lower)
   (spacemacs/set-leader-keys "om" (lambda () (interactive) (find-file "~/docs/org/notas/misc.org")))
@@ -637,6 +643,16 @@ before packages are loaded."
   (spacemacs/set-leader-keys "ou" 'smerge-keep-upper)
   (spacemacs/set-leader-keys "skp" 'helm-projectile-ack)
   (spacemacs/set-leader-keys "oy" 'insert-style)
+  (spacemacs/set-leader-keys "ow" 'web-mode-element-rename)
+
+  ; MACROS
+  (fset 'change-template-string
+        (kmacro-lambda-form [?v ?i ?} ?s ?} ?i ?\$ ?f ?d ?v ?i ?} ?s ?\`] 0 "%d"))
+  (fset 'remove-template-string
+        (kmacro-lambda-form [?d ?s ?} ?d ?s ?\` ?x] 0 "%d"))
+  (fset 'insert-style
+        (kmacro-lambda-form [?F ?< ?e ?a ?  ?c ?l ?a ?s ?s ?N ?a ?m ?e ?= ?f ?d ?d ?s ?\" ?i ?{ ?s ?t ?y ?l ?e ?s ?\. ?} ?f ?d ?b ?a] 0 "%d"))
+
 
   ;; ORG
   (add-hook 'org-mode-hook 'turn-on-auto-fill)
@@ -676,8 +692,11 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("7fd8b914e340283c189980cd1883dbdef67080ad1a3a9cc3df864ca53bdc89cf" "aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8" default))
+ '(org-agenda-files '("~/docs/org/pro/tarefas.org"))
  '(package-selected-packages
-   '(doom-themes mwim unfill import-js grizzl git-link git-messenger git-modes git-timemachine gitignore-templates helm-git-grep helm-ls-git orgit-forge orgit forge yaml ghub closql emacsql treepy smeargle treemacs-magit magit magit-section git-commit with-editor transient browse-at-remote git-gutter-fringe fringe-helper git-gutter company-web web-completion-data emmet-mode helm-css-scss impatient-mode pug-mode sass-mode haml-mode scss-mode slim-mode tagedit web-mode rjsx-mode js-doc js2-refactor multiple-cursors json-mode json-navigator hierarchy json-reformat json-snatcher livid-mode nodejs-repl npm-mode prettier-js skewer-mode js2-mode simple-httpd typescript-mode web-beautify ac-ispell auto-complete auto-yasnippet evil-org flycheck-pos-tip pos-tip fuzzy gnuplot helm-c-yasnippet helm-company company helm-lsp helm-org-rifle htmlize lsp-origami origami lsp-treemacs lsp-ui lsp-mode markdown-mode org-cliplink org-contrib org-download org-mime org-pomodoro alert log4e gntp org-present org-projectile org-project-capture org-category-capture org-rich-yank yasnippet-snippets yasnippet ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-descbinds helm-ag google-translate golden-ratio flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile all-the-icons aggressive-indent ace-link ace-jump-helm-line)))
+   '(xresources-theme esh-help eshell-prompt-extras eshell-z multi-term multi-vterm shell-pop terminal-here vterm xterm-color doom-themes mwim unfill import-js grizzl git-link git-messenger git-modes git-timemachine gitignore-templates helm-git-grep helm-ls-git orgit-forge orgit forge yaml ghub closql emacsql treepy smeargle treemacs-magit magit magit-section git-commit with-editor transient browse-at-remote git-gutter-fringe fringe-helper git-gutter company-web web-completion-data emmet-mode helm-css-scss impatient-mode pug-mode sass-mode haml-mode scss-mode slim-mode tagedit web-mode rjsx-mode js-doc js2-refactor multiple-cursors json-mode json-navigator hierarchy json-reformat json-snatcher livid-mode nodejs-repl npm-mode prettier-js skewer-mode js2-mode simple-httpd typescript-mode web-beautify ac-ispell auto-complete auto-yasnippet evil-org flycheck-pos-tip pos-tip fuzzy gnuplot helm-c-yasnippet helm-company company helm-lsp helm-org-rifle htmlize lsp-origami origami lsp-treemacs lsp-ui lsp-mode markdown-mode org-cliplink org-contrib org-download org-mime org-pomodoro alert log4e gntp org-present org-projectile org-project-capture org-category-capture org-rich-yank yasnippet-snippets yasnippet ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-descbinds helm-ag google-translate golden-ratio flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile all-the-icons aggressive-indent ace-link ace-jump-helm-line)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

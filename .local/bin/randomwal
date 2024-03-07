@@ -5,4 +5,4 @@ unset IFS
 image=${files[$RANDOM % ${#files[@]}]}
 #echo ${files[*]}
 echo $image
-wal -a 92 -i "$image" -o $XDG_CONFIG_HOME/dunst/launchdunst.sh &
+wal -a 92 -i "$image" -o $XDG_CONFIG_HOME/wal/relaunch.sh &

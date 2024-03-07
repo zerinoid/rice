@@ -1,14 +1,13 @@
 #!/bin/sh
 
 # If emacs is running, will ask to kill, else will ask to start.
-if pgrep -f "emacs --daemon" >/dev/null ;
-    then
-      [ "$(printf "No\\nYes" | dmenu -i -p "Kill emacs daemon?")" = "Yes" ] && \
-          kill $(pgrep -f "emacs --daemon") && notify-send "emacs daemon killed."
-    else
-        ifinstalled emacs || exit
-        [ "$(printf "No\\nYes" | dmenu -i -p "Start emacs daemon?")" = "Yes" ] && \
-            emacs --daemon && notify-send "emacs in daemon mode started." && \
-            emacsclient -s $EMACS_SERVER_SOCKET -c
-        exit 0
+if pgrep -f "emacs --daemon" >/dev/null; then
+	[ "$(printf "No\\nYes" | dmenu -i -p "Kill emacs daemon?")" = "Yes" ] &&
+		kill $(pgrep -f "emacs --daemon") && notify-send "emacs daemon killed."
+else
+	ifinstalled emacs || exit
+	[ "$(printf "No\\nYes" | dmenu -i -p "Start emacs daemon?")" = "Yes" ] &&
+		emacs --daemon && notify-send "emacs in daemon mode started." &&
+		emacsclient -s $EMACS_SERVER_SOCKET -c -e "(load-theme 'ewal-spacemacs-modern t)"
+	exit 0
 fi

@@ -137,3 +137,11 @@ cvgen() {
 		cp $FOLDER/humano.pdf ~/drive/curriculos/leonardo_zerino$DATE.pdf
 	fi
 }
+
+covgen() {
+	DATE=$(date +%y%m%d-%H%M%S)
+	FOLDER=~/docs/cv-typst
+
+	typst compile $FOLDER/cover.typ
+	cp $FOLDER/cover.pdf ~/drive/curriculos/leonardo_zerino_cover_$DATE.pdf
+}

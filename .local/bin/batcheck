@@ -7,7 +7,7 @@ TIMEREMAINING="$(echo $BATTINFO | cut -f 5 -d " ")"
 export XDG_RUNTIME_DIR="/run/user/1000"
 export DISPLAY=:0
 
-if [[ $ISDISCHARGING && $TIMEREMAINING < 00:15:00 ]]; then
+if [[ $ISDISCHARGING && $TIMEREMAINING < 00:10:00 ]]; then
 
 	notify-send -u critical -i notification-battery-empty "$(echo -e "P-R-E-R-I-G-O \n \n$BATTINFO")"
 	aplay /usr/share/sounds/sound-icons/cembalo-2.wav
@@ -16,7 +16,7 @@ if [[ $ISDISCHARGING && $TIMEREMAINING < 00:15:00 ]]; then
 	# 	aplay /usr/share/sounds/sound-icons/cembalo-2.wav
 	# done
 
-elif [[ $ISDISCHARGING && $TIMEREMAINING < 00:30:00 ]]; then
+elif [[ $ISDISCHARGING && $TIMEREMAINING < 00:20:00 ]]; then
 
 	# if [ -r "$HOME/.dbus/Xdbus" ]; then
 	#   . "$HOME/.dbus/Xdbus"

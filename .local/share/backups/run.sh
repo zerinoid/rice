@@ -98,9 +98,9 @@ borg create $BORG_OPTS \
 	$TARGET::$DATE-$$-musica \
 	$HOME/music
 
-# borg create $BORG_OPTS \
-#   $TARGET::$DATE-$$-lenny \
-#   $HOME/.ban
+borg create $BORG_OPTS \
+	$TARGET::$DATE-$$-lenny \
+	$HOME/.ban $HOME/db $HOME/tmp/mac
 
 success=$?
 

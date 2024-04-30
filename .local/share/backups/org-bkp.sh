@@ -4,7 +4,7 @@ sleep 5
 
 DATE=$(date --iso-8601)
 
-BORG_OPTS="--stats --list --one-file-system --compression lz4 --checkpoint-interval 86400"
+BORG_OPTS="--stats --list --one-file-system --compression lz4 --checkpoint-interval 86400 --exclude-from "$BACKUPCFG"/exclude-org"
 
 BORG_REP=$HOME/drive/org-bkp/org.borg
 
@@ -22,7 +22,8 @@ info "Starting backup"
 
 borg create $BORG_OPTS \
 	$BORG_REP::{hostname}-$DATE-$$-knowledge \
-	$HOME/docs/org $HOME/.emacs.d/private/snippets $HOME/docs/bkp
+	$HOME/docs/org $HOME/.emacs.d/private/snippets \
+	$HOME/docs/bkp $HOME/docs/cv-typst
 
 backup_exit=$?
 

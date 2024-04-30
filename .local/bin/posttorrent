@@ -41,8 +41,12 @@ home.opsfet.ch)
 	echo "============================================" >>"$LOG"
 	echo "$data: $TR_TORRENT_NAME baixado" >>"$LOG"
 
-	transmission-remote --torrent "$TR_TORRENT_ID" --move "$HOME/music/apollo/" >>"$LOG"
-	echo "${data}: ${TR_TORRENT_NAME} movido para apollo" >>"$LOG"
+	if [[ $(transmission-remote -t $TR_TORRENT_ID -i | awk -F " " '/Location/ {print $2}') =~ "fixo" ]]; then
+		echo "NADA"
+	else
+		transmission-remote --torrent "$TR_TORRENT_ID" --move "$HOME/music/apollo/" >>"$LOG"
+		echo "${data}: ${TR_TORRENT_NAME} movido para apollo" >>"$LOG"
+	fi
 	;;
 tracker.brokenstones*)
 	echo "============================================" >>"$LOG"

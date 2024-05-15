@@ -1,0 +1,28 @@
+#!/bin/bash
+
+LANGUAGE="prt"
+LEVEL="pl"
+declare FLAG
+
+while getopts ":je" o; do
+	case $o in
+	e)
+		LANGUAGE="eng"
+		FLAG+="i"
+		;;
+	j)
+		LEVEL="jr"
+		FLAG+="j"
+		;;
+	\?)
+		echo "Usage: $(basename $0) [-j] [-e]" 1>&2
+		exit
+		;;
+	esac
+done
+
+DATE=$(date +%y%m%d)
+FOLDER=~/docs/cv-typst
+
+typst compile $FOLDER/maquina.typ --input lang=$LANGUAGE --input lvl=$LEVEL 2>&1
+cp -v $FOLDER/maquina.pdf ~/drive/curriculos/leonardo_zerino_"$FLAG""$DATE".pdf 2>&1

@@ -95,6 +95,7 @@ This function should only modify configuration layer settings."
      (typescript :variables
                  typescript-linter 'eslint
                  typescript-fmt-tool 'prettier
+                 typescript-indent-level 2
                  typescript-fmt-on-save t)
      version-control
      treemacs)

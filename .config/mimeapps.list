@@ -10,6 +10,7 @@ x-scheme-handler/whatsapp=microsoft-edge.desktop;
 x-scheme-handler/webcal=microsoft-edge.desktop;
 x-scheme-handler/mailto=microsoft-edge.desktop;
 application/pdf=org.pwmt.zathura-pdf-poppler.desktop;
+application/x-desktop=vim.desktop;
 image/png=sxiv.desktop;
 image/jpg=sxiv.desktop;
 image/jpeg=sxiv.desktop;

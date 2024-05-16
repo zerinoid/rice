@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=lf
+Comment=Launches the lf file manager
+Icon=utilities-terminal
+# Terminal=true
+Exec=alacritty -e sh -c "cd \\"\\$(command lf -print-last-dir %F)\\";\\$SHELL"
+Categories=ConsoleOnly;System;FileTools;FileManager
+MimeType=inode/directory;

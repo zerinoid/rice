@@ -102,8 +102,8 @@ super + shift + alt + q
   killall overgrive transmission-da
 
 # lf
-# super + r
-# 	$TERMA -e bash -c "lfcd;$SHELL"
+super + shift + r
+	$TERMA -e bash -c 'cd "$(command lf -print-last-dir $@)";$SHELL'
 
 # snippets
 super + alt + s

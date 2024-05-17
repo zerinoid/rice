@@ -4,6 +4,6 @@ Name=lf
 Comment=Launches the lf file manager
 Icon=utilities-terminal
 # Terminal=true
-Exec=alacritty -e sh -c "cd \\"\\$(command lf -print-last-dir %F)\\";\\$SHELL"
+Exec=alacritty -e sh -c "lfcd %F"
 Categories=ConsoleOnly;System;FileTools;FileManager
 MimeType=inode/directory;

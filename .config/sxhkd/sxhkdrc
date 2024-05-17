@@ -103,7 +103,7 @@ super + shift + alt + q
 
 # lf
 super + shift + r
-	$TERMA -e bash -c 'cd "$(command lf -print-last-dir $@)";$SHELL'
+	$TERMA -e bash -c lfcd
 
 # snippets
 super + alt + s

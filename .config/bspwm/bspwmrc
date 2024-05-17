@@ -6,7 +6,7 @@ echo "= bspwm =============================" >>"$LOGINLOG"
 echo "$data" >>"$LOGINLOG"
 
 randomwal
-. ~/.cache/wal/colors.sh
+# . ~/.cache/wal/colors.sh
 
 xrdb -load .Xresources &
 xset r rate 300 50 &

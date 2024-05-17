@@ -23,6 +23,6 @@ touchegg &
 
 ## wal colors
 wal -R 2>&1 >>"$LOGINLOG" &
-. "$HOME/.cache/wal/colors.sh"
+# . "$HOME/.cache/wal/colors.sh"
 $HOME/.local/bin/randomwal &
 2>&1 >>"$LOGINLOG"

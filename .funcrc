@@ -116,9 +116,25 @@ mimegio() {
 }
 
 covgen() {
-	DATE=$(date +%y%m%d-%H%M%S)
+	LANGUAGE="prt"
+	declare FLAG
+
+	while getopts ":e" o; do
+		case $o in
+		e)
+			LANGUAGE="eng"
+			FLAG+="i"
+			;;
+		\?)
+			echo "Usage: $(basename $0) [-e]" 1>&2
+			exit
+			;;
+		esac
+	done
+
+	DATE=$(date +%y%m%d)
 	FOLDER=~/docs/cv-typst
 
-	typst compile $FOLDER/cover.typ
-	cp $FOLDER/cover.pdf ~/drive/curriculos/leonardo_zerino_cover_$DATE.pdf
+	typst compile $FOLDER/cover.typ --input lang=$LANGUAGE 2>&1
+	cp $FOLDER/cover.pdf ~/drive/curriculos/leonardo_zerino_cover_"$FLAG""$DATE".pdf 2>&1
 }

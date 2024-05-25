@@ -138,3 +138,9 @@ covgen() {
 	typst compile $FOLDER/cover.typ --input lang=$LANGUAGE 2>&1
 	cp $FOLDER/cover.pdf ~/drive/curriculos/leonardo_zerino_cover_"$FLAG""$DATE".pdf 2>&1
 }
+
+wbm2mp4() {
+	for video in $@; do
+		ffmpeg -i $video $(basename $video .webm).mp4
+	done
+}

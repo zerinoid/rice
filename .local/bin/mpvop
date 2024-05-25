@@ -1,0 +1,8 @@
+#!/bin/sh
+WIDTH=$(mediainfo $1 | awk -F":" '/Width/ {print $2}' | sed -e s/' '//g -e s/pixels//g)
+
+HEIGHT=$(mediainfo $1 | awk -F":" '/Height/ {print $2}' | sed -e s/' '//g -e s/pixels//g)
+
+echo "$WIDTH"x"$HEIGHT"
+bspc rule -a mpv -o state=floating rectangle="$WIDTH"x"$HEIGHT"+40+20 2>&1
+mpv $@

@@ -32,7 +32,9 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(php
+     graphql
+     rust
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -85,6 +87,8 @@ This function should only modify configuration layer settings."
             sgml-basic-offset 2)
      import-js
      (javascript :variables
+                 javascript-backend 'tide
+                 javascript-lsp-linter nil
                  javascript-fmt-tool 'prettier
                  javascript-fmt-on-save t
                  javascript-import-tool 'import-js
@@ -93,6 +97,7 @@ This function should only modify configuration layer settings."
                  js2-mode-show-parse-errors nil
                  js2-mode-show-strict-warnings nil)
      (typescript :variables
+                 typescript-backend 'tide
                  typescript-linter 'eslint
                  typescript-fmt-tool 'prettier
                  typescript-indent-level 2
@@ -591,7 +596,7 @@ default it calls `spacemacs/load-spacemacs-env' which loads the environment
 variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
 See the header of this file for more information."
   (spacemacs/load-spacemacs-env)
-)
+  )
 
 (defun dotspacemacs/user-init ()
   "Initialization for user code:
@@ -599,7 +604,7 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-)
+  )
 
 
 (defun dotspacemacs/user-load ()
@@ -607,7 +612,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
-)
+  )
 
 
 (defun dotspacemacs/user-config ()
@@ -617,6 +622,7 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
   ;; (setq default-directory "~/docs/")
+  ;; (add-to-list 'auto-mode-alist '("\\.js\\'" . company-mode))
 
   ;; swap ` '
   (define-key evil-normal-state-map (kbd "`") 'evil-goto-mark-line)
@@ -645,13 +651,19 @@ before packages are loaded."
   (spacemacs/set-leader-keys "oy" 'insert-style)
   (spacemacs/set-leader-keys "ow" 'web-mode-element-rename)
 
-  ; MACROS
+                                        ; MACROS
   (fset 'change-template-string
-        (kmacro-lambda-form [?v ?i ?} ?s ?} ?i ?\$ ?f ?d ?v ?i ?} ?s ?\`] 0 "%d"))
+        (kmacro-lambda-form [?v ?i ?} ?s ?} ?i ?\$ ?f ?d ?v ?i ?} ?s ?\` ?f ?\` ?i ? ] 0 "%d"))
   (fset 'remove-template-string
         (kmacro-lambda-form [?d ?s ?} ?d ?s ?\` ?x] 0 "%d"))
   (fset 'insert-style
         (kmacro-lambda-form [?F ?< ?e ?a ?  ?c ?l ?a ?s ?s ?N ?a ?m ?e ?= ?f ?d ?d ?s ?\" ?i ?{ ?s ?t ?y ?l ?e ?s ?\. ?} ?f ?d ?b ?a] 0 "%d"))
+  (fset 'remove-class
+        (kmacro-lambda-form [?F ?< ?f ?  ?d ?t ?>] 0 "%d"))
+  (fset 'insert-class
+        (kmacro-lambda-form [?F ?< ?e ?a ?  ?c ?l ?a ?s ?s ?N ?a ?m ?e ?= ?\C-o] 0 "%d"))
+  (fset 'change-quote
+        (kmacro-lambda-form [?f ?\" ?c ?i ?\" ?\C-o] 0 "%d"))
 
 
   ;; ORG
@@ -682,7 +694,7 @@ before packages are loaded."
             (rest-str   (substring string 1)))
         (concat (capitalize first-char) rest-str))))
 
-)
+  )
 
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -692,20 +704,20 @@ before packages are loaded."
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("7fd8b914e340283c189980cd1883dbdef67080ad1a3a9cc3df864ca53bdc89cf" "aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8" default))
- '(org-agenda-files '("~/docs/org/pro/tarefas.org"))
- '(package-selected-packages
-   '(rainbow-mode xresources-theme esh-help eshell-prompt-extras eshell-z multi-term multi-vterm shell-pop terminal-here vterm xterm-color doom-themes mwim unfill import-js grizzl git-link git-messenger git-modes git-timemachine gitignore-templates helm-git-grep helm-ls-git orgit-forge orgit forge yaml ghub closql emacsql treepy smeargle treemacs-magit magit magit-section git-commit with-editor transient browse-at-remote git-gutter-fringe fringe-helper git-gutter company-web web-completion-data emmet-mode helm-css-scss impatient-mode pug-mode sass-mode haml-mode scss-mode slim-mode tagedit web-mode rjsx-mode js-doc js2-refactor multiple-cursors json-mode json-navigator hierarchy json-reformat json-snatcher livid-mode nodejs-repl npm-mode prettier-js skewer-mode js2-mode simple-httpd typescript-mode web-beautify ac-ispell auto-complete auto-yasnippet evil-org flycheck-pos-tip pos-tip fuzzy gnuplot helm-c-yasnippet helm-company company helm-lsp helm-org-rifle htmlize lsp-origami origami lsp-treemacs lsp-ui lsp-mode markdown-mode org-cliplink org-contrib org-download org-mime org-pomodoro alert log4e gntp org-present org-projectile org-project-capture org-category-capture org-rich-yank yasnippet-snippets yasnippet ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-descbinds helm-ag google-translate golden-ratio flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile all-the-icons aggressive-indent ace-link ace-jump-helm-line)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-)
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(custom-safe-themes
+     '("7fd8b914e340283c189980cd1883dbdef67080ad1a3a9cc3df864ca53bdc89cf" "aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8" default))
+   '(org-agenda-files '("~/docs/org/pro/tarefas.org"))
+   '(package-selected-packages
+     '(spacemacs-theme graphql-mode company-php ac-php-core xcscope company-phpactor drupal-mode geben php-auto-yasnippets php-extras php-mode phpactor composer php-runtime phpunit counsel-gtags counsel swiper ivy dap-mode lsp-docker bui ggtags ron-mode rustic rust-mode xref toml-mode tide company-lsp tern rainbow-mode xresources-theme esh-help eshell-prompt-extras eshell-z multi-term multi-vterm shell-pop terminal-here vterm xterm-color doom-themes mwim unfill import-js grizzl git-link git-messenger git-modes git-timemachine gitignore-templates helm-git-grep helm-ls-git orgit-forge orgit forge yaml ghub closql emacsql treepy smeargle treemacs-magit magit magit-section git-commit with-editor transient browse-at-remote git-gutter-fringe fringe-helper git-gutter company-web web-completion-data emmet-mode helm-css-scss impatient-mode pug-mode sass-mode haml-mode scss-mode slim-mode tagedit web-mode rjsx-mode js-doc js2-refactor multiple-cursors json-mode json-navigator hierarchy json-reformat json-snatcher livid-mode nodejs-repl npm-mode prettier-js skewer-mode js2-mode simple-httpd typescript-mode web-beautify ac-ispell auto-complete auto-yasnippet evil-org flycheck-pos-tip pos-tip fuzzy gnuplot helm-c-yasnippet helm-company company helm-lsp helm-org-rifle htmlize lsp-origami origami lsp-treemacs lsp-ui lsp-mode markdown-mode org-cliplink org-contrib org-download org-mime org-pomodoro alert log4e gntp org-present org-projectile org-project-capture org-category-capture org-rich-yank yasnippet-snippets yasnippet ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-descbinds helm-ag google-translate golden-ratio flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile all-the-icons aggressive-indent ace-link ace-jump-helm-line)))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   )
+  )

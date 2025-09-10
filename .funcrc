@@ -1,146 +1,158 @@
 #!/bin/bash
 
 e() {
-	if [ -f $1 ]; then
-		case $1 in
-		*.tar.bz2) tar xjvf $1 ;;
-		*.tar.gz) tar xzvf $1 ;;
-		*.tar.xz) tar xJvf $1 ;;
-		*.bz2) bunzip2 $1 ;;
-		*.rar) unrar xv $1 ;;
-		*.gz) gunzip $1 ;;
-		*.tar) tar xvf $1 ;;
-		*.tbz2) tar xjvf $1 ;;
-		*.tgz) tar xzvf $1 ;;
-		*.zip) unzip $1 ;;
-		*.7z) 7z x $1 ;;
-		*.xz) xz -vd $1 ;;
-		*) echo "'$1' cannot be extracted via extract()" ;;
-		esac
-	else
-		echo "'$1' is not a valid file"
-	fi
+  if [ -f $1 ]; then
+    case $1 in
+    *.tar.bz2) tar xjvf $1 ;;
+    *.tar.gz) tar xzvf $1 ;;
+    *.tar.xz) tar xJvf $1 ;;
+    *.bz2) bunzip2 $1 ;;
+    *.rar) unrar xv $1 ;;
+    *.gz) gunzip $1 ;;
+    *.tar) tar xvf $1 ;;
+    *.tbz2) tar xjvf $1 ;;
+    *.tgz) tar xzvf $1 ;;
+    *.zip) unzip $1 ;;
+    *.7z) 7z x $1 ;;
+    *.xz) xz -vd $1 ;;
+    *) echo "'$1' cannot be extracted via extract()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
 }
 
 superls() { printf "\n" && colorls "$@" -a --sd && printf "\n"; }
 
 bim() {
-	for album in "$@"; do
-		beet import -i ~/music/*/*"$album"*
-		beet embedart -y "$album"
-	done
+  for album in "$@"; do
+    beet import -i ~/music/*/*"$album"*
+    beet embedart -y "$album"
+  done
 }
 
 bf() {
-	IFS=$'\n'
-	NOVOS=($(find ~/music -mindepth 2 -type d -mtime 0))
-	unset IFS
+  IFS=$'\n'
+  NOVOS=($(find ~/music -mindepth 2 -type d -mtime 0))
+  unset IFS
 
-	for album in $NOVOS; do
-		beet import -i $album
-		beet embedart -y $album
-	done
+  for album in $NOVOS; do
+    beet import -i $album
+    beet embedart -y $album
+  done
 }
 
 pwlog() {
-	git log "$@" --graph --oneline --decorate --color | less -SEXIER
+  git log "$@" --graph --oneline --decorate --color | less -SEXIER
 }
 
 mkill() { for pid in $(ps -ef | awk '/'"$@"'/ {print $2}'); do kill -9 $pid; done; }
 
 unhistory() {
-	LC_ALL=C sed -i '/'$1'/d' $HISTFILE
-	histdb --forget "$1"
+  LC_ALL=C sed -i '/'$1'/d' $HISTFILE
+  histdb --forget "$1"
 }
 
 #dit add
 da() {
-	dit ls-files | grep "$1" | xargs git --git-dir=$HOME/.cfg/ --work-tree=$HOME add
+  dit ls-files | grep "$1" | xargs git --git-dir=$HOME/.cfg/ --work-tree=$HOME add
 }
 
 #dit diff
 gdd() {
-	dit ls-files | grep "$1" | xargs git --git-dir=$HOME/.cfg/ --work-tree=$HOME diff
+  dit ls-files | grep "$1" | xargs git --git-dir=$HOME/.cfg/ --work-tree=$HOME diff
 }
 
 #dit difftool
 gdt() {
-	dit ls-files | grep "$1" | xargs git --git-dir=$HOME/.cfg/ --work-tree=$HOME difftool -y
+  dit ls-files | grep "$1" | xargs git --git-dir=$HOME/.cfg/ --work-tree=$HOME difftool -y
 }
 
 #git difftool
 gt() {
-	git ls-files | grep "$1" | xargs git difftool -y
+  git ls-files | grep "$1" | xargs git difftool -y
 }
 
 snpadd() {
-	echo $2 >>~/.config/snippet_paste/$1
-	echo "criado snippet $1"
+  echo $2 >>~/.config/snippet_paste/$1
+  echo "criado snippet $1"
 }
 
 snped() {
-	find ~/.config/snippet_paste -iname "*$@*" -type f -print0 | xargs -0 vim
+  find ~/.config/snippet_paste -iname "*$@*" -type f -print0 | xargs -0 vim
 }
 
 snprm() {
-	found=$(find ~/.config/snippet_paste -iname "*$@*" -type f)
-	set -f
-	printf "%s\n\t" $found
-	printf "remove snippet?[y/N]"
-	read ans
-	[ $ans = "y" ] && mv $found ~/.local/share/Trash/files
+  found=$(find ~/.config/snippet_paste -iname "*$@*" -type f)
+  set -f
+  printf "%s\n\t" $found
+  printf "remove snippet?[y/N]"
+  read ans
+  [ $ans = "y" ] && mv $found ~/.local/share/Trash/files
 }
 
 lem() {
-	files=$@
-	emacsclient -s $EMACS_SERVER_SOCKET -c ${files:="."} &
-	disown
+  files=$@
+  emacsclient -s $EMACS_SERVER_SOCKET -c ${files:="."} &
+  disown
 }
 
 # crop=width:height:initial-x:initial-y
 # par expansion da ext = ${file##*.}
 cropedp() {
-	for file in $@; do
-		ffmpeg -i $file -vf crop=1366:768:0:900 ${file%%.*}.jpg
-	done
+  for file in $@; do
+    ffmpeg -i $file -vf crop=1366:768:0:900 ${file%%.*}.jpg
+  done
 }
 
 crophdmi() {
-	for file in $@; do
-		ffmpeg -i $file -vf crop=1600:900:0:0 ${file%%.*}.jpg
-	done
+  for file in $@; do
+    ffmpeg -i $file -vf crop=1600:900:0:0 ${file%%.*}.jpg
+  done
 }
 
 mimegio() {
-	gio info $1 | grep "standard::content-type" | awk -F" " '{print $2}'
+  gio info $1 | grep "standard::content-type" | awk -F" " '{print $2}'
 }
 
 covgen() {
-	LANGUAGE="prt"
-	declare FLAG
+  LANGUAGE="prt"
+  declare FLAG
 
-	while getopts ":e" o; do
-		case $o in
-		e)
-			LANGUAGE="eng"
-			FLAG+="i"
-			;;
-		\?)
-			echo "Usage: $(basename $0) [-e]" 1>&2
-			exit
-			;;
-		esac
-	done
+  while getopts ":e" o; do
+    case $o in
+    e)
+      LANGUAGE="eng"
+      FLAG+="i"
+      ;;
+    \?)
+      echo "Usage: $(basename $0) [-e]" 1>&2
+      exit
+      ;;
+    esac
+  done
 
-	DATE=$(date +%y%m%d)
-	FOLDER=~/docs/cv-typst
+  DATE=$(date +%y%m%d)
+  FOLDER=~/docs/cv-typst
 
-	typst compile $FOLDER/cover.typ --input lang=$LANGUAGE 2>&1
-	cp $FOLDER/cover.pdf ~/drive/curriculos/leonardo_zerino_cover_"$FLAG""$DATE".pdf 2>&1
+  typst compile $FOLDER/cover.typ --input lang=$LANGUAGE 2>&1
+  cp $FOLDER/cover.pdf ~/drive/curriculos/leonardo_zerino_cover_"$FLAG""$DATE".pdf 2>&1
 }
 
 wbm2mp4() {
-	for video in $@; do
-		ffmpeg -i $video $(basename $video .webm).mp4
-	done
+  for video in $@; do
+    ffmpeg -i $video $(basename $video .webm).mp4
+  done
+}
+
+bgprop() {
+  echo "background: bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit;"
+}
+
+cutvideo() {
+  PWD=$(pwd)
+  NAME=$(basename $1 .mp4)
+  LENGTH=$(($3 - $2))
+  NUMBER=$(ls $PWD | grep $NAME | wc -l)
+  ffmpeg -hide_banner -ss $2 -t $LENGTH -i $1 -codec:s "copy" "$NAME""$NUMBER".mp4
 }

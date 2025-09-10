@@ -21,7 +21,7 @@ cmd open ${{
       text/*|*/json) $EDITOR $fx;;
       */javascript|*x-shellscript) $EDITOR $fx;;
       image/x-xcf|image/svg+xml) setsid $BROWSER $f >/dev/null 2>&1 & ;;
-      image/*) rotdir $f | setsid sxiv -aiobN float_sc -g getGeo 2>/dev/null | lf-select & ;;
+      image/*) rotdir $f | setsid sxiv -aiobN float_sc -g $(getDim $f) 2>/dev/null | lf-select & ;;
       audio/*) mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f ;;
       video/*) setsid mpvop $f --input-ipc-server=/tmp/mpvsoc$(date +%%s) -quiet >/dev/null 2>&1 & ;;
       application/pdf) setsid zathura $fx >/dev/null 2>&1 & ;;
@@ -43,6 +43,21 @@ cmd delete ${{
   [ $ans = "y" ] && rm -r $fx
 }}
 
+cmd shrink ${{
+  set -f
+  printf "diminuir quainto?"
+  read ans
+  [ $ans ] &&
+  ffmpeg -i $f -vf "scale=iw/$ans:ih/$ans" ${f%.*}${ans}.${f##*.}
+}}
+
+cmd zip ${{
+    set -f 
+    printf "nome do arquivo: "
+    read ans
+    [ $ans ] && zip -j $ans $fs
+  }}
+
 cmd trash ${{
   set -f
   printf "%s\n\t" "$fx"
@@ -63,7 +78,7 @@ cmd rsyncto ${{
   set -f
   clear; echo "Copy to where?"
   dest="$(fd . ~ -t d | fzf)" &&
-  eval sudo rsync -vPhua '$fx' $dest &&
+  eval rsync -vPhua '$fx' $dest &&
   notify-send "📋 File(s) rsynced." "File(s) rsynced to $dest."
 }}
 
@@ -168,3 +183,4 @@ map x $$f
 map X &$f
 map Y copypath
 map <delete> delete
+map <c-z> zip

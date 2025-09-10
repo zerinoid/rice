@@ -1,0 +1,90 @@
+#!/bin/bash
+
+# Check if image file is provided
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <image-file>"
+    exit 1
+fi
+
+image_file="$1"
+
+# Check if file exists
+if [ ! -f "$image_file" ]; then
+    echo "Error: File '$image_file' not found"
+    exit 1
+fi
+
+# Check if identify command is available
+if ! command -v identify &> /dev/null; then
+    echo "Error: 'identify' command not found. Please install ImageMagick."
+    exit 1
+fi
+
+# Get screen dimensions
+get_screen_dimensions() {
+    # Try xdotool first
+    if command -v xdotool &> /dev/null; then
+        xdotool getdisplaygeometry 2>/dev/null | awk '{print $1, $2}' && return
+    fi
+    
+    # Try xrandr
+    if command -v xrandr &> /dev/null; then
+        xrandr --current | grep -w connected | head -1 | grep -o '[0-9]*x[0-9]*' | tr 'x' ' ' && return
+    fi
+    
+    # Try xdpyinfo
+    if command -v xdpyinfo &> /dev/null; then
+        xdpyinfo | grep dimensions: | awk '{print $2}' | tr 'x' ' ' && return
+    fi
+    
+    # Fallback to common screen resolution
+    echo "1920 1080"
+}
+
+# Read screen dimensions
+read screen_width screen_height <<< $(get_screen_dimensions)
+
+# Set margin (50px on each side = 100px total)
+MARGIN=40
+TARGET_WIDTH=$((screen_width - MARGIN))
+TARGET_HEIGHT=$((screen_height - MARGIN))
+
+# Debug output (optional - uncomment if needed)
+# echo "Screen: ${screen_width}x${screen_height}"
+# echo "Target: ${TARGET_WIDTH}x${TARGET_HEIGHT}"
+
+# Get image dimensions
+image_info=$(identify -format "%wx%h" "$image_file")
+image_width=$(echo "$image_info" | cut -d'x' -f1)
+image_height=$(echo "$image_info" | cut -d'x' -f2)
+
+# Check if image is already smaller than target dimensions (with margin)
+if [ $image_width -le $TARGET_WIDTH ] && [ $image_height -le $TARGET_HEIGHT ]; then
+    # Image is already smaller, return original dimensions
+    echo "${image_width}x${image_height}"
+    exit 0
+fi
+
+# Calculate scaling ratios for both dimensions
+width_ratio=$(echo "scale=6; $TARGET_WIDTH / $image_width" | bc)
+height_ratio=$(echo "scale=6; $TARGET_HEIGHT / $image_height" | bc)
+
+# Use the smaller ratio to ensure the image fits within both dimensions
+if (( $(echo "$width_ratio < $height_ratio" | bc -l) )); then
+    scale_ratio=$width_ratio
+else
+    scale_ratio=$height_ratio
+fi
+
+# Calculate new dimensions maintaining aspect ratio
+new_width=$(echo "scale=0; $image_width * $scale_ratio / 1" | bc)
+new_height=$(echo "scale=0; $image_height * $scale_ratio / 1" | bc)
+
+# Ensure dimensions are at least 1 pixel and integers
+new_width=${new_width%.*}
+new_height=${new_height%.*}
+new_width=$((new_width > 0 ? new_width : 1))
+new_height=$((new_height > 0 ? new_height : 1))
+
+# Output the final dimensions
+echo "${new_width}x${new_height}"

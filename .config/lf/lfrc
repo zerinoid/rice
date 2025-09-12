@@ -1,4 +1,22 @@
-# Luke's lf settings
+#    :  read (default)  builtin/custom command
+#    $  shell           shell command
+#    %  shell-pipe      shell command running with the ui
+#    !  shell-wait      shell command waiting for key press
+#    &  shell-async     shell command running asynchronously
+#read (modal) (default :)
+#Read a command to evaluate.
+
+#shell (modal) (default $)
+#Read a shell command to execute.
+
+#shell-pipe (modal) (default %)
+#Read a shell command to execute piping its standard I/O to the bottom statline.
+
+#shell-wait (modal) (default !)
+#Read a shell command to execute and wait for a key press in the end.
+
+#shell-async (modal) (default &)
+#Read a shell command to execute asynchronously without standard I/O.
 
 # Basic vars
 set shell sh
@@ -51,7 +69,7 @@ cmd shrink ${{
   ffmpeg -i $f -vf "scale=iw/$ans:ih/$ans" ${f%.*}_${ans}.${f##*.}
 }}
 
-cmd zip ${{
+cmd zip %{{
     set -f 
     printf "nome do arquivo: "
     read ans
@@ -129,11 +147,13 @@ cmd recol ${{
     fi
 }}
 
-cmd copypath & {{
-    readlink -fn $f | xclip -sel p -f | xclip -sel c
+cmd copypath ${{
+    readlink -fn $f | xclip -sel p -f | xclip -sel c &&
+    notify-send -t 1500 "$f" "Copiado"
 }}
 
 # Bindings
+map ] $nvim ~/.config/lf/lfrc
 map <enter> shell
 map a push R<a-b><a-b><a-f> # before extention
 map A push R<c-a> # at the very beginning
@@ -179,6 +199,7 @@ map <c-r> reload
 # map <c-t> !mobt $fx
 map S shrink
 map <c-s> !medula $fx
+map T $sxiv -t "$(pwd)" # opens thumbnail mode
 map x $$f
 map X &$f
 map Y copypath

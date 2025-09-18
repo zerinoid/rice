@@ -73,7 +73,7 @@ cmd zip %{{
     set -f 
     printf "nome do arquivo: "
     read ans
-    [ $ans ] && zip -j $ans $fs
+    [ $ans ] && zip -jr $ans $fs
   }}
 
 cmd trash ${{
@@ -147,7 +147,7 @@ cmd recol ${{
     fi
 }}
 
-cmd copypath ${{
+cmd copypath &{{
     readlink -fn $f | xclip -sel p -f | xclip -sel c &&
     notify-send -t 1500 "$f" "Copiado"
 }}

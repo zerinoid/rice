@@ -700,6 +700,16 @@ before packages are loaded."
   (add-hook 'org-mode-hook #'org-todo-t-keymap)
   (add-hook 'org-mode-hook #'org-line-hook)
 
+  (defun my/insert-todo-at-top ()
+    (find-file "~/docs/org/pes/todo.org")
+    (goto-char (point-min))
+    (re-search-forward "^[^#]" nil t)
+    (beginning-of-line)
+    (let ((pos (point)))
+      (org-insert-todo-heading nil)
+      (when (looking-at "\n")
+        (delete-char 1))))
+
   ;; DEV
   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
   (defun line-space-hook ()

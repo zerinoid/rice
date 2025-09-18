@@ -80,11 +80,15 @@ super + shift + d
 
 # emacs
 super + e
-	emacsclient -s $EMACS_SERVER_SOCKET -c
+	emacsclient -s $EMACS_SERVER_SOCKET -c -n
+
+# emacs
+super + ctrl + e
+	emacsclient -s $EMACS_SERVER_SOCKET -c -n -e "(org-journal-new-entry nil)"
 
 # emacs
 super + shift + e
-	emacsclient -s $EMACS_SERVER_SOCKET -c -e "(org-journal-new-entry nil)"
+	emacsclient -s $EMACS_SERVER_SOCKET -c -n -e "(my/insert-todo-at-top)"
 
 super + ctrl + i
 	$TERMA --class 'pad' -e sh -c "nmcli device wifi rescan;nmcli device wifi list;$SHELL" &

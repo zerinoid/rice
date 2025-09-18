@@ -41,6 +41,30 @@ get_screen_dimensions() {
     echo "1920 1080"
 }
 
+# Get EXIF orientation and adjust dimensions if needed
+get_orientation_adjusted_dimensions() {
+    local file="$1"
+    
+    # Get EXIF orientation (if exists)
+    local orientation=$(identify -format "%[EXIF:Orientation]" "$file" 2>/dev/null)
+    
+    # Get raw dimensions
+    local image_info=$(identify -format "%wx%h" "$file")
+    local width=$(echo "$image_info" | cut -d'x' -f1)
+    local height=$(echo "$image_info" | cut -d'x' -f2)
+    
+    # Check if orientation requires dimension swap (90° or 270° rotations)
+    case "$orientation" in
+        "6"|"8") # 90° or 270° rotation - dimensions should be swapped
+            echo "$height $width"
+            ;;
+        *) # No rotation or mirroring that doesn't affect dimensions
+            echo "$width $height"
+            ;;
+    esac
+}
+
+
 # Read screen dimensions
 read screen_width screen_height <<< $(get_screen_dimensions)
 
@@ -49,14 +73,13 @@ MARGIN=40
 TARGET_WIDTH=$((screen_width - MARGIN))
 TARGET_HEIGHT=$((screen_height - MARGIN))
 
+# Get orientation-adjusted image dimensions
+read image_width image_height <<< $(get_orientation_adjusted_dimensions "$image_file")
+
 # Debug output (optional - uncomment if needed)
 # echo "Screen: ${screen_width}x${screen_height}"
 # echo "Target: ${TARGET_WIDTH}x${TARGET_HEIGHT}"
-
-# Get image dimensions
-image_info=$(identify -format "%wx%h" "$image_file")
-image_width=$(echo "$image_info" | cut -d'x' -f1)
-image_height=$(echo "$image_info" | cut -d'x' -f2)
+# echo "Image (adjusted): ${image_width}x${image_height}"
 
 # Check if image is already smaller than target dimensions (with margin)
 if [ $image_width -le $TARGET_WIDTH ] && [ $image_height -le $TARGET_HEIGHT ]; then

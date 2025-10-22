@@ -48,8 +48,21 @@ get_orientation_adjusted_dimensions() {
     # Get EXIF orientation (if exists)
     local orientation=$(identify -format "%[EXIF:Orientation]" "$file" 2>/dev/null)
     
-    # Get raw dimensions
-    local image_info=$(identify -format "%wx%h" "$file")
+    # Get dimensions - for GIFs, use [0] to get first frame only
+    local image_info
+    if [[ "$file" =~ \.gif$ ]]; then
+        # For GIFs, get dimensions of first frame only
+        image_info=$(identify -format "%wx%h" "$file[0]" 2>/dev/null)
+    else
+        # For other images, use normal method
+        image_info=$(identify -format "%wx%h" "$file")
+    fi
+    
+    # Fallback if the above fails
+    if [ -z "$image_info" ]; then
+        image_info=$(identify -format "%wx%h" "$file" | head -1)
+    fi
+    
     local width=$(echo "$image_info" | cut -d'x' -f1)
     local height=$(echo "$image_info" | cut -d'x' -f2)
     
@@ -63,7 +76,6 @@ get_orientation_adjusted_dimensions() {
             ;;
     esac
 }
-
 
 # Read screen dimensions
 read screen_width screen_height <<< $(get_screen_dimensions)

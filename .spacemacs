@@ -668,7 +668,8 @@ before packages are loaded."
   (spacemacs/set-leader-keys "ot" 'template-copy)
   (spacemacs/set-leader-keys "ou" 'smerge-keep-upper)
   (spacemacs/set-leader-keys "skp" 'helm-projectile-ack)
-  (spacemacs/set-leader-keys "oy" 'insert-style)
+  ;; (spacemacs/set-leader-keys "oy" 'insert-style)
+  (spacemacs/set-leader-keys "oy" 'my/org-copy-text-under-heading)
   (spacemacs/set-leader-keys "ow" 'web-mode-element-rename)
 
                                         ; MACROS
@@ -684,7 +685,6 @@ before packages are loaded."
         (kmacro-lambda-form [?F ?< ?e ?a ?  ?c ?l ?a ?s ?s ?N ?a ?m ?e ?= ?\C-o] 0 "%d"))
   (fset 'change-quote
         (kmacro-lambda-form [?f ?\" ?c ?i ?\" ?\C-o] 0 "%d"))
-
 
   ;; ORG
   (add-hook 'org-mode-hook 'turn-on-auto-fill)
@@ -710,6 +710,18 @@ before packages are loaded."
       (when (looking-at "\n")
         (delete-char 1))))
 
+  (defun my/org-copy-text-under-heading ()
+    (interactive)
+    ;; Select the current Org subtree
+    (org-mark-subtree)
+    ;; Deselect the heading line
+    (next-line 1)
+    ;; Copy the current region
+    (kill-ring-save
+     (region-beginning)
+     (region-end))
+    ;; Deselect the region after copying
+    (deactivate-mark))
   ;; DEV
   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
   (defun line-space-hook ()

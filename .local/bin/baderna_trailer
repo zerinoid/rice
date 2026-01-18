@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Arquivo fixo da marca d'água
+MARCA="$HOME/pics/baderna-assets/logo3_wm.png"
+
+# Verifica se o arquivo foi passado como argumento
+if [ -z "$1" ]; then
+    echo "Erro: Forneça o arquivo de vídeo. Ex: baderna_trailer video.mp4"
+    exit 1
+fi
+
+INPUT_FILE="$1"
+FILENAME=$(basename -- "$INPUT_FILE")
+FILENAME_NO_EXT="${FILENAME%.*}"
+OUTPUT_FILE="${FILENAME_NO_EXT}_done.mp4"
+
+echo "Processando: $INPUT_FILE"
+echo "Centralizando a marca d'água..."
+
+# Execução do FFmpeg
+# O cálculo (W-w)/2 e (H-h)/2 posiciona o centro da imagem no centro do vídeo
+ffmpeg -i "$INPUT_FILE" -i "$MARCA" -filter_complex \
+"[0:v][1:v]overlay=(W-w)/2:(H-h)/2" \
+-c:a copy -c:v libx264 -crf 20 -preset fast "$OUTPUT_FILE"
+
+echo "Sucesso! Arquivo gerado: $OUTPUT_FILE"

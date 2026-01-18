@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# Arquivos fixos
+VINHETA="$HOME/pics/baderna-assets/baderna_vinheta.mp4"
+MARCA="$HOME/pics/baderna-assets/baderna_wm.png"
+
+# Mude para "true" para processar apenas 15s, ou "false" para o vídeo todo
+MODO_TESTE=true
+
+if [ -z "$1" ]; then
+    echo "Erro: Forneça o arquivo de vídeo."
+    exit 1
+fi
+
+INPUT_FILE="$1"
+FILENAME=$(basename -- "$INPUT_FILE")
+FILENAME_NO_EXT="${FILENAME%.*}"
+OUTPUT_FILE="${FILENAME_NO_EXT}_done.mp4"
+
+# Detecta o FPS
+FPS=$(ffprobe -v error -select_streams v:0 -show_entries stream=r_frame_rate -of default=noprint_wrappers=1:nokey=1 "$INPUT_FILE")
+
+# Define os filtros de corte baseado no modo
+if [ "$MODO_TESTE" = false ]; then
+   echo "--- MODO TESTE ATIVADO (15 SEGUNDOS) ---"
+   CORTAR_V="trim=duration=15,setpts=PTS-STARTPTS,"
+   CORTAR_A="atrim=duration=15,asetpts=PTS-STARTPTS,"
+else
+   echo "--- PROCESSAMENTO COMPLETO ---"
+   CORTAR_V=""
+   CORTAR_A=""
+fi
+
+echo "Processando: $INPUT_FILE a $FPS FPS"
+
+# Execução do FFmpeg
+# Note que inserimos as variáveis de corte logo no início do tratamento do input [1]
+ffmpeg -i "$VINHETA" -i "$INPUT_FILE" -i "$MARCA" -filter_complex \
+"[0:v]fps=fps=$FPS,setsar=1:1[v_ajustada]; \
+ [1:v]${CORTAR_V}setsar=1:1[p_tratado]; \
+ [1:a]${CORTAR_A}anull[a_tratado]; \
+ [p_tratado][2:v]overlay=0:0[p_marcado]; \
+ [v_ajustada][0:a][p_marcado][a_tratado]concat=n=2:v=1:a=1[v][a]" \
+ -map "[v]" -map "[a]" \
+ -c:v libx264 -crf 20 -preset fast -r "$FPS" "$OUTPUT_FILE"
+
+echo "Sucesso! Arquivo gerado: $OUTPUT_FILE"

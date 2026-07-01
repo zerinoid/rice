@@ -1,0 +1,22 @@
+# --- Behavior Settings ---
+set database "sqlite"             # Remembers your page position/history
+set selection-clipboard "clipboard" # Copies text straight to system clipboard
+set sandbox "none"               # Required on some systems to allow automatic reloading
+
+# --- Interface Tweak ---
+set statusbar-home-tilde true    # Shorten paths to ~/ in the status bar
+set window-title-home-tilde true
+set guioptions "s"               # Minimal UI: keeps the statusbar but hides scrollbars
+
+# --- Smooth Zooming ---
+set zoom-step 10
+set zoom-min 10
+set zoom-max 1000
+
+# --- Keybindings ---
+map R reload                     # Manual reload fallback (though it auto-reloads natively)
+map [normal] a adjust_window width # Match width to window size
+
+set recolor "true"
+set recolor-lightcolor "#1e1e2e" # Change to match your editor background (e.g. Catppuccin Mocha)
+set recolor-darkcolor "#cdd6f4"  # Text color

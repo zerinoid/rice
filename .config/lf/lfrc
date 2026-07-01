@@ -56,7 +56,7 @@ cmd getGeo ${{
 cmd delete ${{
   set -f
   printf "%s\n\t" "$fx"
-  printf "delete?[y/N]"
+  printf "!!!!!!!!! DELETE FILE PERMANTENTLY? !!!!!!!! [y/N]"
   read ans
   [ $ans = "y" ] && rm -r $fx
 }}
@@ -149,7 +149,38 @@ cmd recol ${{
 
 cmd copypath &{{
     readlink -fn $f | xclip -sel p -f | xclip -sel c &&
-    notify-send -t 1500 "$f" "Copiado"
+    notify-send -t 2000  "Path copiado" "${f}\n\n👣👣👣👣"
+}}
+
+# Define a custom command to "copy" files as symlinks
+cmd link-copy ${{
+    # Clear any previous selection buffer to ensure fresh linking
+    rm -f ~/.config/lf/files
+    # Write absolute paths of selected files to the lf state buffer
+    echo "$fx" > ~/.config/lf/files
+    lf -remote "send $id echo Files marked for symlinking 🔗‍️🔗‍️🔗‍️"
+}}
+
+# Define a custom command to "paste" the symlinks into the current directory
+cmd link-paste ${{
+    # Read the marked files from the buffer
+    if [ -f ~/.config/lf/files ]; then
+        cat ~/.config/lf/files | tr ':' '\n' | while read -r file; do
+            # Ensure the source file exists before creating the link
+            if [ -e "$file" ]; then
+                # Create the symlink in the current working directory ($PWD)
+                ln -sf "$file" .
+            fi
+        done
+        lf -remote "send $id echo Symlinks created"
+    else
+        lf -remote "send $id echo 'No files marked for symlinking!'"
+    fi
+}}
+
+cmd copy-content ${{
+    cat $f | xclip -selection clipboard &&
+    notify-send -t 2000 "Conteúdo copiado" "$(basename $f)\n\n🐈🐈🐈🐈🐈🐈🐈" 
 }}
 
 # Renames
@@ -170,6 +201,8 @@ map <c-e> extract
 map E $$TERMA -e $EDITOR "$f" &
 map <c-f> $lf -remote "send $id select '$(fzf)'" #ir para diretorio local
 map <c-g> rsyncto
+map <c-y> link-copy
+map <c-l> link-paste
 
 map gc cd ~/drive/curriculos
 map gd cd ~/docs
@@ -179,12 +212,12 @@ map gm cd ~/music
 map go cd ~/docs/org
 map gr cd ~/drive
 map gs cd ~/fixo/source
-map gt cd ~/docs/txt
+map gp cd ~/pics
 map gw cd ~/webdev
 map zc cd ~/.config
-map zm cd /mnt
+map zm cd ~/mobile
 
-map <c-c> $cat $f | xclip -selection clipboard
+map <c-c> copy-content
 map r $~/.config/lf/pv.sh $f | less -R
 map R $$TERMA -e sh -c '~/.config/lf/pv.sh "$f" | less -R' &
 # map J $lf -remote "send $id cd $(cut -d' ' -f2- ~/.config/directories | fzf)" # ir para dir definido

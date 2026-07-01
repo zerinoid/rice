@@ -32,15 +32,11 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(php
-     graphql
-     rust
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
-     ;; `M-m f e R' (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
+   '(toml
+     sql
+     yaml
      auto-completion
+     github-copilot
      better-defaults
      emacs-lisp
      git
@@ -64,10 +60,11 @@ This function should only modify configuration layer settings."
           org-pomodoro-finished-sound "/usr/share/sounds/sound-icons/xylofon.wav"
           org-pomodoro-long-break-sound "/usr/share/sounds/sound-icons/trumpet-1.wav"
           org-pomodoro-short-break-sound "/usr/share/sounds/sound-icons/prompt.wav"
-          org-todo-keywords '((sequence "TODO(t!)" "NEXT(n!)" "TEST(e!)" "|" "CANC(c!)" "DONE(d!)"))
+          org-todo-keywords '((sequence "TODO(t!)" "NEXT(n!)" "TEST(e!)" "SUSP(s!)" "|" "CANC(c!)" "DONE(d!)"))
           org-todo-keyword-faces '(("TODO" . org-warning)
                                    ("CANC" . (:foreground "white" :background "#4d4d4d" :weight bold))
                                    ("TEST" . (:foreground "purple" :background "#4d4d4d" :weight bold))
+                                   ("SUSP" . (:foreground "orange" :background "#4d4d4d" :weight bold))
                                    ("NEXT" .  "#4f97d7"))
           )
      journal
@@ -118,10 +115,6 @@ This function should only modify configuration layer settings."
    '(doom-themes
      ewal-spacemacs-themes
      ewal
-     ;; (copilot :location (recipe
-     ;;                     :fetcher github
-     ;;                     :repo "copilot-emacs/copilot.el"
-     ;;                     :files ("*.el")))
      )
 
    ;; A list of packages that cannot be updated.
@@ -524,7 +517,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
    ;; (default '("rg" "ag" "pt" "ack" "grep"))
-   dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
+   dotspacemacs-search-tools '("rg" "ag" "ack" "grep")
 
    ;; Format specification for setting the frame title.
    ;; %a - the `abbreviated-file-name', or `buffer-name'
@@ -636,14 +629,6 @@ before packages are loaded."
   ;;   ;; disable inline previews
   ;;   (delq 'company-preview-if-just-one-frontend company-frontends))
 
-  ;; (with-eval-after-load 'copilot
-  ;;   (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
-  ;;   (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
-  ;;   (define-key copilot-completion-map (kbd "C-TAB") 'copilot-accept-completion-by-word)
-  ;;   (define-key copilot-completion-map (kbd "C-<tab>") 'copilot-accept-completion-by-word))
-
-  ;; (add-hook 'prog-mode-hook 'copilot-mode)
-
   ;; swap ` '
   (define-key evil-normal-state-map (kbd "`") 'evil-goto-mark-line)
   (define-key evil-normal-state-map (kbd "'") 'evil-goto-mark)
@@ -752,10 +737,62 @@ This function is called at the very end of Spacemacs initialization."
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
    '(custom-safe-themes
-     '("7fd8b914e340283c189980cd1883dbdef67080ad1a3a9cc3df864ca53bdc89cf" "aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8" default))
-   '(org-agenda-files '("~/docs/org/pro/tarefas.org"))
+     '("7fd8b914e340283c189980cd1883dbdef67080ad1a3a9cc3df864ca53bdc89cf"
+       "aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8"
+       default))
+   '(org-agenda-files
+     '("~/docs/org/pro/foraisso.org" "/home/zerinol/docs/org/pro/tarefas.org"))
    '(package-selected-packages
-     '(deferred a copilot spacemacs-theme graphql-mode company-php ac-php-core xcscope company-phpactor drupal-mode geben php-auto-yasnippets php-extras php-mode phpactor composer php-runtime phpunit counsel-gtags counsel swiper ivy dap-mode lsp-docker bui ggtags ron-mode rustic rust-mode xref toml-mode tide company-lsp tern rainbow-mode xresources-theme esh-help eshell-prompt-extras eshell-z multi-term multi-vterm shell-pop terminal-here vterm xterm-color doom-themes mwim unfill import-js grizzl git-link git-messenger git-modes git-timemachine gitignore-templates helm-git-grep helm-ls-git orgit-forge orgit forge yaml ghub closql emacsql treepy smeargle treemacs-magit magit magit-section git-commit with-editor transient browse-at-remote git-gutter-fringe fringe-helper git-gutter company-web web-completion-data emmet-mode helm-css-scss impatient-mode pug-mode sass-mode haml-mode scss-mode slim-mode tagedit web-mode rjsx-mode js-doc js2-refactor multiple-cursors json-mode json-navigator hierarchy json-reformat json-snatcher livid-mode nodejs-repl npm-mode prettier-js skewer-mode js2-mode simple-httpd typescript-mode web-beautify ac-ispell auto-complete auto-yasnippet evil-org flycheck-pos-tip pos-tip fuzzy gnuplot helm-c-yasnippet helm-company company helm-lsp helm-org-rifle htmlize lsp-origami origami lsp-treemacs lsp-ui lsp-mode markdown-mode org-cliplink org-contrib org-download org-mime org-pomodoro alert log4e gntp org-present org-projectile org-project-capture org-category-capture org-rich-yank yasnippet-snippets yasnippet ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-descbinds helm-ag google-translate golden-ratio flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile all-the-icons aggressive-indent ace-link ace-jump-helm-line)))
+     '(a ac-ispell ac-php-core ace-jump-helm-line ace-link aggressive-indent
+         alert all-the-icons auto-compile auto-complete auto-highlight-symbol
+         auto-yasnippet browse-at-remote bui centered-cursor-mode
+         clean-aindent-mode closql column-enforce-mode company company-lsp
+         company-php company-phpactor company-web composer copilot counsel
+         counsel-gtags dap-mode deferred define-word devdocs diminish
+         dired-quick-sort doom-themes dotenv-mode drag-stuff drupal-mode
+         dumb-jump editorconfig elisp-def elisp-slime-nav emacsql emmet-mode
+         emr esh-help eshell-prompt-extras eshell-z eval-sexp-fu evil-anzu
+         evil-args evil-cleverparens evil-collection evil-easymotion
+         evil-escape evil-evilified-state evil-exchange evil-goggles
+         evil-iedit-state evil-indent-plus evil-lion evil-lisp-state
+         evil-matchit evil-mc evil-nerd-commenter evil-numbers evil-org
+         evil-surround evil-textobj-line evil-tutor evil-unimpaired
+         evil-visual-mark-mode evil-visualstar expand-region eyebrowse
+         fancy-battery flx-ido flycheck-elsa flycheck-package
+         flycheck-pos-tip forge fringe-helper fuzzy geben ggtags ghub
+         git-commit git-gutter git-gutter-fringe git-link git-messenger
+         git-modes git-timemachine gitignore-templates gntp gnuplot
+         golden-ratio google-translate graphql-mode grizzl haml-mode helm-ag
+         helm-c-yasnippet helm-company helm-css-scss helm-descbinds
+         helm-git-grep helm-ls-git helm-lsp helm-make helm-mode-manager
+         helm-org helm-org-rifle helm-projectile helm-purpose helm-swoop
+         helm-themes helm-xref hide-comnt hierarchy highlight-indentation
+         highlight-numbers highlight-parentheses hl-todo holy-mode htmlize
+         hungry-delete hybrid-mode impatient-mode import-js indent-guide
+         info+ inspector ivy js-doc js2-mode js2-refactor json-mode
+         json-navigator json-reformat json-snatcher link-hint livid-mode
+         log4e lorem-ipsum lsp-docker lsp-mode lsp-origami lsp-treemacs
+         lsp-ui macrostep magit magit-section markdown-mode multi-line
+         multi-term multi-vterm multiple-cursors mwim nameless nodejs-repl
+         npm-mode open-junk-file org-category-capture org-cliplink
+         org-contrib org-download org-mime org-pomodoro org-present
+         org-project-capture org-projectile org-rich-yank org-superstar orgit
+         orgit-forge origami overseer paradox password-generator pcre2el
+         php-auto-yasnippets php-extras php-mode php-runtime phpactor phpunit
+         popwin pos-tip prettier-js pug-mode quickrun rainbow-delimiters
+         rainbow-mode request restart-emacs rjsx-mode ron-mode rust-mode
+         rustic sass-mode scss-mode shell-pop simple-httpd skewer-mode
+         slim-mode smeargle space-doc spaceline spacemacs-purpose-popwin
+         spacemacs-theme spacemacs-whitespace-cleanup sql-indent sqlup-mode
+         string-edit-at-point string-inflection swiper symbol-overlay symon
+         tagedit term-cursor terminal-here tern tide toc-org toml-mode
+         transient treemacs-evil treemacs-icons-dired treemacs-magit
+         treemacs-persp treemacs-projectile treepy typescript-mode undo-tree
+         unfill use-package uuidgen vi-tilde-fringe vim-powerline
+         volatile-highlights vterm web-beautify web-completion-data web-mode
+         which-key winum with-editor writeroom-mode ws-butler xcscope xref
+         xresources-theme xterm-color yaml yaml-mode yasnippet
+         yasnippet-snippets)))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.

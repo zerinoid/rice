@@ -24,6 +24,8 @@ video/x-msvideo=vlc.desktop;
 x-scheme-handler/magnet=stremio.desktop;
 x-scheme-handler/stremio=stremio.desktop;
 x-scheme-handler/tg=org.telegram.desktop._7edc7ea7edf068fa14eda8d0a413df28.desktop;
+inode/directory=thunar.desktop
+x-scheme-handler/antigravity=antigravity.desktop
 
 [Added Associations]
 video/mp4=userapp-mpvop-LSD9P2.desktop;

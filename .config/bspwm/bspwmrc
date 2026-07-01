@@ -59,6 +59,7 @@ bspc rule -a Ramme state=floating
 bspc rule -a Zathura state=tiled
 bspc rule -a *:Kunst state=floating
 bspc rule -a *:float_sc state=floating
+bspc rule -a Sxiv:* state=floating
 # bspc rule -a PdWindow:* state=floating
 # bspc rule -a PatchWindow:* state=floating
 bspc rule -a TkFDialog:* state=floating rectangle=756x456+400+30

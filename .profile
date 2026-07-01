@@ -10,31 +10,34 @@
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
-	# include .bashrc if it exists
-	if [ -f "$HOME/.bashrc" ]; then
-		. "$HOME/.bashrc"
-	fi
+  # include .bashrc if it exists
+  if [ -f "$HOME/.bashrc" ]; then
+    . "$HOME/.bashrc"
+  fi
 fi
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ]; then
-	PATH="$HOME/bin:$PATH"
+  PATH="$HOME/bin:$PATH"
 fi
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ]; then
-	PATH="$HOME/.local/bin:$PATH"
+  PATH="$HOME/.local/bin:$PATH"
 fi
 
 # source no arquivo de env local
 if [ -f "$HOME/.env" ]; then
-	. "$HOME/.env"
+  . "$HOME/.env"
 fi
 
 # xdg-base-dirs
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
+# export XDG_CURRENT_DESKTOP=GNOME
+# export XDG_SESSION_TYPE=x11
+# export DESKTOP_SESSION=bspwm
 
 # env vars
 [ -f /usr/bin/vim ] && export EDITOR="/usr/bin/vim"
@@ -66,7 +69,6 @@ export PATH="$CARGO_HOME/bin:$PATH"
 # export PATH="$HOME/.cargo/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 export PATH="$PATH:$HOME/.local/share/yabridge"
-export PATH="$HOME/.local/texlive/2023/bin/x86_64-linux:$PATH"
 
 # pkg-config
 export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig"
@@ -75,6 +77,11 @@ export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig"
 export GIMP2_DIRECTORY=".config/gimp-2.8"
 export WEECHAT_HOME="$HOME/.config/weechat"
 # export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
+export GTK_USE_PORTAL=1 # Use xdg-desktop-portal for GTK apps too
+export GTK_FILE_CHOOSER_STARTUP_DIR="$HOME"
+# export GTK_THEME=Materia-dark
+export GTK3_DIALOG=file-chooser
+export THUMBNAIL_SIZE=128
 
 export NVM_AUTOLOAD=1
 export NVM_DIR="$HOME/.config/nvm"

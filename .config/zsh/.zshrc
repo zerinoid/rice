@@ -3,6 +3,10 @@ export HISTFILE="$HOME/.cache/zsh/history"
 export HISTSIZE=1000000
 export SAVEHIST=$HISTSIZE
 
+setopt APPEND_HISTORY      # Appends to history file rather than replacing it
+setopt INC_APPEND_HISTORY  # Writes to the file immediately after command execution
+setopt SHARE_HISTORY       # Shares history across concurrent sessions safely
+
 # Basic auto/tab complete:
 autoload -U compinit
 zstyle ':completion:*' menu select

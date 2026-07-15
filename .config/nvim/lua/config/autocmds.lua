@@ -29,3 +29,8 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     vim.notify("Reloaded lf!", vim.log.levels.INFO)
   end,
 })
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = "*/sxhkd/sxhkdrc",
+  command = "!pkill -USR1 -x sxhkd",
+})

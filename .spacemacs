@@ -295,6 +295,7 @@ It should only modify the values of Spacemacs settings."
                          ;; doom-peacock
                          ;; doom-moonlight
                          doom-feather-light
+                         )
 
    ;; Set the t-brighter-comment sheme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The

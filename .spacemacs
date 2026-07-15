@@ -630,6 +630,8 @@ before packages are loaded."
   ;; (with-eval-after-load 'company
   ;;   ;; disable inline previews
   ;;   (delq 'company-preview-if-just-one-frontend company-frontends))
+  (with-eval-after-load 'terminal-here
+    (setq terminal-here-linux-terminal-command '("alacritty")))
 
   ;; swap ` '
   (define-key evil-normal-state-map (kbd "`") 'evil-goto-mark-line)
@@ -652,7 +654,7 @@ before packages are loaded."
   (spacemacs/set-leader-keys "oo" (lambda () (interactive) (find-file "~/docs/org/pes/todo.org")))
   (spacemacs/set-leader-keys "or" 'revert-buffer)
   (spacemacs/set-leader-keys "os" 'org-download-clipboard)
-  (spacemacs/set-leader-keys "ot" 'template-copy)
+  ;; (spacemacs/set-leader-keys "ot" 'template-copy)
   (spacemacs/set-leader-keys "ou" 'smerge-keep-upper)
   (spacemacs/set-leader-keys "skp" 'helm-projectile-ack)
   ;; (spacemacs/set-leader-keys "oy" 'insert-style)

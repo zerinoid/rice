@@ -745,7 +745,7 @@ This function is called at the very end of Spacemacs initialization."
        "aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8"
        default))
    '(org-agenda-files
-     '("~/docs/org/pro/foraisso.org" "/home/zerinol/docs/org/pro/tarefas.org"))
+     '("~/docs/org/pro/foraisso.org" "~/docs/org/pro/tarefas.org"  "~/docs/org/pes/todo.org"))
    '(package-selected-packages
      '(a ac-ispell ac-php-core ace-jump-helm-line ace-link aggressive-indent
          alert all-the-icons auto-compile auto-complete auto-highlight-symbol

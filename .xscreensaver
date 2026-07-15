@@ -1,11 +1,11 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.45 for zerinol on Tue Jul 14 21:24:02 2026.
+# Written by xscreensaver-demo 5.45 for zerinol on Wed Jul 15 01:35:38 2026.
 # https://www.jwz.org/xscreensaver/
 
-timeout:	0:08:00
+timeout:	0:10:00
 cycle:		0:03:00
 lock:		True
-lockTimeout:	0:10:00
+lockTimeout:	0:20:00
 passwdTimeout:	0:00:30
 visualID:	default
 installColormap:    True
@@ -27,7 +27,7 @@ font:		Hack Nerd Font:style=Regular:size=12
 dpmsEnabled:	True
 dpmsQuickOff:	False
 dpmsStandby:	0:30:00
-dpmsSuspend:	0:45:00
+dpmsSuspend:	0:40:00
 dpmsOff:	0:00:00
 grabDesktopImages:  True
 grabVideoFrames:    True
@@ -65,7 +65,7 @@ programs:								      \
 -				bouboule -root				    \n\
 -				braid -root				    \n\
 				coral -root				    \n\
-				deco -root				    \n\
+-				deco -root				    \n\
 -				drift -root				    \n\
 -				fadeplot -root				    \n\
 -				galaxy -root				    \n\
@@ -97,7 +97,7 @@ programs:								      \
 - GL: 				atlantis -root				    \n\
 -				bsod -root				    \n\
 - GL: 				bubble3d -root				    \n\
-  GL: 				cage -root				    \n\
+- GL: 				cage -root				    \n\
 -				crystal -root				    \n\
 -				cynosure -root				    \n\
 -				discrete -root				    \n\

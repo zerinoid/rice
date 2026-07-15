@@ -200,7 +200,7 @@ map D trash
 map <c-e> extract
 map E $$TERMA -e $EDITOR "$f" &
 map <c-f> $lf -remote "send $id select '$(fzf)'" #ir para diretorio local
-map <c-g> rsyncto
+map <c-g> $lazygit
 map <c-y> link-copy
 map <c-l> link-paste
 

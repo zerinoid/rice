@@ -50,7 +50,9 @@ echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 # Use lf to switch directories and bind it to ctrl-o
+bindkey -s '^P' 'lazygit --git-dir=$HOME/.cfg --work-tree=$HOME \n'
 bindkey -s '^o' 'lfcd\n'
+bindkey -s '^g' 'lazygit\n'
 
 lfsel () {
     [ "$TERM" = "alacritty" ] && TERM=xterm-256color #hack pro alacritty abrir o lf

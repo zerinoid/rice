@@ -22,7 +22,6 @@ touchegg &
 # kunst &
 
 ## wal colors
-wal -R 2>&1 >>"$LOGINLOG" &
-# . "$HOME/.cache/wal/colors.sh"
-$HOME/.local/bin/randomwal &
-2>&1 >>"$LOGINLOG"
+# Run randomwal to set the wallpaper and colors at startup.
+# It will automatically fall back to restoring previous colors if no wallpapers are found.
+$HOME/.local/bin/randomwal >>"$LOGINLOG" 2>&1 &

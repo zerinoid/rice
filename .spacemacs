@@ -625,14 +625,13 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  ;; (setq default-directory "~/docs/")
-  ;; (add-to-list 'auto-mode-alist '("\\.js\\'" . company-mode))
-
-  ;; (with-eval-after-load 'company
-  ;;   ;; disable inline previews
-  ;;   (delq 'company-preview-if-just-one-frontend company-frontends))
   (with-eval-after-load 'terminal-here
     (setq terminal-here-linux-terminal-command '("alacritty")))
+
+  ;; load default node
+  (let ((node-bin (expand-file-name "~/.nvm/versions/node/default/bin")))
+    (when (file-directory-p node-bin)
+      (add-to-list 'exec-path node-bin)))
 
   ;; swap ` '
   (define-key evil-normal-state-map (kbd "`") 'evil-goto-mark-line)

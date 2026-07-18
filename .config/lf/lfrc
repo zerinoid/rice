@@ -216,6 +216,7 @@ map gp cd ~/pics
 map gw cd ~/webdev
 map zc cd ~/.config
 map zm cd ~/mobile
+map zn cd ~/.config/nvim/
 
 map <c-c> copy-content
 map r $~/.config/lf/pv.sh $f | less -R

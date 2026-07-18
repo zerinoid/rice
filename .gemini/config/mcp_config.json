@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "chrome-devtools-mcp": {
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@latest"
+      ],
+      "command": "npx"
+    },
+    "signnow": {
+      "disabled": true,
+      "headers": {
+        "X-SignNow-Access-Token": "94af0edf0ab16982f88847e79e450644c7055caef4a6c81bad0ac471e0f1560a"
+      },
+      "serverUrl": "https://mcp-server.signnow.com/mcp"
+    },
+    "supabase": {
+      "disabled": true,
+      "serverUrl": "https://mcp.supabase.com/mcp?project_ref=husmwaplbsgrlznixyia\u0026read_only=true"
+    }
+  }
+}

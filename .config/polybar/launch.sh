@@ -1,7 +1,6 @@
 #!/bin/bash
 
 LOG_DIR="/tmp/polybar-logs"
-TIMESTAMP=$(date +%Y-%m-%d %H:%M:%S)
 LOG_FILE="$LOG_DIR/polybar-$(date +%Y%m%d).log"
 
 # Create log directory if it doesn't exist
@@ -53,6 +52,28 @@ if [ -z "$WIRELESS_INTERFACE" ]; then
 fi
 export WIRELESS_INTERFACE="${WIRELESS_INTERFACE:-wlan0}"
 log_message "Using wireless interface: $WIRELESS_INTERFACE"
+
+# 3b. Wired interface
+WIRED_INTERFACE=""
+for dev in /sys/class/net/*; do
+  # Skip loopback interface
+  [ "$(basename "$dev")" = "lo" ] && continue
+
+  # Check if it is a physical ethernet device (excludes wireless and virtual)
+  if [ -d "$dev/device" ] && [ ! -d "$dev/wireless" ] && [ ! -d "$dev/phy80211" ]; then
+    WIRED_INTERFACE=$(basename "$dev")
+    break
+  fi
+done
+
+# Fallback: Search by predictable network interface names for Ethernet
+if [ -z "$WIRED_INTERFACE" ]; then
+  WIRED_INTERFACE=$(ip link | awk -F': ' '/eth|enp|eno|ens/ {print $2}' | head -n1)
+fi
+
+# Default to eth0 if nothing is found
+export WIRED_INTERFACE="${WIRED_INTERFACE:-eth0}"
+log_message "Using wired interface: $WIRED_INTERFACE"
 
 # Launch polybar based on available monitors
 if type "xrandr" >/dev/null 2>&1; then

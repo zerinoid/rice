@@ -3,25 +3,26 @@
 # Default wallpaper directory, allow override via env var
 WPP_DIR="${WALLPAPER_DIR:-$HOME/db/wpp}"
 FALLBACK_DIR="$HOME/Pictures/Wallpapers"
+XDG_SESSION_TYPE=x11
 
 # Use fallback if default doesn't exist
 if [ ! -d "$WPP_DIR" ] && [ -d "$FALLBACK_DIR" ]; then
-    WPP_DIR="$FALLBACK_DIR"
+  WPP_DIR="$FALLBACK_DIR"
 fi
 
 if [ -d "$WPP_DIR" ]; then
-    # Find all common image formats
-    IFS=$'\n'
-    files=($(find "$WPP_DIR" -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.jpeg" -o -name "*.webp" \) 2>/dev/null))
-    unset IFS
+  # Find all common image formats
+  IFS=$'\n'
+  files=($(find "$WPP_DIR" -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.jpeg" -o -name "*.webp" \) 2>/dev/null))
+  unset IFS
 
-    if [ ${#files[@]} -gt 0 ]; then
-        image=${files[$RANDOM % ${#files[@]}]}
-        echo "Selected wallpaper: $image"
-        # Run wal and pass the relaunch script
-        wal -a 92 -i "$image" -o "${XDG_CONFIG_HOME:-$HOME/.config}/wal/relaunch.sh" &
-        exit 0
-    fi
+  if [ ${#files[@]} -gt 0 ]; then
+    image=${files[$RANDOM % ${#files[@]}]}
+    echo "Selected wallpaper: $image"
+    # Run wal and pass the relaunch script
+    wal -a 92 -i "$image" -o "${XDG_CONFIG_HOME:-$HOME/.config}/wal/relaunch.sh" &
+    exit 0
+  fi
 fi
 
 # Fallback: if no directory or no images found, restore previous colors

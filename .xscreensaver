@@ -1,11 +1,11 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.45 for zerinol on Wed Jul 15 01:35:38 2026.
+# Written by xscreensaver-demo 5.45 for zerinol on Sat Jul 18 14:39:40 2026.
 # https://www.jwz.org/xscreensaver/
 
-timeout:	0:10:00
+timeout:	0:05:00
 cycle:		0:03:00
 lock:		True
-lockTimeout:	0:20:00
+lockTimeout:	0:07:00
 passwdTimeout:	0:00:30
 visualID:	default
 installColormap:    True
@@ -32,7 +32,7 @@ dpmsOff:	0:00:00
 grabDesktopImages:  True
 grabVideoFrames:    True
 chooseRandomImages: True
-imageDirectory:	/home/zerinol/pics/TRP/ester_SH
+imageDirectory:	/home/zerinol/pics/TRP
 
 mode:		random
 selected:	188
@@ -50,8 +50,8 @@ programs:								      \
 				blitspin -root				    \n\
 -				greynetic -root				    \n\
 -				helix -root				    \n\
--				hopalong -root				    \n\
--				imsmap -root				    \n\
+				hopalong -root -count 9910		    \n\
+-				imsmap -root -ncolors 213 -fps		    \n\
 -				noseguy -root				    \n\
 -				pyro -root				    \n\
 -				qix -root				    \n\
@@ -73,14 +73,14 @@ programs:								      \
 -				grav -root				    \n\
 -				ifs -root				    \n\
 -				unicode -root				    \n\
-- GL: 				jigsaw -root				    \n\
+  GL: 				jigsaw -root				    \n\
 -				julia -root				    \n\
 -				kaleidescope -root			    \n\
 - GL: 				moebius -root				    \n\
 -				moire -root				    \n\
 - GL: 				morph3d -root				    \n\
 -				mountain -root				    \n\
--				munch -root				    \n\
+				munch -root				    \n\
 				penrose -root				    \n\
 - GL: 				pipes -root				    \n\
 -				rd-bomb -root				    \n\
@@ -106,7 +106,7 @@ programs:								      \
 -				flow -root				    \n\
 - GL: 				glplanet -root				    \n\
 -				interference -root			    \n\
--				kumppa -root				    \n\
+				kumppa -root				    \n\
 - GL: 				lament -root				    \n\
 				moire2 -root				    \n\
 - GL: 				sonar -root				    \n\
@@ -187,7 +187,7 @@ programs:								      \
 - GL: 				gleidescope -root			    \n\
 - GL: 				glknots -root				    \n\
 - GL: 				glmatrix -root				    \n\
-- GL: 				glslideshow -root			    \n\
+  GL: 				glslideshow -root			    \n\
 - GL: 				hypertorus -root			    \n\
 - GL: 				jigglypuff -root			    \n\
 				metaballs -root				    \n\
@@ -245,7 +245,7 @@ programs:								      \
 - GL: 				hilbert -root				    \n\
 - GL: 				tronbit -root				    \n\
 - GL: 				geodesic -root				    \n\
-				hexadrop -root				    \n\
+-				hexadrop -root				    \n\
 - GL: 				kaleidocycle -root			    \n\
 - GL: 				quasicrystal -root			    \n\
 - GL: 				unknownpleasures -root			    \n\

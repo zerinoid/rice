@@ -1,10 +1,14 @@
-!! Transparency (0-1):
-st.alpha: 0.85
-
 !! Set a default font and font size as below:
-*.font: Hack Nerd Font Mono-11
-st.background: #000000
+/**.font: Hack Nerd Font Mono 11*/
 
+xscreensaver-auth.default.Dialog.bodyFont: Ubuntu 12, DejaVu Sans 12
+xscreensaver-auth.default.Dialog.headingFont: Ubuntu Bold 14
+xscreensaver-auth.default.Dialog.buttonFont: Ubuntu 11
+xscreensaver.Dialog.bodyFont: fixed
+xscreensaver.font: fixed
+
+st.alpha: 0.85
+st.background: #000000
 st.termname: st-256color
 
 Xft.dpi:                    96
@@ -62,8 +66,8 @@ URxvt.urlLauncher: /usr/bin/xdg-open
 URxvt.underlineURLs: true
 URxvt.urlButton: 1
 
-Sxiv.foreground: #ff00bf
-Sxiv.background: #bfff00
+Sxiv.foreground: #000000
+Sxiv.background: #900d09
 
 !! gruvbox: 
 *.color0: #000000

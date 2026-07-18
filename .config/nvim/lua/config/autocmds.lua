@@ -34,3 +34,8 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = "*/sxhkd/sxhkdrc",
   command = "!pkill -USR1 -x sxhkd",
 })
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = "*/.Xresources",
+  command = "!xrdb -merge ~/.Xresources",
+})

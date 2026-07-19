@@ -3,6 +3,18 @@
 LOG_DIR="/tmp/polybar-logs"
 LOG_FILE="$LOG_DIR/polybar-$(date +%Y%m%d).log"
 
+[ -f "$HOME/.cache/wal/colors.sh" ] && . "$HOME/.cache/wal/colors.sh"
+
+export color0=$color0
+export color1=$color1
+export color2=$color2
+export color3=$color3
+export color4=$color4
+export color5=$color5
+export color6=$color6
+export color7=$color7
+export color8=$color8
+
 # Create log directory if it doesn't exist
 mkdir -p "$LOG_DIR"
 

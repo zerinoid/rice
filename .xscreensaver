@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.45 for zerinol on Sat Jul 18 14:39:40 2026.
+# Written by xscreensaver-demo 5.45 for zerinol on Thu Jul 23 21:22:38 2026.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	0:05:00
@@ -29,8 +29,8 @@ dpmsQuickOff:	False
 dpmsStandby:	0:30:00
 dpmsSuspend:	0:40:00
 dpmsOff:	0:00:00
-grabDesktopImages:  True
-grabVideoFrames:    True
+grabDesktopImages:  False
+grabVideoFrames:    False
 chooseRandomImages: True
 imageDirectory:	/home/zerinol/pics/TRP
 
@@ -50,7 +50,7 @@ programs:								      \
 				blitspin -root				    \n\
 -				greynetic -root				    \n\
 -				helix -root				    \n\
-				hopalong -root -count 9910		    \n\
+-				hopalong -root -count 9910		    \n\
 -				imsmap -root -ncolors 213 -fps		    \n\
 -				noseguy -root				    \n\
 -				pyro -root				    \n\
@@ -80,7 +80,7 @@ programs:								      \
 -				moire -root				    \n\
 - GL: 				morph3d -root				    \n\
 -				mountain -root				    \n\
-				munch -root				    \n\
+-				munch -root				    \n\
 				penrose -root				    \n\
 - GL: 				pipes -root				    \n\
 -				rd-bomb -root				    \n\
@@ -142,7 +142,7 @@ programs:								      \
 - GL: 				dangerball -root			    \n\
 - GL: 				engine -root				    \n\
 - GL: 				flipscreen3d -root			    \n\
-- GL: 				gltext -root				    \n\
+- GL: 				gltext -root -text '%A%n%d %b %Y%n%r'	    \n\
 - GL: 				menger -root				    \n\
 - GL: 				molecule -root				    \n\
 -				rotzoomer -root				    \n\
@@ -151,7 +151,7 @@ programs:								      \
 - GL: 				stonerview -root			    \n\
 -				vermiculate -root			    \n\
 -				whirlwindwarp -root			    \n\
--				zoom -root				    \n\
+				zoom -root				    \n\
 				anemone -root				    \n\
 -				apollonian -root			    \n\
 - GL: 				boxed -root				    \n\
@@ -160,7 +160,7 @@ programs:								      \
 				euler2d -root				    \n\
 -				fluidballs -root			    \n\
 - GL: 				flurry -root				    \n\
-- GL: 				glblur -root				    \n\
+  GL: 				glblur -root				    \n\
 - GL: 				glsnake -root				    \n\
 -				halftone -root				    \n\
 - GL: 				juggler3d -root				    \n\
@@ -197,7 +197,7 @@ programs:								      \
 -				pong -root				    \n\
 -				popsquares -root			    \n\
 - GL: 				surfaces -root				    \n\
--				xanalogtv -root				    \n\
+				xanalogtv -root				    \n\
 -				abstractile -root			    \n\
 -				anemotaxis -root			    \n\
 - GL: 				antinspect -root			    \n\

@@ -15,7 +15,6 @@
       "serverUrl": "https://mcp-server.signnow.com/mcp"
     },
     "supabase": {
-      "disabled": true,
       "serverUrl": "https://mcp.supabase.com/mcp?project_ref=husmwaplbsgrlznixyia\u0026read_only=true"
     }
   }

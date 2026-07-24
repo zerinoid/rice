@@ -2,13 +2,13 @@
 
 # apt
 alias \
-    aph="apt search"\
-	aps="sudo apt install"\
-	apd="sudo apt update"\
-    apdl="apt list --upgradable"\
-	apg="sudo apt upgrade"\
-    apr="sudo apt remove"\
-    apf="apt-file search"
+  aph="apt search" \
+  aps="sudo apt install" \
+  apd="sudo apt update" \
+  apdl="apt list --upgradable" \
+  apg="sudo apt upgrade" \
+  apr="sudo apt remove" \
+  apf="apt-file search"
 
 # ls
 # F classify with indiator (*/=>@|)
@@ -23,38 +23,38 @@ alias \
 # c sort by ctime (last mod of file status info)
 # r reverse order
 alias \
-    l="ls -lFh"\
-    la="ls -lAFh"\
-    lr="ls -tRFh"\
-    lt="ls -ltFH"\
-    ll="ls -l"\
-    ldot="ls -ld .*"\
-    lS="ls -1FSsh"\
-    lart="ls -1Fcart"\
-    lrt="ls -1Fcrt"
+  l="ls -lFh" \
+  la="ls -lAFh" \
+  lr="ls -tRFh" \
+  lt="ls -ltFH" \
+  ll="ls -l" \
+  ldot="ls -ld .*" \
+  lS="ls -1FSsh" \
+  lart="ls -1Fcart" \
+  lrt="ls -1Fcrt"
 
 # GNU/unix
 alias \
-    op="xdg-open"\
-	rm="rm -v"\
-	cp="cp -iv"\
-	mv="mv -iv"\
-    t="tail -f"\
-    sudo="sudo "\
-	grep="grep --color=auto"\
-	egrep="egrep --color=auto"\
-	fgrep="fgrep --color=auto"\
-    sgrep="grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS}"\
-    purge="sudo sync && echo 3 > /proc/sys/vm/drop_caches"
+  op="xdg-open" \
+  rm="rm -v" \
+  cp="cp -iv" \
+  mv="mv -iv" \
+  t="tail -f" \
+  sudo="sudo " \
+  grep="grep --color=auto" \
+  egrep="egrep --color=auto" \
+  fgrep="fgrep --color=auto" \
+  sgrep="grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS}" \
+  purge="sudo sync && echo 3 > /proc/sys/vm/drop_caches"
 
 # customizations
 alias \
-    cfz="vim $ZDOTDIR/.zshrc"\
-    sxh="vim ~/.config/sxhkd/sxhkdrc"\
-    bsp="vim ~/.config/bspwm/bspwmrc"\
-	ba="vim ~/.bash_aliases"\
-    pol="vim ~/.config/polybar/config.ini"\
-    xdf="vim ~/.Xdefaults"\
+  cfz="vim $ZDOTDIR/.zshrc" \
+  sxh="vim ~/.config/sxhkd/sxhkdrc" \
+  bsp="vim ~/.config/bspwm/bspwmrc" \
+  ba="vim ~/.bash_aliases" \
+  pol="vim ~/.config/polybar/config.ini" \
+  xdf="vim ~/.Xdefaults"
 
 # du
 
@@ -63,60 +63,60 @@ alias \
 # dush  - total pasta atual
 # dux   - ducks human readable (40 primeiros)
 alias \
-    ducks="du -cks * | sort -rn | head"\
-    dud="du -d 1 -h"\
-    dush="du -sh"\
-    dux="du -chsx * | sort -rh | head -n 40"\
-    dfth="df -Th | grep -e ^/dev -e Filesystem | grep -v loop"
+  ducks="du -cks * | sort -rn | head" \
+  dud="du -d 1 -h" \
+  dush="du -sh" \
+  dux="du -chsx * | sort -rh | head -n 40" \
+  dfth="df -Th | grep -e ^/dev -e Filesystem | grep -v loop"
 
 # development
 alias \
-	doc="docker-compose exec workspace"\
-	pas="php artisan serve"\
-	nrw="npm run watch"\
-    nrd="npm run dev"
+  doc="docker-compose exec workspace" \
+  pas="php artisan serve" \
+  nrw="npm run watch" \
+  nrd="npm run dev"
 
 # git
 alias \
-    gam="git commit -am"\
-    ga="git add" \
-    gc="git commit -m"\
-    gs="git status"\
-    gp="git push"\
-    gf="git pull"\
+  gam="git commit -am" \
+  ga="git add" \
+  gc="git commit -m" \
+  gs="git status" \
+  gp="git push" \
+  gf="git pull"
 
 # dotfiles git
 alias \
-    dit='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'\
-    gdc="dit commit -m"\
-    ds="dit status"\
-    dp="dit push"\
-    gdf="dit pull"\
-	dam="dit commit -am"
+  dit='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME' \
+  gdc="dit commit -m" \
+  ds="dit status" \
+  dp="dit push" \
+  gdf="dit pull" \
+  dam="dit commit -am"
 
 # beets
 alias \
-    bls="beet ls"\
-    bla="beet ls -a"\
-    bw="beet write"
+  bls="beet ls" \
+  bla="beet ls -a" \
+  bw="beet write"
 
 # with config
 alias \
-    w3m="w3m -config ~/.config/w3m/config"\
-    mpdas="mpdas -c ~/.config/mpdasrc"
+  w3m="w3m -config ~/.config/w3m/config" \
+  mpdas="mpdas -c ~/.config/mpdasrc"
 
 # misc
 alias \
-    v="vim"\
-    nmset="sudo rfkill block wlan; sleep 3; sudo rfkill unblock wlan"\
-    pbc="xclip -selection clipboard"\
-	pbp="xclip -selection clipboard -o"\
-    ytv="straw-viewer --player=mpv"\
-    ffmpeg="ffmpeg -hide_banner"\
-    trem="transmission-remote" \
-    slsk="/home/zerinol/fixo/progs/SoulseekQt-2018-1-30-64bit.AppImage" \
-	kbd="setxkbmap -model abnt2 -layout br\
-		-option caps:escape"\
-	kbn="setxkbmap -model abnt2 -layout br\
+  v="vim" \
+  nmset="sudo rfkill block wlan; sleep 3; sudo rfkill unblock wlan" \
+  pbc="xclip -selection clipboard" \
+  pbp="xclip -selection clipboard -o" \
+  ytv="pipe-viewer --player=mpv" \
+  ffmpeg="ffmpeg -hide_banner" \
+  trem="transmission-remote" \
+  slsk="/home/zerinol/fixo/progs/SoulseekQt-2018-1-30-64bit.AppImage" \
+  kbd="setxkbmap -model abnt2 -layout br\
+		-option caps:escape" \
+  kbn="setxkbmap -model abnt2 -layout br\
 		-option caps:escape\
         -variant nodeadkeys"

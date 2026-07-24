@@ -26,11 +26,11 @@ INTEGRADO=$(xrandr --query | grep -E '^eDP|^LVDS' | cut -d" " -f1 | head -n1)
 EXTERNO=$(xrandr --query | grep " connected" | grep -v "$INTEGRADO" | cut -d" " -f1 | head -n1)
 
 if [ -n "$EXTERNO" ]; then
-    bspc monitor "$INTEGRADO" -d 1 2 3 4 5
-    bspc monitor "$EXTERNO" -d 6 7
-    bspc wm -O "$INTEGRADO" "$EXTERNO"
+  bspc monitor "$INTEGRADO" -d 1 2 3 4 5
+  bspc monitor "$EXTERNO" -d 6 7
+  bspc wm -O "$INTEGRADO" "$EXTERNO"
 else
-    bspc monitor "$INTEGRADO" -d 1 2 3 4 5 6 7
+  bspc monitor "$INTEGRADO" -d 1 2 3 4 5 6 7
 fi
 
 bspc config border_width 2
@@ -82,6 +82,7 @@ bspc rule -a *:qjackctl state=floating
 bspc rule -a Ardour-7.5.240:* state=floating
 bspc rule -a *:crx__chlffgpmiacpedhhbkiomidkjlcfhogd state=floating
 bspc rule -a *:thunar state=floating rectangle=640x460+0+0
+bspc rule -a Xscreensaver-demo:* state=floating
 
 # [ -z $(ps aux | grep mark.sh | grep -v grep) ] && $HOME/.config/bspwm/mark.sh &
 $HOME/.config/polybar/launch.sh 2>&1 >>"$HOME/.local/polybar.log" &

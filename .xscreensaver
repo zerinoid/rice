@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.45 for zerinol on Sat Jul 25 18:30:35 2026.
+# Written by xscreensaver-demo 5.45 for zerinol on Sat Jul 25 19:31:13 2026.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	0:05:00
@@ -32,7 +32,7 @@ dpmsOff:	0:00:00
 grabDesktopImages:  False
 grabVideoFrames:    False
 chooseRandomImages: True
-imageDirectory:	/home/zerinol/pics/TRP
+imageDirectory:	/home/zerinol/pics/screensaver
 
 mode:		random
 selected:	188

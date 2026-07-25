@@ -1,9 +1,9 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.45 for zerinol on Thu Jul 23 21:22:38 2026.
+# Written by xscreensaver-demo 5.45 for zerinol on Sat Jul 25 18:30:35 2026.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	0:05:00
-cycle:		0:03:00
+cycle:		0:05:00
 lock:		True
 lockTimeout:	0:07:00
 passwdTimeout:	0:00:30
@@ -37,7 +37,7 @@ imageDirectory:	/home/zerinol/pics/TRP
 mode:		random
 selected:	188
 
-textMode:	date
+textMode:	program
 textLiteral:	XScreenSaver
 textFile:	/home/zerinol/docs/org/db/info.org
 textProgram:	fortune
@@ -123,7 +123,7 @@ programs:								      \
 -				loop -root				    \n\
 -				penetrate -root				    \n\
 -				petri -root				    \n\
--				phosphor -root				    \n\
+				phosphor -root				    \n\
 - GL: 				pulsar -root				    \n\
 				ripples -root				    \n\
 				shadebobs -root				    \n\
@@ -183,13 +183,13 @@ programs:								      \
 -				eruption -root				    \n\
 - GL: 				flipflop -root				    \n\
 - GL: 				flyingtoasters -root			    \n\
--				fontglide -root				    \n\
+				fontglide -root -trails			    \n\
 - GL: 				gleidescope -root			    \n\
 - GL: 				glknots -root				    \n\
 - GL: 				glmatrix -root				    \n\
   GL: 				glslideshow -root			    \n\
 - GL: 				hypertorus -root			    \n\
-- GL: 				jigglypuff -root			    \n\
+  GL: 				jigglypuff -root			    \n\
 				metaballs -root				    \n\
 - GL: 				mirrorblob -root			    \n\
 -				piecewise -root				    \n\
@@ -267,7 +267,7 @@ programs:								      \
 - GL: 				raverhoop -root				    \n\
 - GL: 				splodesic -root				    \n\
 - GL: 				unicrud -root				    \n\
-- GL: 				esper -root				    \n\
+  GL: 				esper -root				    \n\
 - GL: 				vigilance -root				    \n\
 - GL: 				crumbler -root				    \n\
 -				filmleader -root			    \n\

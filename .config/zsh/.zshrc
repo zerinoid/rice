@@ -284,3 +284,5 @@ _BORING_COMMANDS=($_BORING_COMMANDS "^unhistory")
 # export PATH=$PATH:$HOME/.local/share/android-studio/bin
 
 # export _JAVA_AWT_WM_NONREPARENTING=1
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"

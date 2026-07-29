@@ -1,0 +1,21 @@
+# General Settings
+set realname = "Leo Zerino"
+set mail_check = 60
+set timeout = 10
+
+# XDG Notmuch Database Integration
+set nm_default_url = "notmuch:///home/zerinol/.local/share/mail"
+
+# XDG Cache locations
+set header_cache = "~/.cache/neomutt/headers"
+set message_cachedir = "~/.cache/neomutt/bodies"
+
+# Load Default Account (Contato)
+source ~/.config/neomutt/contato
+
+# Account Switching Shortcuts
+macro index,pager <F1> "<sync-mailbox><enter-command>source ~/.config/neomutt/contato<enter><change-folder>!<enter>" "Switch to Contato"
+macro index,pager <F2> "<sync-mailbox><enter-command>source ~/.config/neomutt/shibari<enter><change-folder>!<enter>" "Switch to Shibari"
+
+# Sync all mail via mbsync and re-index notmuch when pressing 'R'
+macro index,pager R "<shell-escape>mbsync -c ~/.config/isync/mbsyncrc -a && notmuch new<enter>" "Sync all mail"

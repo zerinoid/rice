@@ -1,0 +1,54 @@
+# ==========================================
+# ACCOUNT 1: contato@foraisso.com (Lark)
+# ==========================================
+IMAPAccount contato-lark
+Host imap.larksuite.com
+Port 993
+User contato@foraisso.com
+Pass YOUR_LARK_PASS_CONTATO
+TLSType implicit
+
+IMAPStore contato-remote
+Account contato-lark
+
+MaildirStore contato-local
+SubFolders Verbatim
+Path ~/.local/share/mail/contato/
+Inbox ~/.local/share/mail/contato/INBOX
+
+Channel contato
+Far :contato-remote:
+Near :contato-local:
+Patterns *
+Create Both
+SyncState *
+
+# ==========================================
+# ACCOUNT 2: shibari@foraisso.com (Lark)
+# ==========================================
+IMAPAccount shibari-lark
+Host imap.larksuite.com
+Port 993
+User shibari@foraisso.com
+Pass YOUR_LARK_PASS_SHIBARI
+TLSType implicit
+
+IMAPStore shibari-remote
+Account shibari-lark
+
+MaildirStore shibari-local
+SubFolders Verbatim
+Path ~/.local/share/mail/shibari/
+Inbox ~/.local/share/mail/shibari/INBOX
+
+Channel shibari
+Far :shibari-remote:
+Near :shibari-local:
+Patterns *
+Create Both
+SyncState *
+
+# Group all accounts together
+Group all
+Channel contato
+Channel shibari

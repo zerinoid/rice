@@ -14,7 +14,7 @@ super + Return
   "$TERMA"
 
 super + alt + Return
-	"$TERMA" --class pad
+	"$TERMA" --class Alacritty,pad
 
 super + shift + Return
 	"$TERMB"

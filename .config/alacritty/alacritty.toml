@@ -1,0 +1,72 @@
+[bell]
+animation = "EaseOutSine"
+color = "#37365c"
+duration = 100
+
+[colors.bright]
+black = "#3C3741"
+blue = "#6F9EDD"
+cyan = "#4BFFDC"
+green = "#00FF9E"
+magenta = "#D000FF"
+red = "#E44646"
+white = "#C5C8C6"
+yellow = "#F7BE4E"
+
+[colors.normal]
+black = "#2C282E"
+blue = "#689BFF"
+cyan = "#4BD4C3"
+green = "#1DFF79"
+magenta = "#D35DFF"
+red = "#E15555"
+white = "#707880"
+yellow = "#E38B4E"
+
+[colors.primary]
+background = "#11111d"
+foreground = "#ECBDF6"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "ScrollLineUp"
+key = "K"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "ScrollLineDown"
+key = "J"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "ScrollPageUp"
+key = "U"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "ScrollPageDown"
+key = "D"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "K"
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "J"
+mods = "Alt|Shift"
+
+[window.padding]
+x = 7
+y = 7

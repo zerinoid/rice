@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Explicit PATH setup
+export PATH="/home/zerinol/.local/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
+
+# XDG Environment Variables
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+
+# Force Display & DBus variables for notify-send
+export DISPLAY="${DISPLAY:-:1}"
+export DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-unix:path=/run/user/$(id -u)/bus}"
+
+# Count unread emails BEFORE sync
+UNREAD_BEFORE=$(notmuch count tag:unread 2>/dev/null || echo 0)
+
+# 1. Perform Sync
+mbsync -a 2>&1
+
+# 2. Index new messages
+notmuch new >/dev/null 2>&1
+
+# 3. Count unread emails AFTER sync
+UNREAD_AFTER=$(notmuch count tag:unread 2>/dev/null || echo 0)
+
+# Log run details
+echo "$(date): Before=$UNREAD_BEFORE, After=$UNREAD_AFTER" >>"$XDG_DATA_HOME/mail-sync.log"
+
+# 4. Send notification if new mail arrives
+if [ "$UNREAD_AFTER" -gt "$UNREAD_BEFORE" ]; then
+  NEW_COUNT=$((UNREAD_AFTER - UNREAD_BEFORE))
+  notify-send -u normal -i mail-unread "New Email Received ($NEW_COUNT)" "You have $NEW_COUNT new message(s)." || true
+fi
+
+exit 0

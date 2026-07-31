@@ -29,8 +29,6 @@ echo "$(date): Before=$UNREAD_BEFORE, After=$UNREAD_AFTER" >>"$XDG_DATA_HOME/mai
 if [ "$UNREAD_AFTER" -gt "$UNREAD_BEFORE" ]; then
   NEW_COUNT=$((UNREAD_AFTER - UNREAD_BEFORE))
   notify-send -u normal -i mail-unread "New Email Received ($NEW_COUNT)" "You have $NEW_COUNT new message(s)." || true
-else
-  notify-send -u low -i error "Nao tem emeio"
 fi
 
 exit 0

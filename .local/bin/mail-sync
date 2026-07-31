@@ -4,7 +4,6 @@
 export PATH="/home/zerinol/.local/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
 
 # XDG Environment Variables
-export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 
 # Force Display & DBus variables for notify-send

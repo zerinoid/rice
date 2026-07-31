@@ -12,7 +12,7 @@ else
   icon=error
 fi
 
-# export XDG_RUNTIME_DIR="/run/user/1000"
+export XDG_RUNTIME_DIR="/run/user/1000"
 # export DISPLAY=:0
 # export DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-unix:path=/run/user/$(id -u)/bus}"
 

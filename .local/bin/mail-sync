@@ -8,8 +8,8 @@ export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 
 # Force Display & DBus variables for notify-send
-export DISPLAY="${DISPLAY:-:1}"
-export DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-unix:path=/run/user/$(id -u)/bus}"
+# export DISPLAY="${DISPLAY:-:1}"
+# export DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-unix:path=/run/user/$(id -u)/bus}"
 
 # Count unread emails BEFORE sync
 UNREAD_BEFORE=$(notmuch count tag:unread 2>/dev/null || echo 0)
@@ -30,6 +30,8 @@ echo "$(date): Before=$UNREAD_BEFORE, After=$UNREAD_AFTER" >>"$XDG_DATA_HOME/mai
 if [ "$UNREAD_AFTER" -gt "$UNREAD_BEFORE" ]; then
   NEW_COUNT=$((UNREAD_AFTER - UNREAD_BEFORE))
   notify-send -u normal -i mail-unread "New Email Received ($NEW_COUNT)" "You have $NEW_COUNT new message(s)." || true
+else
+  notify-send -u low -i error "Nao tem emeio"
 fi
 
 exit 0

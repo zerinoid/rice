@@ -4,8 +4,9 @@ BATTINFO=$(acpi -b)
 ISDISCHARGING="$(echo $BATTINFO | grep Discharging)"
 TIMEREMAINING="$(echo $BATTINFO | cut -f 5 -d " ")"
 
-export XDG_RUNTIME_DIR="/run/user/1000"
-export DISPLAY=:1
+# export XDG_RUNTIME_DIR="/run/user/1000"
+# export DISPLAY=:1
+# export DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-unix:path=/run/user/$(id -u)/bus}"
 
 if [[ $ISDISCHARGING && $TIMEREMAINING < 00:10:00 ]]; then
 

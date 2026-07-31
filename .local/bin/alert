@@ -12,8 +12,10 @@ else
   icon=error
 fi
 
-export XDG_RUNTIME_DIR="/run/user/1000"
-export DISPLAY=:0
+# export XDG_RUNTIME_DIR="/run/user/1000"
+# export DISPLAY=:0
+# export DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-unix:path=/run/user/$(id -u)/bus}"
+
 notify-send --urgency=$urgency -i $icon "$text" 2>&1
 # aplay /usr/share/sounds/sound-icons/electric-piano-3.wav 2>/dev/null
 # sleep 1

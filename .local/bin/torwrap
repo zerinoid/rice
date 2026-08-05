@@ -2,8 +2,8 @@
 
 ifinstalled tremc transmission-cli || exit
 
-! pgrep -x transmission-da >/dev/null && transmission-daemon && notify-send "Starting torrent daemon..." 
+! pgrep -x transmission-da >/dev/null && transmission-daemon && notify-send "Starting torrent daemon..."
 
 # && sleep 3 && pkill -RTMIN+7 "${STATUSBAR:?}"
 
-$TERMA --class tremc -e tremc
+$TERMA --class Alacritty,tremc -e tremc

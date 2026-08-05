@@ -183,6 +183,23 @@ cmd copy-content ${{
     notify-send -t 2000 "Conteúdo copiado" "$(basename $f)\n\n🐈🐈🐈🐈🐈🐈🐈" 
 }}
 
+cmd new-file ${{
+    printf "Enter filename: "
+    read ans
+    
+    # Exit if input is empty
+    [ -z "$ans" ] && exit 0
+    
+    # Check if the file does NOT exist yet, then create it
+    if [ ! -f "$ans" ]; then
+        touch "$ans"
+    fi
+    
+    # Open Neovim regardless
+    nvim "$ans"
+}}
+
+
 # Renames
 map A :rename; cmd-end # at the very end
 map c push A<c-u> # new rename
@@ -222,10 +239,11 @@ map <c-c> copy-content
 map r $~/.config/lf/pv.sh $f | less -R
 map R $$TERMA -e sh -c '~/.config/lf/pv.sh "$f" | less -R' &
 # map J $lf -remote "send $id cd $(cut -d' ' -f2- ~/.config/directories | fzf)" # ir para dir definido
-map <c-j> recol
+# map <c-j> recol
 map <c-k> set ratios 1:1
 map M moveto
 map <c-n> push %mkdir<space>
+map <c-j> new-file
 map o &mimeopen $f
 map O $mimeopen --ask $f
 

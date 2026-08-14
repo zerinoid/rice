@@ -1,3 +1,0 @@
-[Service]
-Type=oneshot
-ExecStart=/home/zerinol/.local/share/backups/run.sh

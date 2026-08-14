@@ -3,6 +3,8 @@ set -euo pipefail
 
 sleep 5
 
+/usr/local/bin/alert 0 "Começando backup ORGUE..."
+
 DATE=$(date --iso-8601)
 BACKUPCFG="$HOME/.local/share/backups"
 

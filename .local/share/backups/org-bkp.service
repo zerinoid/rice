@@ -1,0 +1,11 @@
+[Unit]
+Description=Automated Borg Org-Mode Backup & Cloud Sync
+Documentation=man:borg(1)
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/share/backups/org-bkp.sh
+# Ensure the service catches environment variables if needed
+Environment="HOME=%h"
+# Prevent backup overlapping if a previous run is still syncing
+TimeoutSec=1800

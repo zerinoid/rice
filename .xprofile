@@ -15,9 +15,9 @@ picom >>"$LOGINLOG" 2>&1 &
 # transmission-daemon >> "$LOGINLOG" 2>&1 &
 xscreensaver -nosplash &
 /usr/bin/mpdas -c ~/.config/mpdasrc >>"$LOGINLOG" 2>&1 &
-unclutter &
+# unclutter &
 emacs --daemon &
-touchegg &
+# touchegg &
 # xautolock -time 20 -locker slock -corners +000 -cornerdelay 1 -cornerredelay 8 &
 # kunst &
 

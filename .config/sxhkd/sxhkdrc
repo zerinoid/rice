@@ -28,6 +28,10 @@ super + d
 super + equal
 	~/.config/polybar/launch.sh
 
+# Cycle through layouts (Tall -> Wide -> Grid -> Monocle)
+super + alt + space
+	bsp-layout next --layouts tall,wide,grid,tiled
+
 #
 # Dunst
 #

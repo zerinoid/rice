@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.45 for zerinol on Sat Jul 25 19:31:13 2026.
+# Written by xscreensaver-demo 5.45 for zerinol on Thu Aug 13 04:37:04 2026.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	0:05:00
@@ -64,7 +64,7 @@ programs:								      \
 -				pedal -root				    \n\
 -				bouboule -root				    \n\
 -				braid -root				    \n\
-				coral -root				    \n\
+-				coral -root				    \n\
 -				deco -root				    \n\
 -				drift -root				    \n\
 -				fadeplot -root				    \n\
@@ -81,7 +81,7 @@ programs:								      \
 - GL: 				morph3d -root				    \n\
 -				mountain -root				    \n\
 -				munch -root				    \n\
-				penrose -root				    \n\
+-				penrose -root				    \n\
 - GL: 				pipes -root				    \n\
 -				rd-bomb -root				    \n\
 - GL: 				rubik -root				    \n\
@@ -99,14 +99,14 @@ programs:								      \
 - GL: 				bubble3d -root				    \n\
 - GL: 				cage -root				    \n\
 -				crystal -root				    \n\
--				cynosure -root				    \n\
+				cynosure -root				    \n\
 -				discrete -root				    \n\
 				distort -root				    \n\
 -				epicycle -root				    \n\
 -				flow -root				    \n\
 - GL: 				glplanet -root				    \n\
 -				interference -root			    \n\
-				kumppa -root				    \n\
+-				kumppa -root				    \n\
 - GL: 				lament -root				    \n\
 				moire2 -root				    \n\
 - GL: 				sonar -root				    \n\
@@ -114,7 +114,7 @@ programs:								      \
 -				truchet -root				    \n\
 -				vidwhacker -root			    \n\
 -				blaster -root				    \n\
-				bumps -root				    \n\
+-				bumps -root				    \n\
 -				ccurve -root				    \n\
 -				compass -root				    \n\
 -				deluxe -root				    \n\
@@ -133,11 +133,11 @@ programs:								      \
 -				wander -root				    \n\
 -				webcollage -root			    \n\
 -				xflame -root				    \n\
--				xmatrix -root				    \n\
+				xmatrix -root				    \n\
 - GL: 				gflux -root				    \n\
--				nerverot -root				    \n\
--				xrayswarm -root				    \n\
--				xspirograph -root			    \n\
+				nerverot -root				    \n\
+				xrayswarm -root				    \n\
+				xspirograph -root			    \n\
 - GL: 				circuit -root				    \n\
 - GL: 				dangerball -root			    \n\
 - GL: 				engine -root				    \n\
@@ -150,7 +150,7 @@ programs:								      \
 - GL: 				starwars -root				    \n\
 - GL: 				stonerview -root			    \n\
 -				vermiculate -root			    \n\
--				whirlwindwarp -root			    \n\
+				whirlwindwarp -root			    \n\
 				zoom -root				    \n\
 				anemone -root				    \n\
 -				apollonian -root			    \n\
@@ -206,7 +206,7 @@ programs:								      \
 -				interaggregate -root			    \n\
 -				intermomentary -root			    \n\
 -				memscroller -root			    \n\
-- GL: 				noof -root				    \n\
+  GL: 				noof -root				    \n\
 -				pacman -root				    \n\
 - GL: 				pinion -root				    \n\
 - GL: 				polyhedra -root				    \n\
@@ -276,7 +276,7 @@ programs:								      \
 - GL: 				maze3d -root				    \n\
 - GL: 				peepers -root				    \n\
 - GL: 				razzledazzle -root			    \n\
--				vfeedback -root				    \n\
+				vfeedback -root				    \n\
 				scooter -root				    \n\
 - GL: 				deepstars -root				    \n\
 - GL: 				gravitywell -root			    \n\

@@ -199,6 +199,11 @@ cmd new-file ${{
     nvim "$ans"
 }}
 
+cmd play-mpv ${{
+    bash -c 'mpv --loop-file=no --playlist=<(printf "%s\n" "$@")' -- $fx
+}}
+
+map zp play-mpv
 
 # Renames
 map A :rename; cmd-end # at the very end

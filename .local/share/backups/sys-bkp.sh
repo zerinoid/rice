@@ -9,7 +9,7 @@ export XAUTHORITY="${XAUTHORITY:-$HOME/.Xauthority}"
 export DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-unix:path=/run/user/$(id -u)/bus}"
 
 # Open Alacritty and tail logs, keeping it open until Enter is pressed
-alacritty -e bash -c "journalctl --user -fu automatic-backup -n 30; echo 'Backup process finished. Press Enter to close...'; read -r" &
+alacritty -e bash -c "journalctl --user -fu sys-bkp -n 30; echo 'Backup process finished. Press Enter to close...'; read -r" &
 
 MOUNTPOINT=/mnt/backup
 TARGET=$MOUNTPOINT/borg-backups/saturno2024.borg

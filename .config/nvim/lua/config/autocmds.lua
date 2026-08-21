@@ -39,3 +39,19 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = "*/.Xresources",
   command = "!xrdb -merge ~/.Xresources",
 })
+
+-- Auto-reload power-timer.service on saving power_timer.sh
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = "power_timer.sh",
+  callback = function()
+    vim.fn.jobstart({ "systemctl", "--user", "restart", "power-timer.service" }, {
+      on_exit = function(_, exit_code)
+        if exit_code == 0 then
+          vim.notify("power-timer.service restarted", vim.log.levels.INFO, { title = "Systemd" })
+        else
+          vim.notify("Failed to restart power-timer.service", vim.log.levels.ERROR, { title = "Systemd" })
+        end
+      end,
+    })
+  end,
+})

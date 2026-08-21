@@ -13,13 +13,14 @@ dunst >>"$LOGINLOG" 2>&1 &
 picom >>"$LOGINLOG" 2>&1 &
 /opt/thefanclub/overgrive/overgrive >>"$LOGINLOG" 2>&1 &
 # transmission-daemon >> "$LOGINLOG" 2>&1 &
+
 xscreensaver -nosplash &
+xss-lock -- slock &
+
+emacs --daemon &
 /usr/bin/mpdas -c ~/.config/mpdasrc >>"$LOGINLOG" 2>&1 &
 # unclutter &
-emacs --daemon &
 # touchegg &
-# xautolock -time 20 -locker slock -corners +000 -cornerdelay 1 -cornerredelay 8 &
-# kunst &
 
 ## wal colors
 # Run randomwal to set the wallpaper and colors at startup.

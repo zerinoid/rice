@@ -1,11 +1,11 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.45 for zerinol on Thu Aug 13 04:37:04 2026.
+# Written by xscreensaver-demo 5.45 for zerinol on Fri Aug 21 02:44:34 2026.
 # https://www.jwz.org/xscreensaver/
 
-timeout:	0:05:00
-cycle:		0:05:00
-lock:		True
-lockTimeout:	0:07:00
+timeout:	12:00:00
+cycle:		0:03:00
+lock:		False
+lockTimeout:	0:01:00
 passwdTimeout:	0:00:30
 visualID:	default
 installColormap:    True
@@ -24,10 +24,10 @@ fadeTicks:	20
 captureStderr:	True
 ignoreUninstalledPrograms:False
 font:		Hack Nerd Font:style=Regular:size=12
-dpmsEnabled:	True
+dpmsEnabled:	False
 dpmsQuickOff:	False
-dpmsStandby:	0:30:00
-dpmsSuspend:	0:40:00
+dpmsStandby:	0:00:00
+dpmsSuspend:	0:00:00
 dpmsOff:	0:00:00
 grabDesktopImages:  False
 grabVideoFrames:    False
@@ -35,7 +35,7 @@ chooseRandomImages: True
 imageDirectory:	/home/zerinol/pics/screensaver
 
 mode:		random
-selected:	188
+selected:	64
 
 textMode:	program
 textLiteral:	XScreenSaver

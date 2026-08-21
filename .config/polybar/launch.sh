@@ -3,6 +3,18 @@
 LOG_DIR="/tmp/polybar-logs"
 LOG_FILE="$LOG_DIR/polybar-$(date +%Y%m%d).log"
 
+# Prevent multiple concurrent instances of launch.sh during startup
+LOCKFILE="/tmp/polybar-launch.lock"
+if [ -f "$LOCKFILE" ]; then
+  # If lockfile is less than 3 seconds old, exit to prevent race conditions
+  if [ $(( $(date +%s) - $(stat -c %Y "$LOCKFILE" 2>/dev/null || echo 0) )) -lt 3 ]; then
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] Another launch.sh is already starting, exiting." >> "$LOG_FILE"
+    exit 0
+  fi
+fi
+touch "$LOCKFILE"
+
+
 [ -f "$HOME/.cache/wal/colors.sh" ] && . "$HOME/.cache/wal/colors.sh"
 
 export color0=$color0
@@ -117,3 +129,6 @@ fi
 
 log_message "Polybar launch process completed"
 echo "Polybar logs available at: $LOG_FILE"
+
+# Clean up lockfile
+rm -f "$LOCKFILE"

@@ -8,12 +8,11 @@ export DISPLAY="${DISPLAY:-:0}"
 export XAUTHORITY="${XAUTHORITY:-$HOME/.Xauthority}"
 export DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-unix:path=/run/user/$(id -u)/bus}"
 
-# Open Alacritty and tail logs, keeping it open until Enter is pressed
 alacritty -e bash -c "journalctl --user -fu sys-bkp -n 30; echo 'Backup process finished. Press Enter to close...'; read -r" &
 
 MOUNTPOINT=/mnt/backup
-TARGET=$MOUNTPOINT/borg-backups/saturno2024.borg
-DATE=$(date --iso-8601)-$(hostname)
+TARGET="$MOUNTPOINT/borg-backups/saturno2026.borg"
+DATE="$(date --iso-8601)-$(hostname)"
 
 BACKUPCFG="$HOME/.local/share/backups"
 DISKS="$BACKUPCFG/backup.disks"
@@ -38,7 +37,6 @@ partition_path="/dev/disk/by-uuid/$uuid"
 drive=$(lsblk --inverse --noheadings --list --paths --output name "$partition_path" | head -n 1)
 echo "Drive path: $drive"
 
-# CRITICAL FIX 1: Array representation avoids globbing/splitting errors
 BORG_OPTS=(
   --stats
   --list
@@ -52,41 +50,41 @@ export BORG_RELOCATED_REPO_ACCESS_IS_OK=no
 export BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK=no
 
 borg --version
+echo "Starting consolidated backup for $DATE"
 
-echo "Starting backup for $DATE"
-shopt -s globstar
-
-# CRITICAL FIX 2: Track cumulative failures across all sub-backups
 overall_status=0
 
-run_backup() {
-  local archive_suffix="$1"
-  shift
-  borg create "${BORG_OPTS[@]}" "$TARGET::$DATE-$$-${archive_suffix}" "$@" || {
-    echo "Error backing up section: ${archive_suffix}" >&2
-    overall_status=1
-  }
-}
+# 1. Criação do backup único com todos os diretórios
+echo "Creating unified backup archive..."
+borg create "${BORG_OPTS[@]}" \
+  "$TARGET::$DATE-$$-sys-bkp" \
+  "$HOME/db" \
+  "$HOME/docs" \
+  "$HOME/pics" \
+  "$HOME/videos" \
+  "$HOME/.ssh" \
+  "$HOME/.env" \
+  "$HOME/.cache/histdb" \
+  "$HOME/.cache/zsh/history" \
+  "$HOME/music" \
+  "$HOME/.ban" \
+  "$HOME/tmp/mac" || overall_status=1
 
-run_backup "db" "$HOME/db" "$HOME/docs"
-run_backup "pessoais" "$HOME/pics" "$HOME/videos"
-run_backup "sistema" "$HOME/.ssh" "$HOME/.env" "$HOME/.histdb"
-run_backup "musica" "$HOME/music"
-run_backup "lenny" "$HOME/.ban" "$HOME/db" "$HOME/tmp/mac"
-
-# PRACTICE 3: Added Pruning & Compacting
+# 2. Prune seguro
 echo "Pruning older backups..."
 borg prune \
   --list \
+  --glob-archives "*-sys-bkp" \
   --keep-daily 7 \
   --keep-weekly 4 \
   --keep-monthly 6 \
   "$TARGET" || overall_status=1
 
+# 3. Compactação
 echo "Compacting repository space..."
 borg compact "$TARGET" || overall_status=1
 
-# PRACTICE 2: Added Consistency Checks
+# 4. Checagens de integridade
 echo "Checking repository structural integrity..."
 borg check --repository-only "$TARGET" || overall_status=1
 
@@ -110,7 +108,7 @@ if [ -f "$BACKUPCFG/autoeject" ]; then
   sudo hdparm -Y "$drive"
 fi
 
-if [ -f "$BACKUPCFG/backup-suspend" ]; then
+if [ -f "$BACKUPCFG/suspend" ]; then
   systemctl suspend
 fi
 

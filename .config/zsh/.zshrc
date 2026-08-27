@@ -71,8 +71,11 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # Load aliases and shortcuts if existent.
-[ -f "$HOME/.config/shortcutrc" ] && source "$HOME/.config/shortcutrc"
-[ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc"
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutenvrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutenvrc"
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc"
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/funcrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/funcrc"
 
 # =================================
 # zsh do leo
@@ -80,12 +83,6 @@ bindkey '^e' edit-command-line
 
 # fzf search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# arquivo de alias
-[ -f ~/.bash_aliases ] && . ~/.bash_aliases
-
-# arquivo de funções
-[ -f ~/.funcrc ] && . ~/.funcrc
 
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
@@ -224,7 +221,7 @@ zinit ice pick"sqlite-history.zsh" src"histdb-interactive.zsh"
 zinit load larkery/zsh-histdb
 
 zinit ice pick"init.sh"
-zinit light b4b4r07/enhancd
+zinit light babarot/enhancd
 
 zinit load agkozak/zsh-z
 
@@ -251,7 +248,7 @@ zinit light sindresorhus/pure
 # VARS
 ##
 
-# bindkey '^h' _histdb-isearch
+bindkey '^h' _histdb-isearch
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white"
 
 # Usar histdb para sugestões do autosuggest
@@ -267,11 +264,13 @@ group by commands.argv order by count(*) desc limit 1"
 
 ZSH_AUTOSUGGEST_STRATEGY=histdb_top_here
 
+export HISTDB_FILE="$HOME/.cache/histdb/zsh-history.db"
 export FZF_DEFAULT_OPTS="--height 40% --reverse --border --inline-info --color=dark,bg+:235,hl+:10,pointer:5"
 export FZF_DEFAULT_COMMAND='fd'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-ENHANCD_FILTER="fzf"
-ENHANCD_COMMAND="c"
+export ENHANCD_FILTER="fzf"
+export ENHANCD_COMMAND="ecd"
+export ENHANCD_DIR="$HOME/.cache/enhancd"
 
 _BORING_COMMANDS=($_BORING_COMMANDS "^unhistory")
 

@@ -4,7 +4,13 @@ data=$(date '+%Y-%m-%d %H:%M:%S')
 
 echo "= .xprofile ========================= $data" >>"$LOGINLOG"
 
-sxhkd >>"$LOGINLOG" 2>&1 &
+xrdb -load .Xresources &
+xset r rate 300 50 &
+xset +fp $HOME/.local/share/fonts
+xset +fp $HOME/.fonts
+xset fp rehash
+xset -b &
+
 mpd &
 xplugd >>"$LOGINLOG" 2>&1 &
 ~/.fehbg >>"$LOGINLOG" 2>&1 &

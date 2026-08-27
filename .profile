@@ -64,9 +64,7 @@ export LV2_PATH="$HOME/.lv2:/usr/local/lib/lv2:/usr/lib/lv2"
 export TEXMFHOME="$XDG_CONFIG_HOME/texmf"
 
 # vendor path
-# export PATH="$PATH:$HOME/.composer/vendor/bin"
 export PATH="$CARGO_HOME/bin:$PATH"
-# export PATH="$HOME/.cargo/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 export PATH="$PATH:$HOME/.local/share/yabridge"
 

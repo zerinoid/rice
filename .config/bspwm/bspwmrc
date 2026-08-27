@@ -8,12 +8,7 @@ echo "$data" >>"$LOGINLOG"
 # Source wal colors to define $background, $foreground, $color6, etc.
 [ -f "$HOME/.cache/wal/colors.sh" ] && . "$HOME/.cache/wal/colors.sh"
 
-xrdb -load .Xresources &
-xset r rate 300 50 &
-xset +fp $HOME/.local/share/fonts
-xset +fp $HOME/.fonts
-xset fp rehash
-xset -b &
+sxhkd >>"$LOGINLOG" 2>&1 &
 
 [ -x $HOME/.local/bin/dual_monitor ] && dual_monitor 2>&1 >>"$LOGINLOG"
 

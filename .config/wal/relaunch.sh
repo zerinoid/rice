@@ -5,7 +5,9 @@ pkill -x dunst
 dunst &
 
 # Relaunch polybar to update colors dynamically
-"$HOME/.config/polybar/launch.sh" &
+#
+[ "$(pidof polybar)" -gt 0 ] && "$HOME/.config/polybar/launch.sh" &
+[ "$(pidof dwm)" -gt 0 ] && kill -HUP $(pidof dwm) &
 
 # Update emacs theme
-emacsclient -s "$EMACS_SERVER_SOCKET" -e "(load-theme 'ewal-spacemacs-modern t)"
+# emacsclient -s "$EMACS_SERVER_SOCKET" -e "(load-theme 'ewal-spacemacs-modern t)"

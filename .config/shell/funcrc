@@ -31,16 +31,16 @@ bim() {
   done
 }
 
-bf() {
-  IFS=$'\n'
-  NOVOS=($(find ~/music -mindepth 2 -type d -mtime 0))
-  unset IFS
-
-  for album in $NOVOS; do
-    beet import -i $album
-    beet embedart -y $album
-  done
-}
+# bf() {
+#   IFS=$'\n'
+#   NOVOS=($(find ~/music -mindepth 2 -type d -mtime 0))
+#   unset IFS
+#
+#   for album in $NOVOS; do
+#     beet import -i $album
+#     beet embedart -y $album
+#   done
+# }
 
 pwlog() {
   git log "$@" --graph --oneline --decorate --color | less -SEXIER

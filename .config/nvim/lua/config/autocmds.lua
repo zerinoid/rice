@@ -40,6 +40,59 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   command = "!xrdb -merge ~/.Xresources",
 })
 
+local dwmblocks_dir = vim.fn.expand("~/.local/src/dwmblocks")
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = {
+    dwmblocks_dir .. "/config.h",
+    dwmblocks_dir .. "/config.def.h",
+    dwmblocks_dir .. "/blocks.def.h",
+    dwmblocks_dir .. "/blocks.h",
+  },
+  callback = function()
+    vim.notify("Recompilando e reiniciando o dwmblocks...", vim.log.levels.INFO, { title = "dwmblocks" })
+
+    vim.fn.jobstart(
+      "make -C "
+        .. dwmblocks_dir
+        .. " && sudo make -C "
+        .. dwmblocks_dir
+        .. " install && pkill -x dwmblocks; dwmblocks &",
+      {
+        shell = "/usr/bin/env bash",
+        on_exit = function(_, exit_code)
+          if exit_code == 0 then
+            vim.notify("dwmblocks atualizado com sucesso!", vim.log.levels.INFO, { title = "dwmblocks" })
+          else
+            vim.notify("Falha ao compilar/instalar o dwmblocks", vim.log.levels.ERROR, { title = "dwmblocks" })
+          end
+        end,
+      }
+    )
+  end,
+})
+
+local dwm_dir = vim.fn.expand("~/.local/src/dwm")
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = { dwm_dir .. "/config.h", dwm_dir .. "/config.def.h" },
+  callback = function()
+    vim.notify("Recompilando e reiniciando o dwm...", vim.log.levels.INFO, { title = "DWM" })
+
+    -- Executa a compilação e o reload do dwm em segundo plano
+    vim.fn.jobstart("make -C " .. dwm_dir .. " && sudo make -C " .. dwm_dir .. " install && kill -HUP $(pidof dwm)", {
+      shell = "/usr/bin/env bash",
+      on_exit = function(_, exit_code)
+        if exit_code == 0 then
+          vim.notify("DWM atualizado com sucesso!", vim.log.levels.INFO, { title = "DWM" })
+        else
+          vim.notify("Falha ao compilar/instalar o DWM", vim.log.levels.ERROR, { title = "DWM" })
+        end
+      end,
+    })
+  end,
+})
+
 -- Auto-reload power-timer.service on saving power_timer.sh
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = "power_timer.sh",

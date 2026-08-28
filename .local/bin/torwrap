@@ -4,6 +4,5 @@ ifinstalled tremc transmission-cli || exit
 
 ! pgrep -x transmission-da >/dev/null && transmission-daemon && notify-send "Starting torrent daemon..."
 
-# && sleep 3 && pkill -RTMIN+7 "${STATUSBAR:?}"
-
-$TERMA --class Alacritty,tremc -e tremc
+$TERMINAL --class Alacritty,tremc -e tremc
+pkill -RTMIN+7 "${STATUSBAR:-dwmblocks}"

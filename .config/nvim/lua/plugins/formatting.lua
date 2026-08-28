@@ -6,6 +6,9 @@ return {
         javascript = { "biome" },
         typescript = { "biome" },
         json = { "biome" },
+        -- Add C and C++ support here
+        c = { "clang_format" },
+        cpp = { "clang_format" },
       },
       formatters = {
         biome = {
@@ -13,6 +16,10 @@ return {
           prepend_args = function()
             return { "format", "--config-path=" .. vim.fn.expand("~/.config/nvim/biome.json") }
           end,
+        },
+        -- Add clang-format configuration here
+        clang_format = {
+          prepend_args = { "--style=file", "--fallback-style=LLVM" },
         },
       },
     },

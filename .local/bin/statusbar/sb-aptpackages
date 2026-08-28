@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Displays number of upgradeable packages.
+# For this to work, have an `apt update` command run in the background (e.g. via cron,
+# apt-daily systemd timer, or periodic job) as root. This script reads the cached package list.
+# When clicked, it runs your upgrade script.
+#
+# To automatically refresh dwmblocks after upgrades, create /etc/apt/apt.conf.d/99statusbar:
+#
+# DPkg::Post-Invoke {"/usr/bin/pkill -RTMIN+8 dwmblocks || true";};
+
+case $BLOCK_BUTTON in
+1) setsid -f "$TERMINAL" -e sb-aptupgrade ;;
+2) notify-send "$(apt list --upgradable 2>/dev/null | tail -n +2)" ;;
+3) notify-send "🎁 Upgrade module" "📦: number of upgradable packages
+- Left click to upgrade packages
+- Middle click to show upgradable packages" ;;
+6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+# Count packages marked for upgrade (ignoring the "Listing..." header line)
+apt list --upgradable 2>/dev/null | tail -n +2 | grep -c . | sed "s/^/📦/;s/^📦0$//g"

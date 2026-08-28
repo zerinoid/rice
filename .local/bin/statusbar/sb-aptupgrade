@@ -1,0 +1,12 @@
+#!/bin/sh
+
+printf "Beginning upgrade.\\n"
+
+# Update package lists, perform the upgrade, and clean up unneeded packages
+sudo apt update && sudo apt autoremove -y
+
+# Signal dwmblocks to refresh the package counter module
+pkill -RTMIN+8 "${STATUSBAR:-dwmblocks}"
+
+printf "\\nUpgrade complete.\\nPress <Enter> to exit window.\\n\\n"
+read -r _

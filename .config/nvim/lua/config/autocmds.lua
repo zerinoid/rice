@@ -40,14 +40,14 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   command = "!xrdb -merge ~/.Xresources",
 })
 
-local dwmblocks_dir = vim.fn.expand("~/.local/src/dwmblocks")
+local dwmblocks_dir = vim.fn.expand("~/.local/src/dwmblocks/")
 
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = {
-    dwmblocks_dir .. "/config.h",
-    dwmblocks_dir .. "/config.def.h",
-    dwmblocks_dir .. "/blocks.def.h",
-    dwmblocks_dir .. "/blocks.h",
+    dwmblocks_dir .. "config.h",
+    dwmblocks_dir .. "config.def.h",
+    dwmblocks_dir .. "blocks.def.h",
+    dwmblocks_dir .. "blocks.h",
   },
   callback = function()
     vim.notify("Recompilando e reiniciando o dwmblocks...", vim.log.levels.INFO, { title = "dwmblocks" })
@@ -72,14 +72,13 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   end,
 })
 
-local dwm_dir = vim.fn.expand("~/.local/src/dwm")
+local dwm_dir = vim.fn.expand("~/.local/src/dwm/")
 
 vim.api.nvim_create_autocmd("BufWritePost", {
-  pattern = { dwm_dir .. "/config.h", dwm_dir .. "/config.def.h" },
+  pattern = { dwm_dir .. "config.h", dwm_dir .. "config.def.h" },
   callback = function()
     vim.notify("Recompilando e reiniciando o dwm...", vim.log.levels.INFO, { title = "DWM" })
 
-    -- Executa a compilação e o reload do dwm em segundo plano
     vim.fn.jobstart("make -C " .. dwm_dir .. " && sudo make -C " .. dwm_dir .. " install && kill -HUP $(pidof dwm)", {
       shell = "/usr/bin/env bash",
       on_exit = function(_, exit_code)

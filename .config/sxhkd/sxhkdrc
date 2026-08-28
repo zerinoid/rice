@@ -158,7 +158,7 @@ super + alt + y
 
 # desligar
 super + ctrl + q
-	dmenu_tools
+	sysact
 
 # reiniciar
 # super  ctrl + r
@@ -404,7 +404,7 @@ super + F8
 
 # Mount a USB drive or Android device
 super + {F9,F10}
-	{dmenumount,dmenuumount}
+	{mounter,unmounter}
 
 # Pause dunst
 super + F11

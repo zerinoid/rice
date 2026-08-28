@@ -19,17 +19,15 @@
 #Read a shell command to execute asynchronously without standard I/O.
 
 # Basic vars
-set shell sh
-set previewer ~/.config/lf/scope
 set shellopts '-eu'
 set ifs "\n"
 set scrolloff 10
 set icons
+set shell sh
+set previewer ~/.config/lf/scope
 set sortby time
-set reverse
-#set info time
 set ratios 1:1
-# Enable icons. Requires nerd fonts and LF_ICONS variable.
+set reverse
 
 # cmds/functions
 cmd open ${{
@@ -47,7 +45,32 @@ cmd open ${{
     esac
 }}
 
-# cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
+cmd mkdir $mkdir -p "$@"
+
+cmd extract ${{
+	clear; tput cup $(($(tput lines)/3)); tput bold
+	set -f
+	printf "%s\n\t" "$fx"
+	printf "extract?[y/N]"
+	read ans
+	[ $ans = "y" ] && {
+		case $fx in
+			*.tar.bz2)   tar xjf $fx     ;;
+			*.tar.gz)    tar xzf $fx     ;;
+			*.bz2)       bunzip2 $fx     ;;
+			*.rar)       unrar e $fx     ;;
+			*.gz)        gunzip $fx      ;;
+			*.tar)       tar xf $fx      ;;
+			*.tbz2)      tar xjf $fx     ;;
+			*.tgz)       tar xzf $fx     ;;
+			*.zip)       unzip $fx       ;;
+			*.Z)         uncompress $fx  ;;
+			*.7z)        7z x $fx        ;;
+			*.tar.xz)    tar xf $fx      ;;
+		esac
+	}
+}}
+
 
 cmd getGeo ${{
     identify $fx | awk -F" " '{ print $3}'
@@ -70,7 +93,7 @@ cmd shrink ${{
 }}
 
 cmd zip %{{
-    set -f 
+    set -f
     printf "nome do arquivo: "
     read ans
     [ $ans ] && zip -jr $ans $fs
@@ -85,55 +108,64 @@ cmd trash ${{
 }}
 
 cmd moveto ${{
-  set -f
-  clear; echo "Move to where?"
-  dest="$(fd . ~ -t d | fzf)" &&
-  eval mv -iv '$fx' $dest &&
-  notify-send "🚚 File(s) moved." "File(s) moved to $dest."
-}}
-
-cmd rsyncto ${{
-  set -f
-  clear; echo "Copy to where?"
-  dest="$(fd . ~ -t d | fzf)" &&
-  eval rsync -vPhua '$fx' $dest &&
-  notify-send "📋 File(s) rsynced." "File(s) rsynced to $dest."
-}}
-
-cmd rsyncext ${{
-  set -f
-  clear; echo "Copy to where?"
-  dest="$(fd . /mnt -t d | fzf)" &&
-  eval rsync -vPhua '$fx' $dest &&
-  notify-send "📋 File(s) sent." "File(s) sent to $dest."
+	set -f
+	clear; tput cup $(($(tput lines)/3))
+	dest=$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' "${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs" | fzf --layout=reverse --height 40% --prompt 'Move to where? ' | sed 's|~|$HOME|')
+	[ -z "$dest" ] && exit
+	destpath=$(eval printf '%s' \"$dest\")
+	clear; tput cup $(($(tput lines)/3)); tput bold
+	echo "From:"
+	echo "$fx" | sed 's/^/   /'
+	printf "To:\n   %s\n\n\tmove?[y/N]" "$destpath"
+	read -r ans
+	[ "$ans" != "y" ] && exit
+	for x in $fx; do
+		mv -iv "$x" "$destpath"
+	done &&
+	notify-send "🚚 File(s) moved." "File(s) moved to $destpath."
 }}
 
 cmd copyto ${{
-  set -f
-  clear; echo "Copy to where?"
-  dest="$(fd . ~ -t d | fzf)" &&
-  eval cp -ivr '$fx' $dest &&
-  notify-send "📋 File(s) copied." "File(s) copies to $dest."
+	set -f
+	clear; tput cup $(($(tput lines)/3))
+	dest=$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' "${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs" | fzf --layout=reverse --height 40% --prompt 'Copy to where? ' | sed 's|~|$HOME|')
+	[ -z "$dest" ] && exit
+	destpath=$(eval printf '%s' \"$dest\")
+	clear; tput cup $(($(tput lines)/3)); tput bold
+	echo "From:"
+	echo "$fx" | sed 's/^/   /'
+	printf "To:\n   %s\n\n\tcopy?[y/N]" "$destpath"
+	read -r ans
+	[ "$ans" != "y" ] && exit
+	for x in $fx; do
+		cp -ivr "$x" "$destpath"
+	done &&
+	notify-send "📋 File(s) copied." "File(s) copied to $destpath."
 }}
+
+cmd setbg "$1"
 
 cmd bulkrename ${{
-    VISUAL=vim
-    vidir
+    tmpfile_old="$(mktemp)"
+    tmpfile_new="$(mktemp)"
+
+    [ -n "$fs" ] && fs=$(basename -a $fs) || fs=$(ls)
+
+    echo "$fs" > "$tmpfile_old"
+    echo "$fs" > "$tmpfile_new"
+    $EDITOR "$tmpfile_new"
+
+    [ "$(wc -l < "$tmpfile_old")" -eq "$(wc -l < "$tmpfile_new")" ] || { rm -f "$tmpfile_old" "$tmpfile_new"; exit 1; }
+
+    paste "$tmpfile_old" "$tmpfile_new" | while IFS="$(printf '\t')" read -r src dst
+    do
+        [ "$src" = "$dst" ] || [ -e "$dst" ] || mv -- "$src" "$dst"
+    done
+
+    rm -f "$tmpfile_old" "$tmpfile_new"
+    lf -remote "send $id unselect"
 }}
 
-# extract the current file with the right command
-# (xkcd link: https://xkcd.com/1168/)
-cmd extract ${{
-    set -f
-    case $f in
-        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $f;;
-        *.tar.gz|*.tgz) tar xzvf $f;;
-        *.tar.xz|*.txz) tar xJvf $f;;
-        *.zip) unzip $f;;
-        *.rar) unrar x $f;;
-        *.7z) 7z x $f;;
-    esac
-}}
 
 #Redrawn colunas
 cmd recol ${{
@@ -180,21 +212,21 @@ cmd link-paste ${{
 
 cmd copy-content ${{
     cat $f | xclip -selection clipboard &&
-    notify-send -t 2000 "Conteúdo copiado" "$(basename $f)\n\n🐈🐈🐈🐈🐈🐈🐈" 
+    notify-send -t 2000 "Conteúdo copiado" "$(basename $f)\n\n🐈🐈🐈🐈🐈🐈🐈"
 }}
 
 cmd new-file ${{
     printf "Enter filename: "
     read ans
-    
+
     # Exit if input is empty
     [ -z "$ans" ] && exit 0
-    
+
     # Check if the file does NOT exist yet, then create it
     if [ ! -f "$ans" ]; then
         touch "$ans"
     fi
-    
+
     # Open Neovim regardless
     nvim "$ans"
 }}
@@ -213,9 +245,9 @@ map i :rename # before extension
 map a :rename; cmd-right # after extension
 
 # Bindings
-map ] $nvim ~/.config/lf/lfrc
 map <enter> shell
-map b bulkrename
+map b $setbg $f
+map B bulkrename
 map C copyto
 map J $lf -remote "send $id cd $(fd . ~ -t d | fzf)" #ir pra qlqr lugar
 map D trash
@@ -226,25 +258,9 @@ map <c-g> $lazygit
 map <c-y> link-copy
 map <c-l> link-paste
 
-map gc cd ~/drive/curriculos
-map gd cd ~/docs
-map gf cd ~/fixo
-map gh cd ~
-map gm cd ~/music
-map go cd ~/docs/org
-map gr cd ~/drive
-map gs cd ~/fixo/source
-map gp cd ~/pics
-map gw cd ~/webdev
-map zc cd ~/.config
-map zm cd ~/mobile
-map zn cd ~/.config/nvim/
-
 map <c-c> copy-content
 map r $~/.config/lf/pv.sh $f | less -R
 map R $$TERMA -e sh -c '~/.config/lf/pv.sh "$f" | less -R' &
-# map J $lf -remote "send $id cd $(cut -d' ' -f2- ~/.config/directories | fzf)" # ir para dir definido
-# map <c-j> recol
 map <c-k> set ratios 1:1
 map M moveto
 map <c-n> push %mkdir<space>
@@ -257,10 +273,13 @@ map V $vimdiff $fx
 map <c-r> reload
 # map <c-t> !mobt $fx
 map S shrink
-map <c-s> !medula $fx
+map <c-s> set hidden!
 map T $sxiv -t "$(pwd)" # opens thumbnail mode
 map x $$f
 map X &$f
 map Y copypath
 map <delete> delete
 map <c-z> zip
+
+# Source Bookmarks
+source "~/.config/lf/shortcutrc"

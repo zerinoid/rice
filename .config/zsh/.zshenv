@@ -1,8 +1,2 @@
-. "/home/zerinol/.local/share/cargo/env"
-
-# ~/.zshenv
-if [ -d "$HOME/.local/bin" ]; then
-    typeset -U path PATH
-    PATH="$PATH:$(find "$HOME/.local/bin" -type d | paste -sd ':' -)"
-    export PATH
-fi
+# 1. Carrega ambiente do Cargo/Rust se o arquivo existir
+[ -f "$HOME/.local/share/cargo/env" ] && . "$HOME/.local/share/cargo/env"

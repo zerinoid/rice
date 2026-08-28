@@ -11,6 +11,11 @@ xset +fp $HOME/.fonts
 xset fp rehash
 xset -b &
 
+# satatusbar no path
+if [ -d "$HOME/.local/bin" ]; then
+  export PATH="$HOME/.local/bin:$HOME/.local/bin/statusbar:$PATH"
+fi
+
 mpd &
 xplugd >>"$LOGINLOG" 2>&1 &
 ~/.fehbg >>"$LOGINLOG" 2>&1 &

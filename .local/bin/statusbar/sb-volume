@@ -7,21 +7,20 @@ case $BLOCK_BUTTON in
   setsid -w -f "$TERMINAL" -e pulsemixer
   pkill -RTMIN+10 "${STATUSBAR:-dwmblocks}"
   ;;
-2) wpctl set-mute @DEFAULT_SINK@ toggle ;;
-4) wpctl set-volume @DEFAULT_SINK@ 1%+ ;;
-5) wpctl set-volume @DEFAULT_SINK@ 1%- ;;
+2) pulsemixer --toggle-mute ;;
+4) pulsemixer --change-volume +3 ;;
+5) pulsemixer --change-volume -3 ;;
 3) notify-send "📢 Volume module" "\- Shows volume 🔊, 🔇 if muted.
 - Middle click to mute.
 - Scroll to change." ;;
 6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-vol="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
+vol="$(pulsemixer --get-volume)"
+muted="$(pulsemixer --get-mute)"
 
 # If muted, print 🔇 and exit.
-[ "$vol" != "${vol%\[MUTED\]}" ] && echo 🔇 && exit
-
-vol="${vol#Volume: }"
+[ $muted -gt 0 ] && echo 🔇 && exit
 
 split() {
   # For ommiting the . without calling and external program.

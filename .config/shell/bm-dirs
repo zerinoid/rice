@@ -1,6 +1,7 @@
 # You can add comments to these files with #
 cac ${XDG_CACHE_HOME:-$HOME/.cache}
 cf  ${XDG_CONFIG_HOME:-$HOME/.config}
+cfv $HOME/.config/nvim/lua
 D   ${XDG_DOWNLOAD_DIR:-$HOME/dls}
 d   ${XDG_DOCUMENTS_DIR:-$HOME/docs}
 o   $HOME/docs/org

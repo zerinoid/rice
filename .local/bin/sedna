@@ -1,2 +1,2 @@
 #!/bin/bash
-rsync -vPhua "$@" zerinol@sedna:~/tmp
+rsync -vPhua "$@" zerinol@sedna:~

@@ -26,7 +26,7 @@ picom >>"$LOGINLOG" 2>&1 &
 # transmission-daemon >> "$LOGINLOG" 2>&1 &
 
 xscreensaver -nosplash &
-xss-lock -- slock &
+# xss-lock -- slock &
 
 emacs --daemon &
 /usr/bin/mpdas -c ~/.config/mpdasrc >>"$LOGINLOG" 2>&1 &

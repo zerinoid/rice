@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.45 for zerinol on Fri Aug 21 02:44:34 2026.
+# Written by xscreensaver-demo 5.45 for zerinol on Sun Aug 30 11:11:26 2026.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	12:00:00
@@ -189,7 +189,7 @@ programs:								      \
 - GL: 				glmatrix -root				    \n\
   GL: 				glslideshow -root			    \n\
 - GL: 				hypertorus -root			    \n\
-  GL: 				jigglypuff -root			    \n\
+- GL: 				jigglypuff -root			    \n\
 				metaballs -root				    \n\
 - GL: 				mirrorblob -root			    \n\
 -				piecewise -root				    \n\

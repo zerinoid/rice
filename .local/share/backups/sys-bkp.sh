@@ -3,7 +3,7 @@ set -euo pipefail
 
 sleep 5
 
-# Visual output
+# Visual output (apenas se houver sessão X11 ativa)
 export DISPLAY="${DISPLAY:-:0}"
 export XAUTHORITY="${XAUTHORITY:-$HOME/.Xauthority}"
 export DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-unix:path=/run/user/$(id -u)/bus}"
@@ -11,7 +11,7 @@ export DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-unix:path=/run/user
 alacritty -e bash -c "journalctl --user -fu sys-bkp -n 30; echo 'Backup process finished. Press Enter to close...'; read -r" &
 
 MOUNTPOINT=/mnt/backup
-TARGET="$MOUNTPOINT/borg-backups/saturno2026.borg"
+TARGET="$MOUNTPOINT/borg-backups/$(hostname).borg"
 DATE="$(date --iso-8601)-$(hostname)"
 
 BACKUPCFG="$HOME/.local/share/backups"

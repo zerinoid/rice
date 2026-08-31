@@ -7,8 +7,9 @@ if [ -d /sys/class/power_supply/BAT0 ] && [ "$(cat /sys/class/power_supply/ADP0/
   exec xidlehook \
     --not-when-audio \
     --not-when-fullscreen \
-    --timer 180 'xscreensaver-command -activate' '' \
-    --timer 420 'systemctl suspend' ''
+    --timer 240 'xscreensaver-command -activate' '' \
+    --timer 360 'slock' '' \
+    --timer 1200 'systemctl suspend' ''
 
 else
 
@@ -17,6 +18,7 @@ else
     --not-when-audio \
     --not-when-fullscreen \
     --timer 300 'xscreensaver-command -activate' '' \
-    --timer 10800 'systemctl suspend' ''
+    --timer 420 'slock' '' \
+    --timer 3600 'systemctl suspend' ''
 
 fi

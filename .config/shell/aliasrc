@@ -1,0 +1,139 @@
+#!/bin/sh
+
+# Use neovim for vim if present.
+[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
+
+# Use $XINITRC variable if file exists.
+[ -f "$XINITRC" ] && alias startx='startx $XINITRC'
+
+[ -f "$MBSYNCRC" ] && alias mbsync='mbsync -c $MBSYNCRC'
+
+# sudo not required for some system commands
+for command in mount umount sv apt pacman updatedb su shutdown poweroff reboot; do
+  alias $command="sudo $command"
+done
+unset command
+
+se() {
+  choice="$(find ~/.local/bin -mindepth 1 -printf '%P\n' | fzf)"
+  [ -f "$HOME/.local/bin/$choice" ] && $EDITOR "$HOME/.local/bin/$choice"
+}
+
+# apt
+alias \
+  aph="apt search" \
+  aps="sudo apt install" \
+  apd="sudo apt update" \
+  apdl="apt list --upgradable" \
+  apg="sudo apt upgrade" \
+  apr="sudo apt remove" \
+  apf="apt-file search"
+
+# Verbosity and settings that you pretty much just always are going to want.
+alias \
+  cp="cp -iv" \
+  mv="mv -iv" \
+  rm="rm -vI" \
+  bc="bc -ql" \
+  rsync="rsync -vrPlu" \
+  mkd="mkdir -pv" \
+  yt="yt-dlp --embed-metadata -i" \
+  yta="yt -x -f bestaudio/best" \
+  ytt="yt --skip-download --write-thumbnail" \
+  ffmpeg="ffmpeg -hide_banner" \
+  sudo="sudo "
+
+# Colorize commands when possible.
+alias \
+  ls="ls -hN --color=auto --group-directories-first" \
+  grep="grep --color=auto" \
+  diff="diff --color=auto" \
+  ccat="highlight --out-format=ansi" \
+  ip="ip -color=auto"
+
+# These common commands are just too long! Abbreviate them.
+alias \
+  ka="killall" \
+  g="git" \
+  trem="transmission-remote" \
+  YT="youtube-viewer" \
+  sdn="shutdown -h now" \
+  e='$EDITOR' \
+  v='$EDITOR' \
+  p="pacman" \
+  xi="sudo xbps-install" \
+  xr="sudo xbps-remove -R" \
+  xq="xbps-query" \
+  z="zathura"
+
+alias \
+  magit="nvim -c MagitOnly" \
+  ref='shortcuts >/dev/null; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutenvrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc'
+
+# ls
+# F classify with indiator (*/=>@|)
+# A almost all (not . and ..)
+# R subdirs recursively
+# t sort by time
+# H follow symlink listed on the cli
+# d list dirs themselves
+# 1 one file per line. avoid \n
+# s print size
+# S sort by size
+# c sort by ctime (last mod of file status info)
+# r reverse order
+alias \
+  l="ls -ltFh" \
+  la="ls -ltFhA" \
+  lr="ls -tFhR" \
+  ll="ls -l" \
+  ldot="ls -ld .*" \
+  lS="ls -1FhSs" \
+  lrt="ls -1Fcrt" \
+  lart="ls -1Fcart"
+
+# ducks -
+# dud   - summarize + human readable
+# dush  - total pasta atual
+# dux   - ducks human readable (40 primeiros)
+alias \
+  ducks="du -cks * | sort -rn | head" \
+  dud="du -d 1 -h" \
+  dush="du -sh" \
+  dux="du -chsx * | sort -rh | head -n 40" \
+  dfth="df -Th | grep -e ^/dev -e Filesystem | grep -v loop"
+
+# development
+alias \
+  doc="docker-compose exec workspace" \
+  nrw="npm run watch" \
+  nrd="npm run dev"
+
+# git
+alias \
+  gam="git commit -am" \
+  ga="git add" \
+  gc="git commit -m" \
+  gs="git status" \
+  gp="git push" \
+  gf="git pull"
+
+# dotfiles git
+alias \
+  dit='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME' \
+  gdc="dit commit -m" \
+  ds="dit status" \
+  dp="dit push" \
+  gdf="dit pull" \
+  dam="dit commit -am"
+
+# with config
+alias \
+  w3m="w3m -config ~/.config/w3m/config" \
+  mpdas="mpdas -c ~/.config/mpdasrc"
+
+# misc
+alias \
+  nmset="sudo rfkill block wlan; sleep 3; sudo rfkill unblock wlan" \
+  pbc="xclip -selection clipboard" \
+  pbp="xclip -selection clipboard -o"

@@ -114,11 +114,10 @@ export GROFF_NO_SGR=1                  # for konsole and gnome-terminal
 export MANPAGER='less -s -M -R +Gg'
 
 # Directory coloring
-export LS_OPTIONS='--color=auto'
 # export LS_COLORS=
 
 # colorize
-export ZSH_COLORIZE_STYLE="paraiso-dark"
+# export ZSH_COLORIZE_STYLE="paraiso-dark"
 # export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
 # export LESSOPEN='|~/.lessfilter %s'
@@ -140,7 +139,6 @@ setopt hist_ignore_space
 
 
 # Common aliases
-alias ls="ls $LS_OPTIONS"
 alias dig="dig +nocmd any +multiline +noall +answer"
 
 # Common CTRL bindings.
